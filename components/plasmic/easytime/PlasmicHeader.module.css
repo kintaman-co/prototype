@@ -1,0 +1,53 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background: #6246ea;
+  height: 56px;
+  width: 100%;
+  align-content: unset;
+  position: relative;
+  min-width: 0;
+  padding: 8px;
+}
+.left {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  height: 100%;
+  flex-shrink: 0;
+  min-height: 0;
+}
+.headerButton__xQogy:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox__eaIoA {
+  height: auto;
+}
+.right {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  align-content: unset;
+  align-self: auto;
+  height: 100%;
+  flex-shrink: 0;
+  min-height: 0;
+}
+.freeBox__cfPTw {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding-right: 40px;
+  padding-left: 40px;
+}
+.headerButton___5LMdS:global(.__wab_instance) {
+  position: relative;
+}

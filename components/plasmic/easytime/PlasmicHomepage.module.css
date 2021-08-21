@@ -1,0 +1,49 @@
+.root {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: #fffffe;
+  min-width: 0;
+  min-height: 0;
+}
+.header:global(.__wab_instance) {
+  position: relative;
+  align-self: auto;
+  flex-shrink: 0;
+}
+.container:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox___2DQ47 {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  margin: 32px;
+}
+.freeBox__isWorking___2DQ479VcX4 {
+  display: none;
+}
+.skeleton__g8SRs:global(.__wab_instance) {
+  position: relative;
+}
+.skeleton__o548:global(.__wab_instance) {
+  position: relative;
+}
+.skeleton__sWRk:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox__iv4CX {
+  display: none;
+  position: relative;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  margin: 32px;
+}
+.freeBox__isWorking__iv4CX9VcX4 {
+  display: flex;
+}

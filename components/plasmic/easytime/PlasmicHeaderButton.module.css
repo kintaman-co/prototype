@@ -1,0 +1,16 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  position: relative;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 8px;
+}
+.root:active {
+  background: #fffffe26;
+}
+.slotChildren {
+  color: #fffffe /* plasmic-token: Je54hxL4x */;
+}

@@ -9,14 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@plasmicapp/react-web": "^0.2.67",
+    "firebase": "^8.10.0",
     "next": "11.1.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-firebase-hooks": "^3.0.4"
   },
   "devDependencies": {
+    "@plasmicapp/cli": "^0.1.160",
     "@types/react": "17.0.19",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.0",
+    "prettier": "^2.3.2",
     "typescript": "4.3.5"
   }
 }

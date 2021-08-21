@@ -1,0 +1,20 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  background: linear-gradient(
+        90deg,
+        #fffffe21 39%,
+        #2b2c3421 66%,
+        #fffffe1a 86%
+      )
+      0% 0% / 100% 100% repeat,
+    #d8d8d8;
+  transition-property: all;
+  transition-duration: 1s;
+  min-height: 30px;
+  min-width: 30px;
+  border-radius: 8px;
+}

@@ -1,0 +1,52 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+.header:global(.__wab_instance) {
+  position: relative;
+  flex-shrink: 0;
+}
+.container:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox__lBosZ {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+.freeBox__lBosZ > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  margin-top: calc(0px - 9px);
+  height: calc(100% + 9px);
+}
+.freeBox__lBosZ > :global(.__wab_flex-container) > *,
+.freeBox__lBosZ > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox__lBosZ > :global(.__wab_flex-container) > picture > img,
+.freeBox__lBosZ
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 9px;
+}
+.freeBox__epnN0 {
+  position: relative;
+  height: auto;
+}
+.bizList {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+.addBiz:global(.__wab_instance) {
+  position: relative;
+}

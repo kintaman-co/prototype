@@ -1,0 +1,47 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  position: relative;
+}
+.freeBox__nwg {
+  display: flex;
+  flex-direction: row;
+}
+.slotHour__type_large {
+  color: #2b2c34 /* plasmic-token: okz0e5Hvl */;
+  font-size: 48px;
+  font-family: "Lato", sans-serif;
+}
+.slotHour__type_inHeader {
+  font-family: "Nunito Sans", sans-serif;
+  color: #fffffe /* plasmic-token: Je54hxL4x */;
+}
+.freeBox__cFlr {
+  width: auto;
+  display: inline-block;
+}
+.freeBox__type_large__cFlRoNjWl {
+  color: #2b2c34 /* plasmic-token: okz0e5Hvl */;
+  font-size: 48px;
+  font-family: "Lato", sans-serif;
+}
+.freeBox__type_inHeader__cFlRoJcOx {
+  font-family: "Nunito Sans", sans-serif;
+  color: #fffffe /* plasmic-token: Je54hxL4x */;
+}
+.freeBox__zLyZd {
+  width: auto;
+  display: inline-flex;
+  flex-direction: row;
+}
+.slotMin__type_large {
+  color: #2b2c34 /* plasmic-token: okz0e5Hvl */;
+  font-size: 48px;
+  font-family: "Lato", sans-serif;
+}
+.slotMin__type_inHeader {
+  font-family: "Nunito Sans", sans-serif;
+  color: #fffffe /* plasmic-token: Je54hxL4x */;
+}

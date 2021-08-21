@@ -1,0 +1,44 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+.header:global(.__wab_instance) {
+  position: relative;
+  flex-shrink: 0;
+}
+.container:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox__r2XL {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+.freeBox__aLo9 {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #d1d1e9;
+  align-content: unset;
+  left: auto;
+  top: auto;
+  border-radius: 4px;
+  padding: 16px;
+  margin: 32px;
+}
+.freeBox__fslz0 {
+  position: relative;
+  height: auto;
+}
+.signinButton:global(.__wab_instance) {
+  position: relative;
+}

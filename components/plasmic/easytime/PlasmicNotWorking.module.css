@@ -1,0 +1,45 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #d1d1e9;
+  align-content: unset;
+  position: relative;
+  border-radius: 4px;
+  padding: 16px;
+}
+.time:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox {
+  position: relative;
+  height: auto;
+}
+.bizList {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  min-width: 200px;
+  padding: 8px;
+}
+.bizList > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  margin-top: calc(0px - 8px);
+  height: calc(100% + 8px);
+}
+.bizList > :global(.__wab_flex-container) > *,
+.bizList > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.bizList > :global(.__wab_flex-container) > picture > img,
+.bizList
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 8px;
+}
+.skeleton___284B8:global(.__wab_instance) {
+  position: relative;
+}

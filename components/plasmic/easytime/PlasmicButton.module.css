@@ -1,0 +1,53 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background: #6246ea;
+  position: relative;
+  align-content: unset;
+  transition-property: all;
+  transition-duration: 1s;
+  transform: none;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 6px;
+  border-width: 1px;
+  border-style: none;
+}
+.root__type_secondary {
+  background: #e45858;
+}
+.root__type_text {
+  background: none;
+}
+.root:hover {
+  background: linear-gradient(#fffffe1a, #fffffe1a), #6246ea;
+}
+.root:active {
+  background: linear-gradient(#2b2c341a, #2b2c341a), #6246ea;
+}
+.root__type_primary:hover {
+  background: linear-gradient(#fffffe1a, #fffffe1a), #6246ea;
+}
+.root__type_primary:active {
+  background: linear-gradient(#2b2c341a, #2b2c341a), #6246ea;
+}
+.root__type_secondary:hover {
+  background: linear-gradient(#fffffe1a, #fffffe1a), #e45858;
+}
+.root__type_secondary:active {
+  background: linear-gradient(#2b2c341a, #2b2c341a), #e45858;
+}
+.root__type_text:hover {
+  background: #fffffe1a;
+}
+.root__type_text:active {
+  background: #2b2c341a;
+}
+.slotChildren {
+  color: #fffffe /* plasmic-token: NyEsQChCc */;
+}
+.slotChildren__type_text {
+  color: #6246ea /* plasmic-token: Qmv6O_gsE */;
+}

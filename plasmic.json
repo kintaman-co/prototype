@@ -1,0 +1,238 @@
+{
+  "platform": "nextjs",
+  "code": {
+    "lang": "ts",
+    "scheme": "blackbox",
+    "reactRuntime": "classic"
+  },
+  "style": {
+    "scheme": "css-modules",
+    "defaultStyleCssFilePath": "plasmic/plasmic__default_style.module.css"
+  },
+  "images": {
+    "scheme": "files"
+  },
+  "tokens": {
+    "scheme": "theo",
+    "tokensFilePath": "plasmic-tokens.theo.json"
+  },
+  "srcDir": "components",
+  "defaultPlasmicDir": "./plasmic",
+  "projects": [
+    {
+      "projectId": "mBKHaRhjQbiZuznDyARcTS",
+      "projectName": "easytime",
+      "version": "latest",
+      "cssFilePath": "plasmic/easytime/plasmic_easytime.module.css",
+      "components": [
+        {
+          "id": "8PUOayqXwP",
+          "name": "HeaderButton",
+          "type": "managed",
+          "projectId": "mBKHaRhjQbiZuznDyARcTS",
+          "renderModuleFilePath": "plasmic/easytime/PlasmicHeaderButton.tsx",
+          "importSpec": {
+            "modulePath": "HeaderButton.tsx"
+          },
+          "cssFilePath": "plasmic/easytime/PlasmicHeaderButton.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "aBQwDwBIQz",
+          "name": "Header",
+          "type": "managed",
+          "projectId": "mBKHaRhjQbiZuznDyARcTS",
+          "renderModuleFilePath": "plasmic/easytime/PlasmicHeader.tsx",
+          "importSpec": {
+            "modulePath": "Header.tsx"
+          },
+          "cssFilePath": "plasmic/easytime/PlasmicHeader.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "SuzMD14H1M",
+          "name": "Container",
+          "type": "managed",
+          "projectId": "mBKHaRhjQbiZuznDyARcTS",
+          "renderModuleFilePath": "plasmic/easytime/PlasmicContainer.tsx",
+          "importSpec": {
+            "modulePath": "Container.tsx"
+          },
+          "cssFilePath": "plasmic/easytime/PlasmicContainer.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "tOmxC_Hwcz",
+          "name": "Time",
+          "type": "managed",
+          "projectId": "mBKHaRhjQbiZuznDyARcTS",
+          "renderModuleFilePath": "plasmic/easytime/PlasmicTime.tsx",
+          "importSpec": {
+            "modulePath": "Time.tsx"
+          },
+          "cssFilePath": "plasmic/easytime/PlasmicTime.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "FN-EzPooHT",
+          "name": "TimeInput",
+          "type": "managed",
+          "projectId": "mBKHaRhjQbiZuznDyARcTS",
+          "renderModuleFilePath": "plasmic/easytime/PlasmicTimeInput.tsx",
+          "importSpec": {
+            "modulePath": "TimeInput.tsx"
+          },
+          "cssFilePath": "plasmic/easytime/PlasmicTimeInput.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "CM9oqbJYK7",
+          "name": "Button",
+          "type": "managed",
+          "projectId": "mBKHaRhjQbiZuznDyARcTS",
+          "renderModuleFilePath": "plasmic/easytime/PlasmicButton.tsx",
+          "importSpec": {
+            "modulePath": "Button.tsx"
+          },
+          "cssFilePath": "plasmic/easytime/PlasmicButton.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "w3pwx0FCD6",
+          "name": "Log",
+          "type": "managed",
+          "projectId": "mBKHaRhjQbiZuznDyARcTS",
+          "renderModuleFilePath": "plasmic/easytime/PlasmicLog.tsx",
+          "importSpec": {
+            "modulePath": "../pages/log.tsx"
+          },
+          "cssFilePath": "plasmic/easytime/PlasmicLog.module.css",
+          "scheme": "blackbox",
+          "componentType": "page"
+        },
+        {
+          "id": "t8VWzd7npn",
+          "name": "Settings",
+          "type": "managed",
+          "projectId": "mBKHaRhjQbiZuznDyARcTS",
+          "renderModuleFilePath": "plasmic/easytime/PlasmicSettings.tsx",
+          "importSpec": {
+            "modulePath": "../pages/settings.tsx"
+          },
+          "cssFilePath": "plasmic/easytime/PlasmicSettings.module.css",
+          "scheme": "blackbox",
+          "componentType": "page"
+        },
+        {
+          "id": "nOkcrTTsdU",
+          "name": "Signin",
+          "type": "managed",
+          "projectId": "mBKHaRhjQbiZuznDyARcTS",
+          "renderModuleFilePath": "plasmic/easytime/PlasmicSignin.tsx",
+          "importSpec": {
+            "modulePath": "../pages/signin.tsx"
+          },
+          "cssFilePath": "plasmic/easytime/PlasmicSignin.module.css",
+          "scheme": "blackbox",
+          "componentType": "page"
+        },
+        {
+          "id": "wwJKNAAFSQ",
+          "name": "NotWorking",
+          "type": "managed",
+          "projectId": "mBKHaRhjQbiZuznDyARcTS",
+          "renderModuleFilePath": "plasmic/easytime/PlasmicNotWorking.tsx",
+          "importSpec": {
+            "modulePath": "NotWorking.tsx"
+          },
+          "cssFilePath": "plasmic/easytime/PlasmicNotWorking.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "FGt7QMp0cE",
+          "name": "Working",
+          "type": "managed",
+          "projectId": "mBKHaRhjQbiZuznDyARcTS",
+          "renderModuleFilePath": "plasmic/easytime/PlasmicWorking.tsx",
+          "importSpec": {
+            "modulePath": "Working.tsx"
+          },
+          "cssFilePath": "plasmic/easytime/PlasmicWorking.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "yqjHbDN1Sk",
+          "name": "EditableBizItem",
+          "type": "managed",
+          "projectId": "mBKHaRhjQbiZuznDyARcTS",
+          "renderModuleFilePath": "plasmic/easytime/PlasmicEditableBizItem.tsx",
+          "importSpec": {
+            "modulePath": "EditableBizItem.tsx"
+          },
+          "cssFilePath": "plasmic/easytime/PlasmicEditableBizItem.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "Rp4JlG0GLd",
+          "name": "Homepage",
+          "type": "managed",
+          "projectId": "mBKHaRhjQbiZuznDyARcTS",
+          "renderModuleFilePath": "plasmic/easytime/PlasmicHomepage.tsx",
+          "importSpec": {
+            "modulePath": "../pages/index.tsx"
+          },
+          "cssFilePath": "plasmic/easytime/PlasmicHomepage.module.css",
+          "scheme": "blackbox",
+          "componentType": "page"
+        },
+        {
+          "id": "wYIaMxnRFr",
+          "name": "Skeleton",
+          "type": "managed",
+          "projectId": "mBKHaRhjQbiZuznDyARcTS",
+          "renderModuleFilePath": "plasmic/easytime/PlasmicSkeleton.tsx",
+          "importSpec": {
+            "modulePath": "Skeleton.tsx"
+          },
+          "cssFilePath": "plasmic/easytime/PlasmicSkeleton.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        }
+      ],
+      "icons": [
+        {
+          "id": "gT-pajkU-Q",
+          "name": "ClearWhite24DpsvgIcon",
+          "moduleFilePath": "plasmic/easytime/icons/PlasmicIcon__ClearWhite24Dpsvg.tsx"
+        }
+      ],
+      "images": [],
+      "codeComponents": [],
+      "projectApiToken": "Ex6L2DkdViuKvMCif24sfO8XZPOa8OZCXJZFea030Qp7nBAtl1hZyEza9T3gn9MfUjOOSt7vXZrTciwCymA"
+    }
+  ],
+  "globalVariants": {
+    "variantGroups": [
+      {
+        "id": "yypsF8-J0P",
+        "name": "Screen",
+        "projectId": "mBKHaRhjQbiZuznDyARcTS",
+        "contextFilePath": "plasmic/easytime/PlasmicGlobalVariant__Screen.tsx"
+      }
+    ]
+  },
+  "nextjsConfig": {
+    "pagesDir": "../pages"
+  },
+  "cliVersion": "0.1.160",
+  "$schema": "https://unpkg.com/@plasmicapp/cli@0.1.160/dist/plasmic.schema.json"
+}
