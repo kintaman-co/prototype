@@ -33,7 +33,7 @@ import {
   deriveRenderOpts,
   ensureGlobalVariants,
 } from "@plasmicapp/react-web";
-import TimeInput from "../../TimeInput"; // plasmic-import: FN-EzPooHT/component
+import DtInput from "../../DtInput"; // plasmic-import: RlnXukMjMc/component
 import Skeleton from "../../Skeleton"; // plasmic-import: wYIaMxnRFr/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -56,7 +56,7 @@ export const PlasmicNotWorking__ArgProps = new Array<ArgPropType>("bizList");
 
 export type PlasmicNotWorking__OverridesType = {
   root?: p.Flex<"div">;
-  time?: p.Flex<typeof TimeInput>;
+  time?: p.Flex<typeof DtInput>;
   freeBox?: p.Flex<"div">;
   bizList?: p.Flex<"div">;
 };
@@ -83,7 +83,7 @@ function PlasmicNotWorking__RenderFunc(props: {
       data-plasmic-for-node={forNode}
       className={classNames(defaultcss.all, projectcss.root_reset, sty.root)}
     >
-      <TimeInput
+      <DtInput
         data-plasmic-name={"time"}
         data-plasmic-override={overrides.time}
         className={classNames("__wab_instance", sty.time)}
@@ -110,11 +110,20 @@ function PlasmicNotWorking__RenderFunc(props: {
       >
         {p.renderPlasmicSlot({
           defaultContents: (
-            <Skeleton
-              className={classNames("__wab_instance", sty.skeleton___284B8)}
-            />
-          ),
+            <React.Fragment>
+              <Skeleton
+                className={classNames("__wab_instance", sty.skeleton___284B8)}
+              />
 
+              <Skeleton
+                className={classNames("__wab_instance", sty.skeleton___30QHb)}
+              />
+
+              <Skeleton
+                className={classNames("__wab_instance", sty.skeleton__dpy5B)}
+              />
+            </React.Fragment>
+          ),
           value: args.bizList,
         })}
       </p.Stack>
@@ -133,7 +142,7 @@ type DescendantsType<T extends NodeNameType> =
   typeof PlasmicDescendants[T][number];
 type NodeDefaultElementType = {
   root: "div";
-  time: typeof TimeInput;
+  time: typeof DtInput;
   freeBox: "div";
   bizList: "div";
 };

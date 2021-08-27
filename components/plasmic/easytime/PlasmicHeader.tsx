@@ -86,6 +86,7 @@ function PlasmicHeader__RenderFunc(props: {
       >
         <HeaderButton
           className={classNames("__wab_instance", sty.headerButton__xQogy)}
+          to={"/" as const}
         >
           <div
             className={classNames(
@@ -114,18 +115,21 @@ function PlasmicHeader__RenderFunc(props: {
 
         <HeaderButton
           className={classNames("__wab_instance", sty.headerButton__rEl)}
+          to={"/" as const}
         >
           {"勤怠管理"}
         </HeaderButton>
 
         <HeaderButton
           className={classNames("__wab_instance", sty.headerButton__nNgE)}
+          to={"/log" as const}
         >
           {"ログ"}
         </HeaderButton>
 
         <HeaderButton
           className={classNames("__wab_instance", sty.headerButton___5LMdS)}
+          to={"/settings" as const}
         >
           {"設定"}
         </HeaderButton>

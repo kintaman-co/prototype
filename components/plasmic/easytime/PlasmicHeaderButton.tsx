@@ -31,7 +31,7 @@ import {
   useTrigger,
   StrictProps,
   deriveRenderOpts,
-  ensureGlobalVariants
+  ensureGlobalVariants,
 } from "@plasmicapp/react-web";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -47,7 +47,7 @@ export const PlasmicHeaderButton__VariantProps = new Array<VariantPropType>();
 
 export type PlasmicHeaderButton__ArgsType = {
   children?: React.ReactNode;
-  to?: string;
+  to?: string | PageHref;
 };
 
 type ArgPropType = keyof PlasmicHeaderButton__ArgsType;
@@ -62,6 +62,7 @@ export type PlasmicHeaderButton__OverridesType = {
 
 export interface DefaultHeaderButtonProps {
   children?: React.ReactNode;
+  to?: string | PageHref;
   className?: string;
 }
 
@@ -88,14 +89,14 @@ function PlasmicHeaderButton__RenderFunc(props: {
       {p.renderPlasmicSlot({
         defaultContents: "Label",
         value: args.children,
-        className: classNames(sty.slotChildren)
+        className: classNames(sty.slotChildren),
       })}
     </p.PlasmicLink>
   ) as React.ReactElement | null;
 }
 
 const PlasmicDescendants = {
-  root: ["root"]
+  root: ["root"],
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -139,7 +140,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
       name: nodeName,
       descendantNames: [...PlasmicDescendants[nodeName]],
       internalArgPropNames: PlasmicHeaderButton__ArgProps,
-      internalVariantPropNames: PlasmicHeaderButton__VariantProps
+      internalVariantPropNames: PlasmicHeaderButton__VariantProps,
     });
 
     const { dataFetches } = props;
@@ -149,7 +150,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
       args,
       overrides,
       dataFetches,
-      forNode: nodeName
+      forNode: nodeName,
     });
   };
   if (nodeName === "root") {
@@ -168,7 +169,7 @@ export const PlasmicHeaderButton = Object.assign(
 
     // Metadata about props expected for PlasmicHeaderButton
     internalVariantProps: PlasmicHeaderButton__VariantProps,
-    internalArgProps: PlasmicHeaderButton__ArgProps
+    internalArgProps: PlasmicHeaderButton__ArgProps,
   }
 );
 

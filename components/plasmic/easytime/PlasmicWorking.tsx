@@ -33,7 +33,7 @@ import {
   deriveRenderOpts,
   ensureGlobalVariants,
 } from "@plasmicapp/react-web";
-import TimeInput from "../../TimeInput"; // plasmic-import: FN-EzPooHT/component
+import DtInput from "../../DtInput"; // plasmic-import: RlnXukMjMc/component
 import Button from "../../Button"; // plasmic-import: CM9oqbJYK7/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -60,7 +60,7 @@ export const PlasmicWorking__ArgProps = new Array<ArgPropType>(
 
 export type PlasmicWorking__OverridesType = {
   root?: p.Flex<"div">;
-  time?: p.Flex<typeof TimeInput>;
+  time?: p.Flex<typeof DtInput>;
   out?: p.Flex<typeof Button>;
   cancel?: p.Flex<typeof Button>;
 };
@@ -121,7 +121,7 @@ function PlasmicWorking__RenderFunc(props: {
           {"で働いてます"}
         </div>
 
-        <TimeInput
+        <DtInput
           data-plasmic-name={"time"}
           data-plasmic-override={overrides.time}
           className={classNames("__wab_instance", sty.time)}
@@ -184,7 +184,7 @@ type DescendantsType<T extends NodeNameType> =
   typeof PlasmicDescendants[T][number];
 type NodeDefaultElementType = {
   root: "div";
-  time: typeof TimeInput;
+  time: typeof DtInput;
   out: typeof Button;
   cancel: typeof Button;
 };

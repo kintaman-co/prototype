@@ -16,18 +16,20 @@ function Settings() {
   const [snapshots, loading, error] = useList(userRef);
   return (
     <PlasmicSettings
-      bizList={snapshots?.map((biz) => (
-        <EditableBizItem
-          key={biz.key}
-          value={biz.val().name}
-          onChange={(val) => {
-            biz.ref.update({ name: val });
-          }}
-          onDeleteClick={() => {
-            biz.ref.remove();
-          }}
-        />
-      ))}
+      bizList={snapshots
+        ?.filter((biz) => !biz.val().deleted)
+        .map((biz) => (
+          <EditableBizItem
+            key={biz.key}
+            value={biz.val().name}
+            onChange={(val) => {
+              biz.ref.update({ name: val });
+            }}
+            onDeleteClick={() => {
+              biz.ref.update({ deleted: true });
+            }}
+          />
+        ))}
       addBiz={{
         onClick() {
           userRef?.push().set({ name: "" });

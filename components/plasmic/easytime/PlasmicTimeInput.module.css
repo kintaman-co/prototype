@@ -1,15 +1,22 @@
 .root {
   display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-content: unset;
+}
+.freeBox__tuQtm {
+  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   background: #fffffe;
   align-content: unset;
-  position: relative;
 }
 .hour {
   background: #fffffe;
-  width: 40px;
+  width: 60px;
   color: #2b2c34 /* plasmic-token: ZJfqmpfUm */;
   font-size: 26px;
   position: relative;
@@ -18,7 +25,7 @@
   border-width: 1px;
   border-style: none;
 }
-.freeBox {
+.freeBox___1ZcV {
   background: #fffffe;
   width: 10px;
   color: #2b2c34 /* plasmic-token: ZJfqmpfUm */;
@@ -32,7 +39,7 @@
 }
 .minute {
   background: #fffffe;
-  width: 40px;
+  width: 60px;
   color: #2b2c34 /* plasmic-token: ZJfqmpfUm */;
   font-size: 26px;
   position: relative;
@@ -40,4 +47,38 @@
   flex-shrink: 0;
   border-width: 1px;
   border-style: none;
+}
+.dayAgoCheckbox {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  background: #fffffe1a;
+  border-radius: 4px;
+  padding: 4px;
+  margin: 4px;
+}
+.dayAgoCheckbox > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  align-content: unset;
+  margin-left: calc(0px - 3px);
+  width: calc(100% + 3px);
+}
+.dayAgoCheckbox > :global(.__wab_flex-container) > *,
+.dayAgoCheckbox > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.dayAgoCheckbox > :global(.__wab_flex-container) > picture > img,
+.dayAgoCheckbox
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 3px;
+}
+.checkbox:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox__x3F9S {
+  position: relative;
+  color: #2b2c34 /* plasmic-token: okz0e5Hvl */;
 }

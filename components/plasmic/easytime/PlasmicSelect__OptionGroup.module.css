@@ -1,0 +1,61 @@
+.root {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: auto;
+  flex-direction: column;
+  background: #ffffff;
+  min-width: 0;
+}
+.separator {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  height: 0px;
+  width: 100%;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  min-width: 0;
+  flex-shrink: 0;
+  border-top: 1px solid #e5e5ea;
+}
+.titleContainer {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 4px 8px;
+}
+.slotTitle {
+  color: #00000080;
+  white-space: pre;
+}
+.slotTitle > *,
+.slotTitle > .__wab_slot > *,
+.slotTitle > .__wab_slot > .__wab_slot > *,
+.slotTitle > .__wab_slot > .__wab_slot > .__wab_slot > *,
+.slotTitle > picture > img,
+.slotTitle > .__wab_slot > picture > img,
+.slotTitle > .__wab_slot > .__wab_slot > picture > img,
+.slotTitle > .__wab_slot > .__wab_slot > .__wab_slot > picture > img {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.optionsContainer {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+.option__g7HpS:global(.__wab_instance) {
+  position: relative;
+  flex-shrink: 0;
+}
+.option__kpCpw:global(.__wab_instance) {
+  position: relative;
+  flex-shrink: 0;
+}

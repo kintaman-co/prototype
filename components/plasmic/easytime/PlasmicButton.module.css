@@ -7,7 +7,7 @@
   position: relative;
   align-content: unset;
   transition-property: all;
-  transition-duration: 1s;
+  transition-duration: 200ms;
   transform: none;
   cursor: pointer;
   border-radius: 4px;

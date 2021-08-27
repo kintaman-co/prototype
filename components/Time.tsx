@@ -1,20 +1,9 @@
 import React, { useState } from "react";
 import { useEffect, useRef } from "react";
+import { useInterval } from "../hooks/useInterval";
+import { padZero } from "../utils/date";
 import { PlasmicTime, DefaultTimeProps } from "./plasmic/easytime/PlasmicTime";
-function useInterval(callback: () => void, delay: number | null) {
-  const savedCallback = useRef(callback);
-  useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
 
-  useEffect(() => {
-    if (delay === null) {
-      return;
-    }
-    const id = setInterval(() => savedCallback.current(), delay);
-    return () => clearInterval(id);
-  }, [delay]);
-}
 type Props = {
   type: "large" | "inHeader" | undefined;
 };
@@ -27,7 +16,7 @@ function Time({ type }: Props) {
     setMinutes(date.getMinutes());
   }, 3000);
   return (
-    <PlasmicTime hour={hours.toString()} min={minutes.toString()} type={type} />
+    <PlasmicTime hour={padZero(hours)} min={padZero(minutes)} type={type} />
   );
 }
 export default Time;

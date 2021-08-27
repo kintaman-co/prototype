@@ -1,0 +1,43 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: 100%;
+  height: 32px;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
+  padding: 4px 9px;
+}
+.root__isHighlighted {
+  background: #f2f2f7;
+}
+.root__isDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.labelContainer {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+.slotChildren {
+  white-space: pre;
+}
+.slotChildren > *,
+.slotChildren > .__wab_slot > *,
+.slotChildren > .__wab_slot > .__wab_slot > *,
+.slotChildren > .__wab_slot > .__wab_slot > .__wab_slot > *,
+.slotChildren > picture > img,
+.slotChildren > .__wab_slot > picture > img,
+.slotChildren > .__wab_slot > .__wab_slot > picture > img,
+.slotChildren > .__wab_slot > .__wab_slot > .__wab_slot > picture > img {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.slotChildren__isSelected {
+  color: #007aff;
+  font-weight: 500;
+}

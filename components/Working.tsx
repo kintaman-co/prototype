@@ -8,6 +8,9 @@ import {
   DefaultWorkingProps,
 } from "./plasmic/easytime/PlasmicWorking";
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
+import { DTValues } from "./DtInput";
+import BizName from "./BizName";
+import { dateToMinstamp } from "../utils/date";
 
 interface WorkingProps extends DefaultWorkingProps {}
 
@@ -17,14 +20,10 @@ function Working(props: WorkingProps) {
   const [snapshots, loading, error] = useObject(userRef);
   const start = new Date(snapshots?.val()?.pending?.start * 1000);
   const curBizId = snapshots?.val()?.pending?.bizId;
-  const curBizRef = curBizId ? userRef!.child(`businesses/${curBizId}`) : null;
-  const [curBizSnapshots, curBizLoading, curBizError] = useObject(curBizRef);
-  const [time, setTime] = useState<[string, string]>(() => {
-    const now = new Date();
-    return [
-      now.getHours().toString(),
-      ("0" + now.getMinutes().toString()).slice(-2),
-    ];
+  const [time, setTime] = useState<DTValues>({
+    hour: "",
+    minute: "",
+    dayAgo: false,
   });
   return (
     <PlasmicWorking
@@ -35,7 +34,7 @@ function Working(props: WorkingProps) {
         value: time,
         onChange: setTime,
       }}
-      curBiz={curBizSnapshots?.val()?.name}
+      curBiz={<BizName bizId={curBizId} />}
       out={{
         onClick() {
           const pend = snapshots?.val().pending;
@@ -51,11 +50,11 @@ function Working(props: WorkingProps) {
     />
   );
 }
-function bizOut(bizId: string, startVal: number, endTS: [string, string]) {
+function bizOut(bizId: string, startVal: number, endTS: DTValues) {
   const date = new Date();
-  date.setHours(parseInt(endTS[0], 10), parseInt(endTS[1], 10));
-  if (new Date().getTime() - 60000 > date.getTime()) {
-    date.setDate(date.getDate() + 1);
+  date.setHours(parseInt(endTS.hour, 10), parseInt(endTS.minute, 10));
+  if (endTS.dayAgo) {
+    date.setDate(date.getDate() - 1);
   }
   const uid = firebase.auth().currentUser?.uid;
   const userRef = firebase.database().ref(`users/${uid}`);
@@ -65,7 +64,7 @@ function bizOut(bizId: string, startVal: number, endTS: [string, string]) {
     [`records/${newRec}`]: {
       bizId,
       start: startVal,
-      end: Math.floor(date.getTime() / 1000),
+      end: dateToMinstamp(date),
     },
   });
 }

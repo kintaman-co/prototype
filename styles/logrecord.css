@@ -1,0 +1,22 @@
+.recordTable {
+  display: grid !important;
+  grid-template-columns: repeat(5, 1fr) auto;
+  grid-template-rows: repeat(auto-fill, auto);
+}
+.recordRow.header {
+  font-weight: bold;
+}
+.recordRow {
+  display: contents !important;
+}
+.recordRow:nth-of-type(2n) .recordCell {
+  background-color: #f0f0f0;
+}
+.recordCell {
+  display: flex;
+  justify-content: stretch;
+  width: 100%;
+  height: 100%;
+  align-items: stretch;
+  padding: 0.5em;
+}

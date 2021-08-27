@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import firebase from "firebase/app";
+import "firebase/auth";
 import "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useList } from "react-firebase-hooks/database";
@@ -9,6 +10,8 @@ import {
 } from "./plasmic/easytime/PlasmicNotWorking";
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
 import Button from "./Button";
+import { DTValues } from "./DtInput";
+import { dateToMinstamp } from "../utils/date";
 
 interface NotWorkingProps extends DefaultNotWorkingProps {}
 
@@ -18,12 +21,10 @@ function NotWorking(props: NotWorkingProps) {
     ? firebase.database().ref(`users/${user.uid}/businesses`)
     : null;
   const [snapshots, loading, error] = useList(bizRef);
-  const [time, setTime] = useState<[string, string]>(() => {
-    const now = new Date();
-    return [
-      now.getHours().toString(),
-      ("0" + now.getMinutes().toString()).slice(-2),
-    ];
+  const [time, setTime] = useState<DTValues>({
+    hour: "",
+    minute: "",
+    dayAgo: false,
   });
   return (
     <PlasmicNotWorking
@@ -31,31 +32,37 @@ function NotWorking(props: NotWorkingProps) {
         value: time,
         onChange: setTime,
       }}
-      bizList={snapshots?.map((e) => (
-        <Button
-          key={e.key || "NULL"}
-          onClick={() => {
-            bizIn(e.key || "NULL", time);
-          }}
-        >
-          {e.val().name}
-        </Button>
-      ))}
+      bizList={
+        loading
+          ? undefined
+          : snapshots
+              ?.filter((e) => !e.val().deleted)
+              .map((e) => (
+                <Button
+                  key={e.key || "NULL"}
+                  onClick={() => {
+                    bizIn(e.key || "NULL", time);
+                  }}
+                >
+                  {e.val().name}
+                </Button>
+              ))
+      }
     />
   );
 }
-function bizIn(bizId: string, startTS: [string, string]) {
+function bizIn(bizId: string, startTS: DTValues) {
   const date = new Date();
-  date.setHours(parseInt(startTS[0], 10), parseInt(startTS[1], 10));
-  if (new Date().getTime() - 60000 > date.getTime()) {
-    date.setDate(date.getDate() + 1);
+  date.setHours(parseInt(startTS.hour, 10), parseInt(startTS.minute, 10));
+  if (startTS.dayAgo) {
+    date.setDate(date.getDate() - 1);
   }
   const uid = firebase.auth().currentUser?.uid;
   const userRef = firebase.database().ref(`users/${uid}`);
   userRef.update({
     pending: {
       bizId: bizId,
-      start: Math.floor(date.getTime() / 1000),
+      start: dateToMinstamp(date),
     },
   });
 }

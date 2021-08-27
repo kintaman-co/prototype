@@ -1,0 +1,36 @@
+.root {
+  display: inline-flex;
+  flex-direction: column;
+  position: relative;
+  width: auto;
+  height: auto;
+}
+.freeBox___4YxAo {
+  display: flex;
+  position: relative;
+  width: 24px;
+  height: 24px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: unset;
+  flex-shrink: 0;
+  border-radius: 4px;
+  padding: 3px;
+  border: 4px solid #6246ea /* plasmic-token: Qmv6O_gsE */;
+}
+.freeBox__qHoR {
+  display: none;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #6246ea;
+  min-width: 0;
+  min-height: 0;
+  border-radius: 2px;
+  padding: 0px;
+  margin: 0px;
+}
+.freeBox__selected__qHoRCjZWv {
+  display: block;
+}
