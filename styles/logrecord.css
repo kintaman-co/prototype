@@ -1,6 +1,6 @@
 .recordTable {
   display: grid !important;
-  grid-template-columns: repeat(5, 1fr) auto;
+  grid-template-columns: 2fr 2fr 2fr auto 4fr auto;
   grid-template-rows: repeat(auto-fill, auto);
 }
 .recordRow.header {
