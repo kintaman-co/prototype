@@ -1,6 +1,6 @@
 import { ScreenVariantProvider } from "../components/plasmic/easytime/PlasmicGlobalVariant__Screen";
 import { PlasmicSignin } from "../components/plasmic/easytime/PlasmicSignin";
-import firebase from "firebase";
+import firebase from "firebase/app";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
