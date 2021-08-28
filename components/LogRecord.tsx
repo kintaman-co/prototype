@@ -11,20 +11,23 @@ interface LogRecordProps extends DefaultLogRecordProps {
   recId?: string;
 }
 
-function LogRecord_(props: LogRecordProps, ref: HTMLElementRefOf<"div">) {
+function LogRecord_(
+  { recId, ...props }: LogRecordProps,
+  ref: HTMLElementRefOf<"div">
+) {
   const router = useRouter();
   return (
     <PlasmicLogRecord
       root={{ ref }}
-      {...props}
       edit={{
         onClick() {
-          if (!props.recId) {
+          if (!recId) {
             return;
           }
-          router.push(`/log/${props.recId}`);
+          router.push(`/log/${recId}`);
         },
       }}
+      {...props}
     />
   );
 }
