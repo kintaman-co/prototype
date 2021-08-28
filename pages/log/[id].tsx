@@ -2,26 +2,32 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
 import { PlasmicEditLog } from "../../components/plasmic/easytime/PlasmicEditLog";
-import { useEffect, useState } from "react";
+import { useEffect, useState, ReactNode } from "react";
 import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useObject } from "react-firebase-hooks/database";
-import { padZero } from "../../utils/date";
+import { dateToMinstamp, padZero } from "../../utils/date";
 import BizName from "../../components/BizName";
+import BizSelect from "../../components/BizSelect";
 
 function EditLog() {
   const router = useRouter();
   const id = router.query.id as string;
+  const isNew = id === "new";
 
   const [user] = useAuthState(firebase.auth());
-  const recRef = user
-    ? firebase.database().ref(`users/${user.uid}/records/${id}`)
-    : null;
+  const recRef =
+    user && !isNew
+      ? firebase.database().ref(`users/${user.uid}/records/${id}`)
+      : null;
   const [snapshots, fbLoading, error] = useObject(recRef);
   const [actionLoading, setActionLoading] = useState(false);
 
-  const [startTime, setStartTime] = useState(0);
-  const [endTime, setEndTime] = useState(0);
+  const [bizId, setBizId] = useState<string | null>(null);
+
+  const initialDate = dateToMinstamp(new Date());
+  const [startTime, setStartTime] = useState(initialDate);
+  const [endTime, setEndTime] = useState(initialDate);
 
   const [report, setReport] = useState("");
 
@@ -30,6 +36,8 @@ function EditLog() {
     if (!val) {
       return;
     }
+
+    setBizId(val.bizId);
     setStartTime(val.start);
     setEndTime(val.end);
     setReport(val.report || "");
@@ -38,6 +46,7 @@ function EditLog() {
 
   const save = async () => {
     const updates = {
+      bizId,
       start: startTime,
       end: endTime,
       report: report,
@@ -51,6 +60,23 @@ function EditLog() {
     setActionLoading(false);
     back();
   };
+  const createNew = async () => {
+    const updates = {
+      bizId,
+      start: startTime,
+      end: endTime,
+      report: report,
+    };
+    setActionLoading(true);
+    try {
+      await firebase.database().ref(`users/${user!.uid}/records`).push(updates);
+    } catch (e) {
+      console.error(e);
+    }
+    setActionLoading(false);
+    back();
+  };
+
   const deleteLog = async () => {
     setActionLoading(true);
     try {
@@ -64,10 +90,14 @@ function EditLog() {
   const back = () => {
     router.back();
   };
+
   return (
     <PlasmicEditLog
       loading={fbLoading || actionLoading}
-      bizName={<BizName bizId={snapshots?.val()?.bizId} />}
+      bizSelect={{
+        value: bizId,
+        onChange: setBizId,
+      }}
       start={{
         value: startTime,
         onChange: setStartTime,
@@ -82,10 +112,10 @@ function EditLog() {
         onChange: (e) => setReport(e.target.value),
       }}
       save={{
-        onClick: save,
+        onClick: isNew ? createNew : save,
       }}
       deleteLog={{
-        onClick: deleteLog,
+        onClick: isNew ? back : deleteLog,
       }}
       back={{
         onClick: back,

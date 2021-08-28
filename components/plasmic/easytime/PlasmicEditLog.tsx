@@ -36,8 +36,9 @@ import {
 import Header from "../../Header"; // plasmic-import: aBQwDwBIQz/component
 import Container from "../../Container"; // plasmic-import: SuzMD14H1M/component
 import RecordItem from "../../RecordItem"; // plasmic-import: _XArBkddKd/component
-import Skeleton from "../../Skeleton"; // plasmic-import: wYIaMxnRFr/component
+import BizSelect from "../../BizSelect"; // plasmic-import: SCY6plzZHs/component
 import YmdhmInput from "../../YmdhmInput"; // plasmic-import: wYLwsz9PHx/component
+import Skeleton from "../../Skeleton"; // plasmic-import: wYIaMxnRFr/component
 import Button from "../../Button"; // plasmic-import: CM9oqbJYK7/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -59,20 +60,17 @@ export const PlasmicEditLog__VariantProps = new Array<VariantPropType>(
 );
 
 export type PlasmicEditLog__ArgsType = {
-  bizName?: React.ReactNode;
   duration?: React.ReactNode;
 };
 
 type ArgPropType = keyof PlasmicEditLog__ArgsType;
-export const PlasmicEditLog__ArgProps = new Array<ArgPropType>(
-  "bizName",
-  "duration"
-);
+export const PlasmicEditLog__ArgProps = new Array<ArgPropType>("duration");
 
 export type PlasmicEditLog__OverridesType = {
   root?: p.Flex<"div">;
   header?: p.Flex<typeof Header>;
   container?: p.Flex<typeof Container>;
+  bizSelect?: p.Flex<typeof BizSelect>;
   start?: p.Flex<typeof YmdhmInput>;
   end?: p.Flex<typeof YmdhmInput>;
   report?: p.Flex<"textarea">;
@@ -185,52 +183,17 @@ function PlasmicEditLog__RenderFunc(props: {
                             >
                               {"会社名"}
                             </div>
-
-                            <div
-                              className={classNames(
-                                defaultcss.all,
-                                defaultcss.__wab_text,
-                                sty.freeBox___7P0F8
-                              )}
-                            >
-                              {"変更は設定へ。削除した場合は変更できません"}
-                            </div>
                           </div>
                         }
                       >
-                        {p.renderPlasmicSlot({
-                          defaultContents: (
-                            <React.Fragment>
-                              {true ? (
-                                <div
-                                  className={classNames(
-                                    defaultcss.all,
-                                    defaultcss.__wab_text,
-                                    sty.freeBox__sf6Wy
-                                  )}
-                                >
-                                  {"Enter some text"}
-                                </div>
-                              ) : null}
-                              {true ? (
-                                <Skeleton
-                                  className={classNames(
-                                    "__wab_instance",
-                                    sty.skeleton__xIUkB
-                                  )}
-                                />
-                              ) : null}
-                            </React.Fragment>
-                          ),
-                          value: args.bizName,
-                          className: classNames(sty.slotBizName, {
-                            [sty.slotBizName__loading]: hasVariant(
-                              variants,
-                              "loading",
-                              "loading"
-                            ),
-                          }),
-                        })}
+                        <BizSelect
+                          data-plasmic-name={"bizSelect"}
+                          data-plasmic-override={overrides.bizSelect}
+                          className={classNames(
+                            "__wab_instance",
+                            sty.bizSelect
+                          )}
+                        />
                       </RecordItem>
                     ) : null}
 
@@ -464,6 +427,7 @@ const PlasmicDescendants = {
     "root",
     "header",
     "container",
+    "bizSelect",
     "start",
     "end",
     "report",
@@ -474,6 +438,7 @@ const PlasmicDescendants = {
   header: ["header"],
   container: [
     "container",
+    "bizSelect",
     "start",
     "end",
     "report",
@@ -481,6 +446,7 @@ const PlasmicDescendants = {
     "deleteLog",
     "back",
   ],
+  bizSelect: ["bizSelect"],
   start: ["start"],
   end: ["end"],
   report: ["report"],
@@ -495,6 +461,7 @@ type NodeDefaultElementType = {
   root: "div";
   header: typeof Header;
   container: typeof Container;
+  bizSelect: typeof BizSelect;
   start: typeof YmdhmInput;
   end: typeof YmdhmInput;
   report: "textarea";
@@ -566,6 +533,7 @@ export const PlasmicEditLog = Object.assign(
     // Helper components rendering sub-elements
     header: makeNodeComponent("header"),
     container: makeNodeComponent("container"),
+    bizSelect: makeNodeComponent("bizSelect"),
     start: makeNodeComponent("start"),
     end: makeNodeComponent("end"),
     report: makeNodeComponent("report"),

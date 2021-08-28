@@ -1,4 +1,4 @@
-.animatedSkeleton {
+div.animatedSkeleton[class^="plasmic"] {
   animation: animateBg 1s linear infinite;
   background-image: linear-gradient(
     90deg,

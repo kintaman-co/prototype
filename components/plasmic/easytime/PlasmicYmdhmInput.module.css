@@ -26,9 +26,9 @@
 }
 .year {
   background: #fffffe;
-  width: 80px;
+  width: 60px;
   color: #2b2c34 /* plasmic-token: ZJfqmpfUm */;
-  font-size: 26px;
+  font-size: 20px;
   position: relative;
   text-align: left;
   flex-shrink: 0;
@@ -39,7 +39,7 @@
   background: #fffffe;
   width: 10px;
   color: #2b2c34 /* plasmic-token: ZJfqmpfUm */;
-  font-size: 26px;
+  font-size: 20px;
   position: relative;
   align-self: auto;
   text-align: center;
@@ -49,9 +49,9 @@
 }
 .month {
   background: #fffffe;
-  width: 40px;
+  width: 32px;
   color: #2b2c34 /* plasmic-token: ZJfqmpfUm */;
-  font-size: 26px;
+  font-size: 20px;
   position: relative;
   text-align: left;
   flex-shrink: 0;
@@ -62,7 +62,7 @@
   background: #fffffe;
   width: 10px;
   color: #2b2c34 /* plasmic-token: ZJfqmpfUm */;
-  font-size: 26px;
+  font-size: 20px;
   position: relative;
   align-self: auto;
   text-align: center;
@@ -72,9 +72,9 @@
 }
 .day {
   background: #fffffe;
-  width: 40px;
+  width: 32px;
   color: #2b2c34 /* plasmic-token: ZJfqmpfUm */;
-  font-size: 26px;
+  font-size: 20px;
   position: relative;
   text-align: left;
   flex-shrink: 0;
@@ -91,9 +91,9 @@
 }
 .hour {
   background: #fffffe;
-  width: 40px;
+  width: 32px;
   color: #2b2c34 /* plasmic-token: ZJfqmpfUm */;
-  font-size: 26px;
+  font-size: 20px;
   position: relative;
   text-align: right;
   flex-shrink: 0;
@@ -104,7 +104,7 @@
   background: #fffffe;
   width: 10px;
   color: #2b2c34 /* plasmic-token: ZJfqmpfUm */;
-  font-size: 26px;
+  font-size: 20px;
   position: relative;
   align-self: auto;
   text-align: center;
@@ -114,9 +114,9 @@
 }
 .minute {
   background: #fffffe;
-  width: 40px;
+  width: 32px;
   color: #2b2c34 /* plasmic-token: ZJfqmpfUm */;
-  font-size: 26px;
+  font-size: 20px;
   position: relative;
   text-align: left;
   flex-shrink: 0;

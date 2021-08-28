@@ -11,7 +11,63 @@
   position: relative;
   flex-shrink: 0;
 }
-.freeBox {
+.freeBox__qgmjE {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+}
+.freeBox__qgmjE > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  align-content: unset;
+  margin-left: calc(0px - 8px);
+  width: calc(100% + 8px);
+}
+.freeBox__qgmjE > :global(.__wab_flex-container) > *,
+.freeBox__qgmjE > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox__qgmjE > :global(.__wab_flex-container) > picture > img,
+.freeBox__qgmjE
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 8px;
+}
+.recordItem__fzulx:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox__dWwF1 {
+  position: relative;
+  height: auto;
+}
+.start:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox___6MwHr {
+  position: relative;
+}
+.recordItem__t8V:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox___0FNqV {
+  position: relative;
+  height: auto;
+}
+.end:global(.__wab_instance) {
+  position: relative;
+}
+.recordItem__fgH5:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox__f4J5 {
+  position: relative;
+}
+.biz:global(.__wab_instance) {
+  position: relative;
+  width: 209px;
+}
+.freeBox__vzRmu {
   display: flex;
   position: relative;
   flex-direction: column;
@@ -44,4 +100,52 @@
   > picture
   > img {
   margin-top: 4px;
+}
+.freeBox__apAwA {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+}
+.freeBox__apAwA > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  align-content: unset;
+  margin-left: calc(0px - 12px);
+  width: calc(100% + 12px);
+}
+.freeBox__apAwA > :global(.__wab_flex-container) > *,
+.freeBox__apAwA > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox__apAwA > :global(.__wab_flex-container) > picture > img,
+.freeBox__apAwA
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 12px;
+}
+.freeBox__oI100 {
+  position: relative;
+}
+.totalDuration {
+  position: relative;
+  height: auto;
+  color: #2b2c34 /* plasmic-token: gFZV8R6YM */;
+  font-weight: 700;
+}
+.freeBox__y3MJe {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  align-content: unset;
+}
+.createNew:global(.__wab_instance) {
+  position: relative;
+  width: auto;
+}
+.exportCsv:global(.__wab_instance) {
+  position: relative;
+  width: auto;
 }

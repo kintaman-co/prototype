@@ -34,7 +34,11 @@ import {
   ensureGlobalVariants,
 } from "@plasmicapp/react-web";
 import Header from "../../Header"; // plasmic-import: aBQwDwBIQz/component
+import RecordItem from "../../RecordItem"; // plasmic-import: _XArBkddKd/component
+import YmdhmInput from "../../YmdhmInput"; // plasmic-import: wYLwsz9PHx/component
+import BizSelect from "../../BizSelect"; // plasmic-import: SCY6plzZHs/component
 import Skeleton from "../../Skeleton"; // plasmic-import: wYIaMxnRFr/component
+import Button from "../../Button"; // plasmic-import: CM9oqbJYK7/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 import * as defaultcss from "../plasmic__default_style.module.css"; // plasmic-import: global/defaultcss
@@ -57,7 +61,12 @@ export const PlasmicLog__ArgProps = new Array<ArgPropType>("children");
 export type PlasmicLog__OverridesType = {
   root?: p.Flex<"div">;
   header?: p.Flex<typeof Header>;
-  freeBox?: p.Flex<"div">;
+  start?: p.Flex<typeof YmdhmInput>;
+  end?: p.Flex<typeof YmdhmInput>;
+  biz?: p.Flex<typeof BizSelect>;
+  totalDuration?: p.Flex<"div">;
+  createNew?: p.Flex<typeof Button>;
+  exportCsv?: p.Flex<typeof Button>;
 };
 
 export interface DefaultLogProps {
@@ -110,12 +119,80 @@ function PlasmicLog__RenderFunc(props: {
             className={classNames("__wab_instance", sty.header)}
           />
 
+          <p.Stack
+            as={"div"}
+            hasGap={true}
+            className={classNames(defaultcss.all, sty.freeBox__qgmjE)}
+          >
+            <RecordItem
+              className={classNames("__wab_instance", sty.recordItem__fzulx)}
+              title={
+                <div
+                  className={classNames(
+                    defaultcss.all,
+                    defaultcss.__wab_text,
+                    sty.freeBox__dWwF1
+                  )}
+                >
+                  {"終了時刻 始点"}
+                </div>
+              }
+            >
+              <YmdhmInput
+                data-plasmic-name={"start"}
+                data-plasmic-override={overrides.start}
+                className={classNames("__wab_instance", sty.start)}
+              />
+            </RecordItem>
+
+            <div
+              className={classNames(
+                defaultcss.all,
+                defaultcss.__wab_text,
+                sty.freeBox___6MwHr
+              )}
+            >
+              {"〜"}
+            </div>
+
+            <RecordItem
+              className={classNames("__wab_instance", sty.recordItem__t8V)}
+              title={
+                <div
+                  className={classNames(
+                    defaultcss.all,
+                    defaultcss.__wab_text,
+                    sty.freeBox___0FNqV
+                  )}
+                >
+                  {"終了時刻 終点"}
+                </div>
+              }
+            >
+              <YmdhmInput
+                data-plasmic-name={"end"}
+                data-plasmic-override={overrides.end}
+                className={classNames("__wab_instance", sty.end)}
+              />
+            </RecordItem>
+
+            <RecordItem
+              className={classNames("__wab_instance", sty.recordItem__fgH5)}
+              title={"会社名"}
+            >
+              <BizSelect
+                data-plasmic-name={"biz"}
+                data-plasmic-override={overrides.biz}
+                className={classNames("__wab_instance", sty.biz)}
+                hasAll={"hasAll" as const}
+              />
+            </RecordItem>
+          </p.Stack>
+
           <div
-            data-plasmic-name={"freeBox"}
-            data-plasmic-override={overrides.freeBox}
             className={classNames(
               defaultcss.all,
-              sty.freeBox,
+              sty.freeBox__vzRmu,
               "recordTable" as const
             )}
           >
@@ -143,6 +220,54 @@ function PlasmicLog__RenderFunc(props: {
               value: args.children,
             })}
           </div>
+
+          <p.Stack
+            as={"div"}
+            hasGap={true}
+            className={classNames(defaultcss.all, sty.freeBox__apAwA)}
+          >
+            <div
+              className={classNames(
+                defaultcss.all,
+                defaultcss.__wab_text,
+                sty.freeBox__oI100
+              )}
+            >
+              {"合計時間"}
+            </div>
+
+            <div
+              data-plasmic-name={"totalDuration"}
+              data-plasmic-override={overrides.totalDuration}
+              className={classNames(
+                defaultcss.all,
+                defaultcss.__wab_text,
+                sty.totalDuration
+              )}
+            >
+              {"30:12"}
+            </div>
+          </p.Stack>
+
+          <div className={classNames(defaultcss.all, sty.freeBox__y3MJe)}>
+            <Button
+              data-plasmic-name={"createNew"}
+              data-plasmic-override={overrides.createNew}
+              className={classNames("__wab_instance", sty.createNew)}
+              type={"text" as const}
+            >
+              {"手動で追加"}
+            </Button>
+
+            <Button
+              data-plasmic-name={"exportCsv"}
+              data-plasmic-override={overrides.exportCsv}
+              className={classNames("__wab_instance", sty.exportCsv)}
+              type={"text" as const}
+            >
+              {"CSVとしてエクスポート"}
+            </Button>
+          </div>
         </div>
       </div>
     </React.Fragment>
@@ -150,9 +275,23 @@ function PlasmicLog__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "header", "freeBox"],
+  root: [
+    "root",
+    "header",
+    "start",
+    "end",
+    "biz",
+    "totalDuration",
+    "createNew",
+    "exportCsv",
+  ],
   header: ["header"],
-  freeBox: ["freeBox"],
+  start: ["start"],
+  end: ["end"],
+  biz: ["biz"],
+  totalDuration: ["totalDuration"],
+  createNew: ["createNew"],
+  exportCsv: ["exportCsv"],
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -160,7 +299,12 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   header: typeof Header;
-  freeBox: "div";
+  start: typeof YmdhmInput;
+  end: typeof YmdhmInput;
+  biz: typeof BizSelect;
+  totalDuration: "div";
+  createNew: typeof Button;
+  exportCsv: typeof Button;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -225,7 +369,12 @@ export const PlasmicLog = Object.assign(
   {
     // Helper components rendering sub-elements
     header: makeNodeComponent("header"),
-    freeBox: makeNodeComponent("freeBox"),
+    start: makeNodeComponent("start"),
+    end: makeNodeComponent("end"),
+    biz: makeNodeComponent("biz"),
+    totalDuration: makeNodeComponent("totalDuration"),
+    createNew: makeNodeComponent("createNew"),
+    exportCsv: makeNodeComponent("exportCsv"),
 
     // Metadata about props expected for PlasmicLog
     internalVariantProps: PlasmicLog__VariantProps,

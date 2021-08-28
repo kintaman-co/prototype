@@ -1,0 +1,32 @@
+.root {
+  display: inline-flex;
+  flex-direction: column;
+  position: relative;
+  width: auto;
+  height: auto;
+}
+.root__loading {
+  width: 100%;
+  min-width: 0;
+}
+.select:global(.__wab_instance) {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+.select__loading:global(.__wab_instance) {
+  display: none;
+}
+.option___1Opi2:global(.__wab_instance) {
+  position: relative;
+}
+.option___7RI1:global(.__wab_instance) {
+  position: relative;
+}
+.skeleton:global(.__wab_instance) {
+  position: relative;
+}
+.skeleton__loading:global(.__wab_instance) {
+  width: 100%;
+  min-width: 0;
+}

@@ -38,3 +38,6 @@ export function formatDuration(duration: number) {
   const minutes = duration % 60;
   return `${padZero(hours)}:${padZero(minutes)}`;
 }
+export function sanitizeNaN(num: number) {
+  return isNaN(num) ? "" : num.toString();
+}

@@ -1,7 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useList, useObject } from "react-firebase-hooks/database";
+import { useList } from "react-firebase-hooks/database";
 import React from "react";
 import { ScreenVariantProvider } from "../components/plasmic/easytime/PlasmicGlobalVariant__Screen";
 import { PlasmicSettings } from "../components/plasmic/easytime/PlasmicSettings";
@@ -22,6 +22,10 @@ async function linkToGoogle() {
       alert("すでに別のアカウントとして使用されています。");
       return;
     }
+    if (e.code === "auth/popup-blocked") {
+      alert("ポップアップがブロックされています。");
+      return;
+    }
     alert("エラーが発生しました: " + e.code);
   }
 }
@@ -40,6 +44,10 @@ async function linkToGithub() {
       alert("すでに別のアカウントとして使用されています。");
       return;
     }
+    if (e.code === "auth/popup-blocked") {
+      alert("ポップアップがブロックされています。");
+      return;
+    }
     alert("エラーが発生しました: " + e.code);
   }
 }
@@ -50,11 +58,11 @@ function signOut() {
 
 function Settings() {
   const [user] = useAuthState(firebase.auth());
-  const userRef = user
+  const bizRef = user
     ? firebase.database().ref(`users/${user.uid}/businesses`)
     : null;
 
-  const [snapshots, loading, error] = useList(userRef);
+  const [snapshots, loading, error] = useList(bizRef);
   return (
     <PlasmicSettings
       bizList={snapshots
@@ -73,7 +81,7 @@ function Settings() {
         ))}
       addBiz={{
         onClick() {
-          userRef?.push().set({ name: "" });
+          bizRef?.push().set({ name: "" });
         },
       }}
       linkToGitHub={{

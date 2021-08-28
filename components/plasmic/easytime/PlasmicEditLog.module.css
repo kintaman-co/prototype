@@ -38,20 +38,7 @@
   align-items: stretch;
   justify-content: flex-start;
 }
-.freeBox___7P0F8 {
-  position: relative;
-  font-size: 12px;
-  color: #6d6d6d;
-  padding: 3px;
-}
-.slotBizName {
-  font-size: 24px;
-}
-.freeBox__sf6Wy {
-  position: relative;
-  display: none;
-}
-.skeleton__xIUkB:global(.__wab_instance) {
+.bizSelect:global(.__wab_instance) {
   position: relative;
 }
 .recordItem__fjcOq:global(.__wab_instance) {
