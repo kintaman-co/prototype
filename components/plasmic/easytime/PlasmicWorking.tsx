@@ -61,6 +61,7 @@ export const PlasmicWorking__ArgProps = new Array<ArgPropType>(
 
 export type PlasmicWorking__OverridesType = {
   root?: p.Flex<"div">;
+  duration?: p.Flex<"div">;
   time?: p.Flex<typeof DtInput>;
   recordItem?: p.Flex<typeof RecordItem>;
   report?: p.Flex<"textarea">;
@@ -125,6 +126,34 @@ function PlasmicWorking__RenderFunc(props: {
             {"で働いてます"}
           </div>
         </div>
+
+        <p.Stack
+          as={"div"}
+          hasGap={true}
+          className={classNames(defaultcss.all, sty.freeBox__jkZnv)}
+        >
+          <div
+            className={classNames(
+              defaultcss.all,
+              defaultcss.__wab_text,
+              sty.freeBox__mzU5R
+            )}
+          >
+            {"経過時間"}
+          </div>
+
+          <div
+            data-plasmic-name={"duration"}
+            data-plasmic-override={overrides.duration}
+            className={classNames(
+              defaultcss.all,
+              defaultcss.__wab_text,
+              sty.duration
+            )}
+          >
+            {"30:12"}
+          </div>
+        </p.Stack>
 
         <DtInput
           data-plasmic-name={"time"}
@@ -194,7 +223,8 @@ function PlasmicWorking__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "time", "recordItem", "report", "out", "cancel"],
+  root: ["root", "duration", "time", "recordItem", "report", "out", "cancel"],
+  duration: ["duration"],
   time: ["time"],
   recordItem: ["recordItem", "report"],
   report: ["report"],
@@ -206,6 +236,7 @@ type DescendantsType<T extends NodeNameType> =
   typeof PlasmicDescendants[T][number];
 type NodeDefaultElementType = {
   root: "div";
+  duration: "div";
   time: typeof DtInput;
   recordItem: typeof RecordItem;
   report: "textarea";
@@ -274,6 +305,7 @@ export const PlasmicWorking = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
+    duration: makeNodeComponent("duration"),
     time: makeNodeComponent("time"),
     recordItem: makeNodeComponent("recordItem"),
     report: makeNodeComponent("report"),

@@ -10,7 +10,7 @@ import {
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
 import { DTValues } from "./DtInput";
 import BizName from "./BizName";
-import { dateToMinstamp, minstampToDate } from "../utils/date";
+import { dateToMinstamp, formatDuration, minstampToDate } from "../utils/date";
 
 interface WorkingProps extends DefaultWorkingProps {}
 
@@ -25,6 +25,8 @@ function Working(props: WorkingProps) {
     minute: "",
     dayAgo: false,
   });
+  const [report, setReport] = useState("");
+  const diff = dateToMinstamp(new Date()) - dateToMinstamp(start);
   return (
     <PlasmicWorking
       start={`${
@@ -35,11 +37,16 @@ function Working(props: WorkingProps) {
         onChange: setTime,
       }}
       curBiz={<BizName bizId={curBizId} />}
+      duration={formatDuration(diff)}
+      report={{
+        value: report,
+        onChange: (e) => setReport(e.target.value),
+      }}
       out={{
         onClick() {
           const pend = snapshots?.val().pending;
           if (!pend) return;
-          bizOut(pend.bizId, pend.start, time);
+          bizOut(pend.bizId, pend.start, time, report);
         },
       }}
       cancel={{
@@ -50,7 +57,12 @@ function Working(props: WorkingProps) {
     />
   );
 }
-function bizOut(bizId: string, startVal: number, endTS: DTValues) {
+function bizOut(
+  bizId: string,
+  startVal: number,
+  endTS: DTValues,
+  report: string
+) {
   const date = new Date();
   date.setHours(parseInt(endTS.hour, 10), parseInt(endTS.minute, 10));
   if (endTS.dayAgo) {
@@ -65,6 +77,7 @@ function bizOut(bizId: string, startVal: number, endTS: DTValues) {
       bizId,
       start: startVal,
       end: dateToMinstamp(date),
+      report,
     },
   });
 }

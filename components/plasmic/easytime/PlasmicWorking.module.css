@@ -21,6 +21,7 @@
 }
 .slotStart {
   font-weight: 700;
+  color: #2b2c34 /* plasmic-token: gFZV8R6YM */;
 }
 .freeBox__hzet7 {
   position: relative;
@@ -31,12 +32,44 @@
 .slotCurBiz {
   font-size: 20px;
   font-weight: 700;
+  color: #2b2c34 /* plasmic-token: gFZV8R6YM */;
 }
 .freeBox__cxJMq {
   position: relative;
   height: auto;
   margin-right: 4px;
   margin-left: 4px;
+}
+.freeBox__jkZnv {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+}
+.freeBox__jkZnv > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  margin-left: calc(0px - 12px);
+  width: calc(100% + 12px);
+}
+.freeBox__jkZnv > :global(.__wab_flex-container) > *,
+.freeBox__jkZnv > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox__jkZnv > :global(.__wab_flex-container) > picture > img,
+.freeBox__jkZnv
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 12px;
+}
+.freeBox__mzU5R {
+  position: relative;
+}
+.duration {
+  position: relative;
+  height: auto;
+  color: #2b2c34 /* plasmic-token: gFZV8R6YM */;
+  font-weight: 700;
 }
 .time:global(.__wab_instance) {
   position: relative;

@@ -7,7 +7,7 @@ import { PlasmicLog } from "../components/plasmic/easytime/PlasmicLog";
 import { useList } from "react-firebase-hooks/database";
 import React, { ReactNode } from "react";
 import BizName from "../components/BizName";
-import { formatDate, padZero } from "../utils/date";
+import { formatDate, formatDuration, padZero } from "../utils/date";
 import LogRecord from "../components/LogRecord";
 
 function Log() {
@@ -30,7 +30,7 @@ function Log() {
         recId={cur.key || undefined}
         start={formatDate(val.start)}
         end={formatDate(val.end)}
-        duration={padZero(Math.floor(diff / 60)) + ":" + padZero(diff % 60)}
+        duration={formatDuration(diff)}
         report={val.report || ""}
       />
     );

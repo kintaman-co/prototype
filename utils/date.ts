@@ -3,11 +3,13 @@
  *
  * @name formatDate
  * @param {number} - unix timestamp
- * @return {string} - formatted date and time
+ * @return {string} - YYYY/MM/DD hh:mm
  */
 export function formatDate(timestamp: number) {
   const d = minstampToDate(timestamp);
-  return `${d.toLocaleDateString()} ${d.toLocaleTimeString()}`;
+  return `${d.getFullYear()}/${
+    d.getMonth() + 1
+  }/${d.getDate()} ${d.getHours()}:${d.getMinutes()}`;
 }
 
 /**
@@ -29,4 +31,10 @@ export function minstampToDate(minstamp: number) {
  */
 export function padZero(num: number) {
   return `0${num}`.slice(-2);
+}
+
+export function formatDuration(duration: number) {
+  const hours = Math.floor(duration / 60);
+  const minutes = duration % 60;
+  return `${padZero(hours)}:${padZero(minutes)}`;
 }

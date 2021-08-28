@@ -169,7 +169,34 @@ function PlasmicEditLog__RenderFunc(props: {
                           "__wab_instance",
                           sty.recordItem__gr8Yh
                         )}
-                        title={"会社名"}
+                        title={
+                          <div
+                            className={classNames(
+                              defaultcss.all,
+                              sty.freeBox__pspW
+                            )}
+                          >
+                            <div
+                              className={classNames(
+                                defaultcss.all,
+                                defaultcss.__wab_text,
+                                sty.freeBox___4Rd0X
+                              )}
+                            >
+                              {"会社名"}
+                            </div>
+
+                            <div
+                              className={classNames(
+                                defaultcss.all,
+                                defaultcss.__wab_text,
+                                sty.freeBox___7P0F8
+                              )}
+                            >
+                              {"変更は設定へ。削除した場合は変更できません"}
+                            </div>
+                          </div>
+                        }
                       >
                         {p.renderPlasmicSlot({
                           defaultContents: (
