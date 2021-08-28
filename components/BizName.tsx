@@ -16,10 +16,12 @@ function BizName({ bizId }: BizNameProps) {
     : null;
   const [snapshots, loading, error] = useObject(bizRef);
   let bizName: string | undefined = undefined;
+  let deleted = false;
   if (!loading && snapshots) {
     bizName = snapshots.val()?.name;
+    deleted = snapshots.val()?.deleted;
   }
-  return <>{bizName || "Loading name..."}</>;
+  return <>{`${bizName}${deleted ? "(削除済み)" : ""}` || "Loading name..."}</>;
 }
 
 export default BizName;

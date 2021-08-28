@@ -9,12 +9,24 @@
   border-radius: 4px;
   padding: 16px;
 }
+.freeBox___7Jc2L {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  align-content: unset;
+  flex-wrap: nowrap;
+  margin: 12px;
+}
 .slotStart {
   font-weight: 700;
 }
 .freeBox__hzet7 {
   position: relative;
   height: auto;
+  margin-right: 4px;
+  margin-left: 4px;
 }
 .slotCurBiz {
   font-size: 20px;
@@ -23,9 +35,25 @@
 .freeBox__cxJMq {
   position: relative;
   height: auto;
+  margin-right: 4px;
+  margin-left: 4px;
 }
 .time:global(.__wab_instance) {
   position: relative;
+}
+.recordItem:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox__kpTfq {
+  position: relative;
+}
+.report {
+  position: relative;
+  background: #fffffe;
+  width: 240px;
+  height: 120px;
+  border-radius: 4px;
+  margin: 4px;
 }
 .freeBox__lcBi {
   display: flex;

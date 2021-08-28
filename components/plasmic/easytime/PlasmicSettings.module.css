@@ -14,6 +14,34 @@
 .container:global(.__wab_instance) {
   position: relative;
 }
+.freeBox___3R5W5 {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  padding: 8px;
+  margin: 0px;
+}
+.freeBox___3R5W5 > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  margin-top: calc(0px - 8px);
+  height: calc(100% + 8px);
+}
+.freeBox___3R5W5 > :global(.__wab_flex-container) > *,
+.freeBox___3R5W5 > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox___3R5W5 > :global(.__wab_flex-container) > picture > img,
+.freeBox___3R5W5
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 8px;
+}
+.freeBox__epnN0 {
+  position: relative;
+  height: auto;
+}
 .freeBox__lBosZ {
   display: flex;
   position: relative;
@@ -36,10 +64,6 @@
   > img {
   margin-top: 9px;
 }
-.freeBox__epnN0 {
-  position: relative;
-  height: auto;
-}
 .bizList {
   display: flex;
   position: relative;
@@ -48,5 +72,46 @@
   justify-content: flex-start;
 }
 .addBiz:global(.__wab_instance) {
+  position: relative;
+}
+.recordItem__b0EXk:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox___7IbCz {
+  position: relative;
+}
+.freeBox__svdSp {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  padding: 0px;
+}
+.freeBox__svdSp > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  margin-top: calc(0px - 8px);
+  height: calc(100% + 8px);
+}
+.freeBox__svdSp > :global(.__wab_flex-container) > *,
+.freeBox__svdSp > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox__svdSp > :global(.__wab_flex-container) > picture > img,
+.freeBox__svdSp
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 8px;
+}
+.linkToGitHub:global(.__wab_instance) {
+  position: relative;
+}
+.recordItem__wenbB:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox__ykzP {
+  position: relative;
+}
+.signOut:global(.__wab_instance) {
   position: relative;
 }

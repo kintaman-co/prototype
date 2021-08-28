@@ -327,6 +327,32 @@
           "scheme": "blackbox",
           "componentType": "component",
           "plumeType": "triggered-overlay"
+        },
+        {
+          "id": "wYLwsz9PHx",
+          "name": "YmdhmInput",
+          "type": "managed",
+          "projectId": "mBKHaRhjQbiZuznDyARcTS",
+          "renderModuleFilePath": "plasmic/easytime/PlasmicYmdhmInput.tsx",
+          "importSpec": {
+            "modulePath": "YmdhmInput.tsx"
+          },
+          "cssFilePath": "plasmic/easytime/PlasmicYmdhmInput.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "_XArBkddKd",
+          "name": "RecordItem",
+          "type": "managed",
+          "projectId": "mBKHaRhjQbiZuznDyARcTS",
+          "renderModuleFilePath": "plasmic/easytime/PlasmicRecordItem.tsx",
+          "importSpec": {
+            "modulePath": "RecordItem.tsx"
+          },
+          "cssFilePath": "plasmic/easytime/PlasmicRecordItem.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [

@@ -14,20 +14,131 @@
 .container:global(.__wab_instance) {
   position: relative;
 }
+.freeBox__b1Dbx {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}
 .freeBox___41Rlx {
   display: flex;
-  position: relative;
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-start;
+  padding: 16px;
 }
-.freeBox__hMw0 {
+.recordItem__gr8Yh:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox___4Rd0X {
+  position: relative;
+}
+.slotBizName {
+  font-size: 24px;
+}
+.freeBox__sf6Wy {
+  position: relative;
+  display: none;
+}
+.skeleton__xIUkB:global(.__wab_instance) {
+  position: relative;
+}
+.recordItem__fjcOq:global(.__wab_instance) {
+  position: relative;
+}
+.start:global(.__wab_instance) {
+  position: relative;
+}
+.start__loading:global(.__wab_instance) {
+  display: none;
+}
+.skeleton__kocnA:global(.__wab_instance) {
+  position: relative;
+}
+.recordItem__utEYg:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox__yNtqY {
+  position: relative;
+}
+.end:global(.__wab_instance) {
+  position: relative;
+}
+.end__loading:global(.__wab_instance) {
+  display: none;
+}
+.skeleton__qmHiR:global(.__wab_instance) {
+  position: relative;
+}
+.recordItem__v0MwY:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox__yD5Sl {
+  position: relative;
+  height: auto;
+}
+.slotDuration {
+  font-size: 24px;
+}
+.skeleton__kwGu:global(.__wab_instance) {
+  position: relative;
+}
+.recordItem__ibrZ0:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox__fFiLl {
+  position: relative;
+  height: auto;
+}
+.report {
+  position: relative;
+  width: 100%;
+  min-height: 120px;
+  min-width: 0;
+}
+.report__loading {
+  display: none;
+}
+.skeleton__uxCq:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox__wpDgh {
   display: flex;
   position: relative;
   flex-direction: column;
-  align-items: stretch;
-  justify-content: flex-start;
+  padding: 16px;
 }
-.freeBox___5X67N {
+.freeBox__wpDgh > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  align-content: unset;
+  margin-top: calc(0px - 4px);
+  height: calc(100% + 4px);
+}
+.freeBox__wpDgh > :global(.__wab_flex-container) > *,
+.freeBox__wpDgh > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox__wpDgh > :global(.__wab_flex-container) > picture > img,
+.freeBox__wpDgh
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 4px;
+}
+.save:global(.__wab_instance) {
   position: relative;
+  width: 100%;
+  min-width: 0;
+}
+.deleteLog:global(.__wab_instance) {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+.back:global(.__wab_instance) {
+  position: relative;
+  width: 100%;
+  min-width: 0;
 }

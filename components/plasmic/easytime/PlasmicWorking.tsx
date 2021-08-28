@@ -34,6 +34,7 @@ import {
   ensureGlobalVariants,
 } from "@plasmicapp/react-web";
 import DtInput from "../../DtInput"; // plasmic-import: RlnXukMjMc/component
+import RecordItem from "../../RecordItem"; // plasmic-import: _XArBkddKd/component
 import Button from "../../Button"; // plasmic-import: CM9oqbJYK7/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -61,6 +62,8 @@ export const PlasmicWorking__ArgProps = new Array<ArgPropType>(
 export type PlasmicWorking__OverridesType = {
   root?: p.Flex<"div">;
   time?: p.Flex<typeof DtInput>;
+  recordItem?: p.Flex<typeof RecordItem>;
+  report?: p.Flex<"textarea">;
   out?: p.Flex<typeof Button>;
   cancel?: p.Flex<typeof Button>;
 };
@@ -89,36 +92,38 @@ function PlasmicWorking__RenderFunc(props: {
         data-plasmic-for-node={forNode}
         className={classNames(defaultcss.all, projectcss.root_reset, sty.root)}
       >
-        {p.renderPlasmicSlot({
-          defaultContents: "----",
-          value: args.start,
-          className: classNames(sty.slotStart),
-        })}
+        <div className={classNames(defaultcss.all, sty.freeBox___7Jc2L)}>
+          {p.renderPlasmicSlot({
+            defaultContents: "----",
+            value: args.start,
+            className: classNames(sty.slotStart),
+          })}
 
-        <div
-          className={classNames(
-            defaultcss.all,
-            defaultcss.__wab_text,
-            sty.freeBox__hzet7
-          )}
-        >
-          {"より"}
-        </div>
+          <div
+            className={classNames(
+              defaultcss.all,
+              defaultcss.__wab_text,
+              sty.freeBox__hzet7
+            )}
+          >
+            {"より"}
+          </div>
 
-        {p.renderPlasmicSlot({
-          defaultContents: "----",
-          value: args.curBiz,
-          className: classNames(sty.slotCurBiz),
-        })}
+          {p.renderPlasmicSlot({
+            defaultContents: "----",
+            value: args.curBiz,
+            className: classNames(sty.slotCurBiz),
+          })}
 
-        <div
-          className={classNames(
-            defaultcss.all,
-            defaultcss.__wab_text,
-            sty.freeBox__cxJMq
-          )}
-        >
-          {"で働いてます"}
+          <div
+            className={classNames(
+              defaultcss.all,
+              defaultcss.__wab_text,
+              sty.freeBox__cxJMq
+            )}
+          >
+            {"で働いてます"}
+          </div>
         </div>
 
         <DtInput
@@ -126,6 +131,21 @@ function PlasmicWorking__RenderFunc(props: {
           data-plasmic-override={overrides.time}
           className={classNames("__wab_instance", sty.time)}
         />
+
+        <RecordItem
+          data-plasmic-name={"recordItem"}
+          data-plasmic-override={overrides.recordItem}
+          className={classNames("__wab_instance", sty.recordItem)}
+          title={"日誌"}
+        >
+          <textarea
+            data-plasmic-name={"report"}
+            data-plasmic-override={overrides.report}
+            className={classNames(defaultcss.textarea, sty.report)}
+            placeholder={"任意" as const}
+            value={"" as const}
+          />
+        </RecordItem>
 
         <p.Stack
           as={"div"}
@@ -174,8 +194,10 @@ function PlasmicWorking__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "time", "out", "cancel"],
+  root: ["root", "time", "recordItem", "report", "out", "cancel"],
   time: ["time"],
+  recordItem: ["recordItem", "report"],
+  report: ["report"],
   out: ["out"],
   cancel: ["cancel"],
 } as const;
@@ -185,6 +207,8 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   time: typeof DtInput;
+  recordItem: typeof RecordItem;
+  report: "textarea";
   out: typeof Button;
   cancel: typeof Button;
 };
@@ -251,6 +275,8 @@ export const PlasmicWorking = Object.assign(
   {
     // Helper components rendering sub-elements
     time: makeNodeComponent("time"),
+    recordItem: makeNodeComponent("recordItem"),
+    report: makeNodeComponent("report"),
     out: makeNodeComponent("out"),
     cancel: makeNodeComponent("cancel"),
 

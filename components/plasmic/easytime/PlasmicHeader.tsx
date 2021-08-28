@@ -55,6 +55,7 @@ export type PlasmicHeader__OverridesType = {
   root?: p.Flex<"div">;
   left?: p.Flex<"div">;
   right?: p.Flex<"div">;
+  freeBox?: p.Flex<"div">;
   time?: p.Flex<typeof Time>;
 };
 
@@ -88,15 +89,7 @@ function PlasmicHeader__RenderFunc(props: {
           className={classNames("__wab_instance", sty.headerButton__xQogy)}
           to={"/" as const}
         >
-          <div
-            className={classNames(
-              defaultcss.all,
-              defaultcss.__wab_text,
-              sty.freeBox__eaIoA
-            )}
-          >
-            {"easytime"}
-          </div>
+          {"easytime"}
         </HeaderButton>
       </div>
 
@@ -105,7 +98,11 @@ function PlasmicHeader__RenderFunc(props: {
         data-plasmic-override={overrides.right}
         className={classNames(defaultcss.all, sty.right)}
       >
-        <div className={classNames(defaultcss.all, sty.freeBox__cfPTw)}>
+        <div
+          data-plasmic-name={"freeBox"}
+          data-plasmic-override={overrides.freeBox}
+          className={classNames(defaultcss.all, sty.freeBox)}
+        >
           <Time
             data-plasmic-name={"time"}
             data-plasmic-override={overrides.time}
@@ -139,9 +136,10 @@ function PlasmicHeader__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "left", "right", "time"],
+  root: ["root", "left", "right", "freeBox", "time"],
   left: ["left"],
-  right: ["right", "time"],
+  right: ["right", "freeBox", "time"],
+  freeBox: ["freeBox", "time"],
   time: ["time"],
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -151,6 +149,7 @@ type NodeDefaultElementType = {
   root: "div";
   left: "div";
   right: "div";
+  freeBox: "div";
   time: typeof Time;
 };
 
@@ -217,6 +216,7 @@ export const PlasmicHeader = Object.assign(
     // Helper components rendering sub-elements
     left: makeNodeComponent("left"),
     right: makeNodeComponent("right"),
+    freeBox: makeNodeComponent("freeBox"),
     time: makeNodeComponent("time"),
 
     // Metadata about props expected for PlasmicHeader

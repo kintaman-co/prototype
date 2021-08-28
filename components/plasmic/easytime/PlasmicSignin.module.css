@@ -20,8 +20,13 @@
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-start;
+  padding: 16px;
 }
-.freeBox__aLo9 {
+.freeBox__fslz0 {
+  position: relative;
+  height: auto;
+}
+.freeBox__meYeN {
   display: flex;
   position: relative;
   flex-direction: column;
@@ -33,12 +38,27 @@
   top: auto;
   border-radius: 4px;
   padding: 16px;
-  margin: 32px;
+  margin: 8px;
 }
-.freeBox__fslz0 {
+.freeBox__cnkjL {
+  display: flex;
   position: relative;
-  height: auto;
+  flex-direction: column;
 }
-.signinButton:global(.__wab_instance) {
-  position: relative;
+.freeBox__cnkjL > :global(.__wab_flex-container) {
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  margin-top: calc(0px - 8px);
+  height: calc(100% + 8px);
+}
+.freeBox__cnkjL > :global(.__wab_flex-container) > *,
+.freeBox__cnkjL > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox__cnkjL > :global(.__wab_flex-container) > picture > img,
+.freeBox__cnkjL
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 8px;
 }

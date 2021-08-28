@@ -10,7 +10,7 @@ import {
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
 import { DTValues } from "./DtInput";
 import BizName from "./BizName";
-import { dateToMinstamp } from "../utils/date";
+import { dateToMinstamp, minstampToDate } from "../utils/date";
 
 interface WorkingProps extends DefaultWorkingProps {}
 
@@ -18,7 +18,7 @@ function Working(props: WorkingProps) {
   const [user] = useAuthState(firebase.auth());
   const userRef = user ? firebase.database().ref(`users/${user.uid}`) : null;
   const [snapshots, loading, error] = useObject(userRef);
-  const start = new Date(snapshots?.val()?.pending?.start * 1000);
+  const start = minstampToDate(snapshots?.val()?.pending?.start);
   const curBizId = snapshots?.val()?.pending?.bizId;
   const [time, setTime] = useState<DTValues>({
     hour: "",

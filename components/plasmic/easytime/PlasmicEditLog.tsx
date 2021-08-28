@@ -35,26 +35,50 @@ import {
 } from "@plasmicapp/react-web";
 import Header from "../../Header"; // plasmic-import: aBQwDwBIQz/component
 import Container from "../../Container"; // plasmic-import: SuzMD14H1M/component
+import RecordItem from "../../RecordItem"; // plasmic-import: _XArBkddKd/component
+import Skeleton from "../../Skeleton"; // plasmic-import: wYIaMxnRFr/component
+import YmdhmInput from "../../YmdhmInput"; // plasmic-import: wYLwsz9PHx/component
+import Button from "../../Button"; // plasmic-import: CM9oqbJYK7/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 import * as defaultcss from "../plasmic__default_style.module.css"; // plasmic-import: global/defaultcss
 import * as projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
 import * as sty from "./PlasmicEditLog.module.css"; // plasmic-import: _FkSA8LL9h/css
 
-export type PlasmicEditLog__VariantMembers = {};
+export type PlasmicEditLog__VariantMembers = {
+  loading: "loading";
+};
 
-export type PlasmicEditLog__VariantsArgs = {};
+export type PlasmicEditLog__VariantsArgs = {
+  loading?: SingleBooleanChoiceArg<"loading">;
+};
+
 type VariantPropType = keyof PlasmicEditLog__VariantsArgs;
-export const PlasmicEditLog__VariantProps = new Array<VariantPropType>();
+export const PlasmicEditLog__VariantProps = new Array<VariantPropType>(
+  "loading"
+);
 
-export type PlasmicEditLog__ArgsType = {};
+export type PlasmicEditLog__ArgsType = {
+  bizName?: React.ReactNode;
+  duration?: React.ReactNode;
+};
+
 type ArgPropType = keyof PlasmicEditLog__ArgsType;
-export const PlasmicEditLog__ArgProps = new Array<ArgPropType>();
+export const PlasmicEditLog__ArgProps = new Array<ArgPropType>(
+  "bizName",
+  "duration"
+);
 
 export type PlasmicEditLog__OverridesType = {
   root?: p.Flex<"div">;
   header?: p.Flex<typeof Header>;
   container?: p.Flex<typeof Container>;
+  start?: p.Flex<typeof YmdhmInput>;
+  end?: p.Flex<typeof YmdhmInput>;
+  report?: p.Flex<"textarea">;
+  save?: p.Flex<typeof Button>;
+  deleteLog?: p.Flex<typeof Button>;
+  back?: p.Flex<typeof Button>;
 };
 
 export interface DefaultEditLogProps {
@@ -98,7 +122,8 @@ function PlasmicEditLog__RenderFunc(props: {
           className={classNames(
             defaultcss.all,
             projectcss.root_reset,
-            sty.root
+            sty.root,
+            { [sty.root__loading]: hasVariant(variants, "loading", "loading") }
           )}
         >
           <Header
@@ -110,21 +135,296 @@ function PlasmicEditLog__RenderFunc(props: {
           <Container
             data-plasmic-name={"container"}
             data-plasmic-override={overrides.container}
-            className={classNames("__wab_instance", sty.container)}
+            className={classNames("__wab_instance", sty.container, {
+              [sty.container__loading]: hasVariant(
+                variants,
+                "loading",
+                "loading"
+              ),
+            })}
           >
-            <div className={classNames(defaultcss.all, sty.freeBox___41Rlx)}>
-              <div className={classNames(defaultcss.all, sty.freeBox__hMw0)}>
-                <div
-                  className={classNames(
-                    defaultcss.all,
-                    defaultcss.__wab_text,
-                    sty.freeBox___5X67N
-                  )}
+            {true ? (
+              <div
+                className={classNames(defaultcss.all, sty.freeBox__b1Dbx, {
+                  [sty.freeBox__loading__b1DbxyKaCr]: hasVariant(
+                    variants,
+                    "loading",
+                    "loading"
+                  ),
+                })}
+              >
+                {true ? (
+                  <div
+                    className={classNames(defaultcss.all, sty.freeBox___41Rlx, {
+                      [sty.freeBox__loading___41RlXyKaCr]: hasVariant(
+                        variants,
+                        "loading",
+                        "loading"
+                      ),
+                    })}
+                  >
+                    {true ? (
+                      <RecordItem
+                        className={classNames(
+                          "__wab_instance",
+                          sty.recordItem__gr8Yh
+                        )}
+                        title={"会社名"}
+                      >
+                        {p.renderPlasmicSlot({
+                          defaultContents: (
+                            <React.Fragment>
+                              {true ? (
+                                <div
+                                  className={classNames(
+                                    defaultcss.all,
+                                    defaultcss.__wab_text,
+                                    sty.freeBox__sf6Wy
+                                  )}
+                                >
+                                  {"Enter some text"}
+                                </div>
+                              ) : null}
+                              {true ? (
+                                <Skeleton
+                                  className={classNames(
+                                    "__wab_instance",
+                                    sty.skeleton__xIUkB
+                                  )}
+                                />
+                              ) : null}
+                            </React.Fragment>
+                          ),
+                          value: args.bizName,
+                          className: classNames(sty.slotBizName, {
+                            [sty.slotBizName__loading]: hasVariant(
+                              variants,
+                              "loading",
+                              "loading"
+                            ),
+                          }),
+                        })}
+                      </RecordItem>
+                    ) : null}
+
+                    <RecordItem
+                      className={classNames(
+                        "__wab_instance",
+                        sty.recordItem__fjcOq
+                      )}
+                      title={"始業時間"}
+                    >
+                      {(
+                        hasVariant(variants, "loading", "loading") ? true : true
+                      ) ? (
+                        <YmdhmInput
+                          data-plasmic-name={"start"}
+                          data-plasmic-override={overrides.start}
+                          className={classNames("__wab_instance", sty.start, {
+                            [sty.start__loading]: hasVariant(
+                              variants,
+                              "loading",
+                              "loading"
+                            ),
+                          })}
+                        />
+                      ) : null}
+                      {(
+                        hasVariant(variants, "loading", "loading")
+                          ? true
+                          : false
+                      ) ? (
+                        <Skeleton
+                          className={classNames(
+                            "__wab_instance",
+                            sty.skeleton__kocnA,
+                            {
+                              [sty.skeleton__loading__kocnAyKaCr]: hasVariant(
+                                variants,
+                                "loading",
+                                "loading"
+                              ),
+                            }
+                          )}
+                        />
+                      ) : null}
+                    </RecordItem>
+
+                    <RecordItem
+                      className={classNames(
+                        "__wab_instance",
+                        sty.recordItem__utEYg
+                      )}
+                      title={"終業時間"}
+                    >
+                      {(
+                        hasVariant(variants, "loading", "loading") ? true : true
+                      ) ? (
+                        <YmdhmInput
+                          data-plasmic-name={"end"}
+                          data-plasmic-override={overrides.end}
+                          className={classNames("__wab_instance", sty.end, {
+                            [sty.end__loading]: hasVariant(
+                              variants,
+                              "loading",
+                              "loading"
+                            ),
+                          })}
+                        />
+                      ) : null}
+                      {(
+                        hasVariant(variants, "loading", "loading")
+                          ? true
+                          : false
+                      ) ? (
+                        <Skeleton
+                          className={classNames(
+                            "__wab_instance",
+                            sty.skeleton__qmHiR,
+                            {
+                              [sty.skeleton__loading__qmHiRyKaCr]: hasVariant(
+                                variants,
+                                "loading",
+                                "loading"
+                              ),
+                            }
+                          )}
+                        />
+                      ) : null}
+                    </RecordItem>
+
+                    <RecordItem
+                      className={classNames(
+                        "__wab_instance",
+                        sty.recordItem__v0MwY
+                      )}
+                      title={
+                        <div
+                          className={classNames(
+                            defaultcss.all,
+                            defaultcss.__wab_text,
+                            sty.freeBox__yD5Sl
+                          )}
+                        >
+                          {"稼働時間"}
+                        </div>
+                      }
+                    >
+                      {p.renderPlasmicSlot({
+                        defaultContents: (
+                          <Skeleton
+                            className={classNames(
+                              "__wab_instance",
+                              sty.skeleton__kwGu
+                            )}
+                          />
+                        ),
+
+                        value: args.duration,
+                        className: classNames(sty.slotDuration),
+                      })}
+                    </RecordItem>
+
+                    <RecordItem
+                      className={classNames(
+                        "__wab_instance",
+                        sty.recordItem__ibrZ0
+                      )}
+                      title={
+                        <div
+                          className={classNames(
+                            defaultcss.all,
+                            defaultcss.__wab_text,
+                            sty.freeBox__fFiLl
+                          )}
+                        >
+                          {"日誌"}
+                        </div>
+                      }
+                    >
+                      {(
+                        hasVariant(variants, "loading", "loading") ? true : true
+                      ) ? (
+                        <textarea
+                          data-plasmic-name={"report"}
+                          data-plasmic-override={overrides.report}
+                          className={classNames(
+                            defaultcss.textarea,
+                            sty.report,
+                            {
+                              [sty.report__loading]: hasVariant(
+                                variants,
+                                "loading",
+                                "loading"
+                              ),
+                            }
+                          )}
+                          value={"" as const}
+                        />
+                      ) : null}
+                      {(
+                        hasVariant(variants, "loading", "loading")
+                          ? true
+                          : false
+                      ) ? (
+                        <Skeleton
+                          className={classNames(
+                            "__wab_instance",
+                            sty.skeleton__uxCq,
+                            {
+                              [sty.skeleton__loading__uxCqyKaCr]: hasVariant(
+                                variants,
+                                "loading",
+                                "loading"
+                              ),
+                            }
+                          )}
+                        />
+                      ) : null}
+                    </RecordItem>
+                  </div>
+                ) : null}
+
+                <p.Stack
+                  as={"div"}
+                  hasGap={true}
+                  className={classNames(defaultcss.all, sty.freeBox__wpDgh, {
+                    [sty.freeBox__loading__wpDghyKaCr]: hasVariant(
+                      variants,
+                      "loading",
+                      "loading"
+                    ),
+                  })}
                 >
-                  {"Enter some text"}
-                </div>
+                  <Button
+                    data-plasmic-name={"save"}
+                    data-plasmic-override={overrides.save}
+                    className={classNames("__wab_instance", sty.save)}
+                    type={"primary" as const}
+                  >
+                    {"保存"}
+                  </Button>
+
+                  <Button
+                    data-plasmic-name={"deleteLog"}
+                    data-plasmic-override={overrides.deleteLog}
+                    className={classNames("__wab_instance", sty.deleteLog)}
+                    type={"secondary" as const}
+                  >
+                    {"削除"}
+                  </Button>
+
+                  <Button
+                    data-plasmic-name={"back"}
+                    data-plasmic-override={overrides.back}
+                    className={classNames("__wab_instance", sty.back)}
+                    type={"text" as const}
+                  >
+                    {"編集をやめる"}
+                  </Button>
+                </p.Stack>
               </div>
-            </div>
+            ) : null}
           </Container>
         </div>
       </div>
@@ -133,9 +433,33 @@ function PlasmicEditLog__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "header", "container"],
+  root: [
+    "root",
+    "header",
+    "container",
+    "start",
+    "end",
+    "report",
+    "save",
+    "deleteLog",
+    "back",
+  ],
   header: ["header"],
-  container: ["container"],
+  container: [
+    "container",
+    "start",
+    "end",
+    "report",
+    "save",
+    "deleteLog",
+    "back",
+  ],
+  start: ["start"],
+  end: ["end"],
+  report: ["report"],
+  save: ["save"],
+  deleteLog: ["deleteLog"],
+  back: ["back"],
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -144,6 +468,12 @@ type NodeDefaultElementType = {
   root: "div";
   header: typeof Header;
   container: typeof Container;
+  start: typeof YmdhmInput;
+  end: typeof YmdhmInput;
+  report: "textarea";
+  save: typeof Button;
+  deleteLog: typeof Button;
+  back: typeof Button;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -209,6 +539,12 @@ export const PlasmicEditLog = Object.assign(
     // Helper components rendering sub-elements
     header: makeNodeComponent("header"),
     container: makeNodeComponent("container"),
+    start: makeNodeComponent("start"),
+    end: makeNodeComponent("end"),
+    report: makeNodeComponent("report"),
+    save: makeNodeComponent("save"),
+    deleteLog: makeNodeComponent("deleteLog"),
+    back: makeNodeComponent("back"),
 
     // Metadata about props expected for PlasmicEditLog
     internalVariantProps: PlasmicEditLog__VariantProps,

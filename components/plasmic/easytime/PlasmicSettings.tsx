@@ -31,10 +31,11 @@ import {
   useTrigger,
   StrictProps,
   deriveRenderOpts,
-  ensureGlobalVariants
+  ensureGlobalVariants,
 } from "@plasmicapp/react-web";
 import Header from "../../Header"; // plasmic-import: aBQwDwBIQz/component
 import Container from "../../Container"; // plasmic-import: SuzMD14H1M/component
+import RecordItem from "../../RecordItem"; // plasmic-import: _XArBkddKd/component
 import EditableBizItem from "../../EditableBizItem"; // plasmic-import: yqjHbDN1Sk/component
 import Button from "../../Button"; // plasmic-import: CM9oqbJYK7/component
 
@@ -62,6 +63,9 @@ export type PlasmicSettings__OverridesType = {
   container?: p.Flex<typeof Container>;
   bizList?: p.Flex<"div">;
   addBiz?: p.Flex<typeof Button>;
+  linkToGoogle?: p.Flex<typeof Button>;
+  linkToGitHub?: p.Flex<typeof Button>;
+  signOut?: p.Flex<typeof Button>;
 };
 
 export interface DefaultSettingsProps {
@@ -122,44 +126,93 @@ function PlasmicSettings__RenderFunc(props: {
             <p.Stack
               as={"div"}
               hasGap={true}
-              className={classNames(defaultcss.all, sty.freeBox__lBosZ)}
+              className={classNames(defaultcss.all, sty.freeBox___3R5W5)}
             >
-              <div
-                className={classNames(
-                  defaultcss.all,
-                  defaultcss.__wab_text,
-                  sty.freeBox__epnN0
-                )}
+              <RecordItem
+                title={
+                  <div
+                    className={classNames(
+                      defaultcss.all,
+                      defaultcss.__wab_text,
+                      sty.freeBox__epnN0
+                    )}
+                  >
+                    {"会社リスト"}
+                  </div>
+                }
               >
-                {"会社リスト"}
-              </div>
+                <p.Stack
+                  as={"div"}
+                  hasGap={true}
+                  className={classNames(defaultcss.all, sty.freeBox__lBosZ)}
+                >
+                  <div
+                    data-plasmic-name={"bizList"}
+                    data-plasmic-override={overrides.bizList}
+                    className={classNames(defaultcss.all, sty.bizList)}
+                  >
+                    {p.renderPlasmicSlot({
+                      defaultContents: (
+                        <EditableBizItem
+                          className={classNames(
+                            "__wab_instance",
+                            sty.editableBizItem__igcaB
+                          )}
+                        />
+                      ),
 
-              <div
-                data-plasmic-name={"bizList"}
-                data-plasmic-override={overrides.bizList}
-                className={classNames(defaultcss.all, sty.bizList)}
+                      value: args.bizList,
+                    })}
+                  </div>
+
+                  <Button
+                    data-plasmic-name={"addBiz"}
+                    data-plasmic-override={overrides.addBiz}
+                    className={classNames("__wab_instance", sty.addBiz)}
+                  >
+                    {"会社を追加"}
+                  </Button>
+                </p.Stack>
+              </RecordItem>
+
+              <RecordItem
+                className={classNames("__wab_instance", sty.recordItem__b0EXk)}
+                title={"別のアカウントと連携"}
               >
-                {p.renderPlasmicSlot({
-                  defaultContents: (
-                    <EditableBizItem
-                      className={classNames(
-                        "__wab_instance",
-                        sty.editableBizItem__igcaB
-                      )}
-                    />
-                  ),
+                <p.Stack
+                  as={"div"}
+                  hasGap={true}
+                  className={classNames(defaultcss.all, sty.freeBox__svdSp)}
+                >
+                  <Button
+                    data-plasmic-name={"linkToGoogle"}
+                    data-plasmic-override={overrides.linkToGoogle}
+                  >
+                    {"Google"}
+                  </Button>
 
-                  value: args.bizList
-                })}
-              </div>
+                  <Button
+                    data-plasmic-name={"linkToGitHub"}
+                    data-plasmic-override={overrides.linkToGitHub}
+                    className={classNames("__wab_instance", sty.linkToGitHub)}
+                  >
+                    {"GitHub"}
+                  </Button>
+                </p.Stack>
+              </RecordItem>
 
-              <Button
-                data-plasmic-name={"addBiz"}
-                data-plasmic-override={overrides.addBiz}
-                className={classNames("__wab_instance", sty.addBiz)}
+              <RecordItem
+                className={classNames("__wab_instance", sty.recordItem__wenbB)}
+                title={"ログアウトする"}
               >
-                {"会社を追加"}
-              </Button>
+                <Button
+                  data-plasmic-name={"signOut"}
+                  data-plasmic-override={overrides.signOut}
+                  className={classNames("__wab_instance", sty.signOut)}
+                >
+                  {"ログアウト"}
+                </Button>
+              </RecordItem>
             </p.Stack>
           </Container>
         </div>
@@ -169,11 +222,30 @@ function PlasmicSettings__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "header", "container", "bizList", "addBiz"],
+  root: [
+    "root",
+    "header",
+    "container",
+    "bizList",
+    "addBiz",
+    "linkToGoogle",
+    "linkToGitHub",
+    "signOut",
+  ],
   header: ["header"],
-  container: ["container", "bizList", "addBiz"],
+  container: [
+    "container",
+    "bizList",
+    "addBiz",
+    "linkToGoogle",
+    "linkToGitHub",
+    "signOut",
+  ],
   bizList: ["bizList"],
-  addBiz: ["addBiz"]
+  addBiz: ["addBiz"],
+  linkToGoogle: ["linkToGoogle"],
+  linkToGitHub: ["linkToGitHub"],
+  signOut: ["signOut"],
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -184,6 +256,9 @@ type NodeDefaultElementType = {
   container: typeof Container;
   bizList: "div";
   addBiz: typeof Button;
+  linkToGoogle: typeof Button;
+  linkToGitHub: typeof Button;
+  signOut: typeof Button;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -221,7 +296,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
       name: nodeName,
       descendantNames: [...PlasmicDescendants[nodeName]],
       internalArgPropNames: PlasmicSettings__ArgProps,
-      internalVariantPropNames: PlasmicSettings__VariantProps
+      internalVariantPropNames: PlasmicSettings__VariantProps,
     });
 
     const { dataFetches } = props;
@@ -231,7 +306,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
       args,
       overrides,
       dataFetches,
-      forNode: nodeName
+      forNode: nodeName,
     });
   };
   if (nodeName === "root") {
@@ -251,10 +326,13 @@ export const PlasmicSettings = Object.assign(
     container: makeNodeComponent("container"),
     bizList: makeNodeComponent("bizList"),
     addBiz: makeNodeComponent("addBiz"),
+    linkToGoogle: makeNodeComponent("linkToGoogle"),
+    linkToGitHub: makeNodeComponent("linkToGitHub"),
+    signOut: makeNodeComponent("signOut"),
 
     // Metadata about props expected for PlasmicSettings
     internalVariantProps: PlasmicSettings__VariantProps,
-    internalArgProps: PlasmicSettings__ArgProps
+    internalArgProps: PlasmicSettings__ArgProps,
   }
 );
 

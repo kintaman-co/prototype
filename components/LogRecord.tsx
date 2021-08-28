@@ -8,7 +8,7 @@ import {
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
 import { useRouter } from "next/router";
 interface LogRecordProps extends DefaultLogRecordProps {
-  bizId?: string;
+  recId?: string;
 }
 
 function LogRecord_(props: LogRecordProps, ref: HTMLElementRefOf<"div">) {
@@ -19,10 +19,10 @@ function LogRecord_(props: LogRecordProps, ref: HTMLElementRefOf<"div">) {
       {...props}
       edit={{
         onClick() {
-          if (!props.bizId) {
+          if (!props.recId) {
             return;
           }
-          router.push(`/log/${props.bizId}`);
+          router.push(`/log/${props.recId}`);
         },
       }}
     />

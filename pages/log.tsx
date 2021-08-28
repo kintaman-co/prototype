@@ -27,7 +27,7 @@ function Log() {
       <LogRecord
         biz={<BizName bizId={val.bizId} />}
         key={cur.key}
-        bizId={val.bizId}
+        recId={cur.key || undefined}
         start={formatDate(val.start)}
         end={formatDate(val.end)}
         duration={padZero(Math.floor(diff / 60)) + ":" + padZero(diff % 60)}
@@ -38,8 +38,12 @@ function Log() {
   }, [] as ReactNode[]);
   return (
     <PlasmicLog>
-      <LogRecord header />
-      {content}
+      {!loading && !error && snapshots ? (
+        <>
+          <LogRecord header />
+          {content}
+        </>
+      ) : undefined}
     </PlasmicLog>
   );
 }

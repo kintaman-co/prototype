@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: space-between;
   background: #6246ea;
-  height: 56px;
+  height: 64px;
   width: 100%;
   align-content: unset;
   position: relative;
@@ -15,17 +15,15 @@
   display: flex;
   position: relative;
   flex-direction: row;
-  align-items: stretch;
+  align-items: center;
   justify-content: flex-start;
   height: 100%;
   flex-shrink: 0;
+  align-content: unset;
   min-height: 0;
 }
 .headerButton__xQogy:global(.__wab_instance) {
   position: relative;
-}
-.freeBox__eaIoA {
-  height: auto;
 }
 .right {
   display: flex;
@@ -39,7 +37,7 @@
   flex-shrink: 0;
   min-height: 0;
 }
-.freeBox__cfPTw {
+.freeBox {
   display: flex;
   position: relative;
   flex-direction: row;
