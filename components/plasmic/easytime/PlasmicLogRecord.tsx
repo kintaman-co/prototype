@@ -40,18 +40,11 @@ import * as defaultcss from "../plasmic__default_style.module.css"; // plasmic-i
 import * as projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
 import * as sty from "./PlasmicLogRecord.module.css"; // plasmic-import: F0onFvhtbG/css
 
-export type PlasmicLogRecord__VariantMembers = {
-  header: "header";
-};
+export type PlasmicLogRecord__VariantMembers = {};
 
-export type PlasmicLogRecord__VariantsArgs = {
-  header?: SingleBooleanChoiceArg<"header">;
-};
-
+export type PlasmicLogRecord__VariantsArgs = {};
 type VariantPropType = keyof PlasmicLogRecord__VariantsArgs;
-export const PlasmicLogRecord__VariantProps = new Array<VariantPropType>(
-  "header"
-);
+export const PlasmicLogRecord__VariantProps = new Array<VariantPropType>();
 
 export type PlasmicLogRecord__ArgsType = {
   biz?: React.ReactNode;
@@ -84,7 +77,6 @@ export interface DefaultLogRecordProps {
   end?: React.ReactNode;
   duration?: React.ReactNode;
   bizId?: string;
-  header?: SingleBooleanChoiceArg<"header">;
   className?: string;
 }
 
@@ -107,24 +99,14 @@ function PlasmicLogRecord__RenderFunc(props: {
         defaultcss.all,
         projectcss.root_reset,
         sty.root,
-        hasVariant(variants, "header", "header")
-          ? ("recordRow header" as const)
-          : ("recordRow" as const),
-        { [sty.root__header]: hasVariant(variants, "header", "header") }
+        "recordRow" as const
       )}
     >
       <div
         className={classNames(
           defaultcss.all,
           sty.freeBox___1Gl2,
-          "recordCell" as const,
-          {
-            [sty.freeBox__header___1Gl2I3QDb]: hasVariant(
-              variants,
-              "header",
-              "header"
-            ),
-          }
+          "recordCell" as const
         )}
       >
         {p.renderPlasmicSlot({
@@ -137,14 +119,7 @@ function PlasmicLogRecord__RenderFunc(props: {
         className={classNames(
           defaultcss.all,
           sty.freeBox___0EFJ,
-          "recordCell" as const,
-          {
-            [sty.freeBox__header___0EFJi3QDb]: hasVariant(
-              variants,
-              "header",
-              "header"
-            ),
-          }
+          "recordCell" as const
         )}
       >
         {p.renderPlasmicSlot({
@@ -157,14 +132,7 @@ function PlasmicLogRecord__RenderFunc(props: {
         className={classNames(
           defaultcss.all,
           sty.freeBox__xXXdt,
-          "recordCell" as const,
-          {
-            [sty.freeBox__header__xXXdti3QDb]: hasVariant(
-              variants,
-              "header",
-              "header"
-            ),
-          }
+          "recordCell" as const
         )}
       >
         {p.renderPlasmicSlot({
@@ -178,14 +146,7 @@ function PlasmicLogRecord__RenderFunc(props: {
           className={classNames(
             defaultcss.all,
             sty.freeBox__d8Gjr,
-            "recordCell" as const,
-            {
-              [sty.freeBox__header__d8GjRi3QDb]: hasVariant(
-                variants,
-                "header",
-                "header"
-              ),
-            }
+            "recordCell" as const
           )}
         >
           {true
@@ -201,14 +162,7 @@ function PlasmicLogRecord__RenderFunc(props: {
         className={classNames(
           defaultcss.all,
           sty.freeBox__vSsos,
-          "recordCell" as const,
-          {
-            [sty.freeBox__header__vSsosi3QDb]: hasVariant(
-              variants,
-              "header",
-              "header"
-            ),
-          }
+          "recordCell" as const
         )}
       >
         {p.renderPlasmicSlot({

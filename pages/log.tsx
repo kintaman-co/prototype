@@ -16,6 +16,10 @@ import {
 import LogRecord from "../components/LogRecord";
 import router from "next/router";
 import { exportToCsv } from "../utils/csv";
+import LogRecordHeaderItem, {
+  Order,
+  Topics,
+} from "../components/LogRecordHeaderItem";
 
 function Log() {
   const [user] = useAuthState(firebase.auth());
@@ -25,40 +29,107 @@ function Log() {
 
   const [snapshots, loading, error] = useList(recRef);
 
-  const initialDate = dateToMinstamp(new Date());
+  // begin header
+  const [sortBy, setSortBy] = useState<[Topics, Order]>(["end", "desc"]);
+  const header = (
+    <LogRecord
+      biz={
+        <LogRecordHeaderItem
+          topic="biz"
+          label="会社名"
+          value={sortBy}
+          onChange={setSortBy}
+        />
+      }
+      start={
+        <LogRecordHeaderItem
+          topic="start"
+          label="開始時刻"
+          value={sortBy}
+          onChange={setSortBy}
+        />
+      }
+      end={
+        <LogRecordHeaderItem
+          topic="end"
+          label="終了時刻"
+          value={sortBy}
+          onChange={setSortBy}
+        />
+      }
+      report={
+        <LogRecordHeaderItem
+          topic="report"
+          label="日報"
+          value={sortBy}
+          onChange={setSortBy}
+        />
+      }
+      duration={
+        <LogRecordHeaderItem
+          topic="duration"
+          label="労働時間"
+          value={sortBy}
+          onChange={setSortBy}
+        />
+      }
+    />
+  );
+  // end header
+
   const [start, setStart] = useState(0);
-  const [end, setEnd] = useState(initialDate);
+  const [end, setEnd] = useState(() => dateToMinstamp(new Date()));
   const [biz, setBiz] = useState<string | null>("all");
 
   let totalDuration = 0;
-  const content = snapshots?.reduce((acc, cur) => {
-    const val = cur.val();
-    if (!val) {
-      return acc;
-    }
 
-    if (start > val.end || val.end > end) {
-      return acc;
-    }
-    if (biz !== "all" && biz !== val.bizId) {
-      return acc;
-    }
+  const content = snapshots
+    ?.reduce((acc, cur) => {
+      const val = cur.val();
+      if (!val) {
+        return acc;
+      }
 
-    const diff = val.end - val.start;
-    totalDuration += diff;
-    acc.push(
+      if (start > val.end || val.end > end) {
+        return acc;
+      }
+      if (biz !== "all" && biz !== val.bizId) {
+        return acc;
+      }
+
+      const diff = val.end - val.start;
+      totalDuration += diff;
+      acc.push({
+        biz: val.bizId,
+        start: val.start,
+        end: val.end,
+        report: val.report,
+        recId: cur.key,
+        duration: diff,
+      });
+      return acc;
+    }, [] as Record<Topics | "recId", any>[])
+    .sort((a, b) => {
+      const coeff = sortBy[1] == "asc" ? 1 : -1;
+      if (a[sortBy[0]] < b[sortBy[0]]) {
+        return -1 * coeff;
+      }
+      if (a[sortBy[0]] > b[sortBy[0]]) {
+        return 1 * coeff;
+      }
+      return 0;
+    })
+    .map((val) => (
       <LogRecord
-        biz={<BizName bizId={val.bizId} />}
-        key={cur.key}
-        recId={cur.key || undefined}
+        biz={<BizName bizId={val.biz} />}
+        key={val.recId}
+        recId={val.recId}
         start={formatDate(val.start)}
         end={formatDate(val.end)}
-        duration={formatDuration(diff)}
+        duration={formatDuration(val.duration)}
         report={val.report || ""}
       />
-    );
-    return acc;
-  }, [] as ReactNode[]);
+    ));
 
   const exportCsv = () => {
     const csv = snapshots?.reduce(
@@ -78,13 +149,14 @@ function Log() {
         acc.push([val.bizId, val.start, val.end, val.report]);
         return acc;
       },
-      [["bizId", "start_minstamp", "end_minstamp", "report"]]
+      [["biz_id", "start_minstamp", "end_minstamp", "report"]]
     );
     if (!csv) {
       return;
     }
     exportToCsv("export.csv", csv);
   };
+
   return (
     <PlasmicLog
       createNew={{
@@ -111,7 +183,7 @@ function Log() {
     >
       {!loading && !error && snapshots ? (
         <>
-          <LogRecord header />
+          {header}
           {content}
         </>
       ) : undefined}

@@ -366,6 +366,19 @@
           "scheme": "blackbox",
           "componentType": "component",
           "plumeType": "triggered-overlay"
+        },
+        {
+          "id": "BqNx1sQzzM",
+          "name": "LogRecordHeaderItem",
+          "type": "managed",
+          "projectId": "mBKHaRhjQbiZuznDyARcTS",
+          "renderModuleFilePath": "plasmic/easytime/PlasmicLogRecordHeaderItem.tsx",
+          "importSpec": {
+            "modulePath": "LogRecordHeaderItem.tsx"
+          },
+          "cssFilePath": "plasmic/easytime/PlasmicLogRecordHeaderItem.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
         }
       ],
       "icons": [

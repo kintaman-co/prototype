@@ -35,15 +35,17 @@ function BizSelect_(
 
   const [snapshots, loading, error] = useList(bizRef);
 
-  const options = snapshots?.map((snapshot) => (
-    <Select.Option
-      key={snapshot.key}
-      value={snapshot.key}
-      isDisabled={snapshot.val().deleted}
-    >
-      {snapshot.val().name}
-    </Select.Option>
-  ));
+  const options = snapshots
+    ?.filter((a) => !a.val().deleted)
+    .map((snapshot) => (
+      <Select.Option
+        key={snapshot.key}
+        value={snapshot.key}
+        isDisabled={snapshot.val().deleted}
+      >
+        {snapshot.val().name}
+      </Select.Option>
+    ));
   if (hasAll) {
     options?.unshift(<Select.Option value={"all"}>All</Select.Option>);
   }

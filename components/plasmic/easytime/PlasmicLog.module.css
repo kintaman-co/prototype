@@ -18,9 +18,9 @@
 }
 .freeBox__qgmjE > :global(.__wab_flex-container) {
   flex-direction: row;
-  align-items: center;
+  align-items: unset;
   justify-content: center;
-  align-content: unset;
+  flex-wrap: wrap;
   margin-left: calc(0px - 8px);
   width: calc(100% + 8px);
 }
@@ -65,7 +65,7 @@
 }
 .biz:global(.__wab_instance) {
   position: relative;
-  width: 209px;
+  min-width: 200px;
 }
 .freeBox__vzRmu {
   display: flex;

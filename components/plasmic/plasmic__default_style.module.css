@@ -21,6 +21,17 @@
   composes: all;
   display: inline-block;
 }
+.span {
+  composes: all;
+  display: inline;
+  font-family: inherit;
+  line-height: inherit;
+  font-size: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  color: inherit;
+  text-transform: inherit;
+}
 .input {
   composes: all;
   font-family: inherit;
@@ -68,6 +79,16 @@
   composes: all;
   font-family: inherit;
   line-height: inherit;
+}
+.p {
+  composes: all;
+  font-family: inherit;
+  line-height: inherit;
+  font-size: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  color: inherit;
+  text-transform: inherit;
 }
 .h1 {
   composes: all;
