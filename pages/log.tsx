@@ -118,45 +118,37 @@ function Log() {
         return 1 * coeff;
       }
       return 0;
-    })
-    .map((val) => (
-      <LogRecord
-        biz={<BizName bizId={val.biz} />}
-        key={val.recId}
-        recId={val.recId}
-        start={formatDate(val.start)}
-        end={formatDate(val.end)}
-        duration={formatDuration(val.duration)}
-        report={val.report || ""}
-      />
-    ));
+    });
+  const renderedContent = content?.map((val) => (
+    <LogRecord
+      biz={<BizName bizId={val.biz} />}
+      key={val.recId}
+      recId={val.recId}
+      start={formatDate(val.start)}
+      end={formatDate(val.end)}
+      duration={formatDuration(val.duration)}
+      report={val.report || ""}
+    />
+  ));
 
   const exportCsv = () => {
-    const csv = snapshots?.reduce(
-      (acc, cur) => {
-        const val = cur.val();
-        if (!val) {
-          return acc;
-        }
-
-        if (start > val.end || val.end > end) {
-          return acc;
-        }
-        if (biz !== "all" && biz !== val.biz) {
-          return acc;
-        }
-
-        acc.push([val.bizId, val.start, val.end, val.report]);
-        return acc;
-      },
-      [["biz_id", "start_minstamp", "end_minstamp", "report"]]
-    );
+    const csv = content?.map((e) => [e.recId, e.biz, e.start, e.end, e.report]);
     if (!csv) {
       return;
     }
-    exportToCsv("export.csv", csv);
+    exportToCsv("export.csv", [
+      ["rec_id", "biz_id", "start_minstamp", "end_minstamp", "report"],
+      ...csv,
+    ]);
   };
 
+  const setToTheFirstDayOfTheMonth = (monthOffset: number) => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + monthOffset;
+    setStart(dateToMinstamp(new Date(year, month, 1, 0, 0, 0)));
+    setEnd(dateToMinstamp(new Date(year, month + 1, 1, 0, 0, 0)));
+  };
   return (
     <PlasmicLog
       createNew={{
@@ -180,11 +172,21 @@ function Log() {
         value: biz,
         onChange: setBiz,
       }}
+      curMonth={{
+        onClick() {
+          setToTheFirstDayOfTheMonth(0);
+        },
+      }}
+      prevMonth={{
+        onClick() {
+          setToTheFirstDayOfTheMonth(-1);
+        },
+      }}
     >
       {!loading && !error && snapshots ? (
         <>
           {header}
-          {content}
+          {renderedContent}
         </>
       ) : undefined}
     </PlasmicLog>

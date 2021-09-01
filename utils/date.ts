@@ -7,9 +7,9 @@
  */
 export function formatDate(timestamp: number) {
   const d = minstampToDate(timestamp);
-  return `${d.getFullYear()}/${
-    d.getMonth() + 1
-  }/${d.getDate()} ${d.getHours()}:${d.getMinutes()}`;
+  return `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()} ${padZero(
+    d.getHours()
+  )}:${padZero(d.getMinutes())}`;
 }
 
 /**

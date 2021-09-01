@@ -67,13 +67,34 @@
   position: relative;
   min-width: 200px;
 }
+.freeBox__pqmvv {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+.freeBox__owZb2 {
+  height: auto;
+  width: auto;
+  display: inline-block;
+}
 .freeBox__vzRmu {
   display: flex;
   position: relative;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: flex-start;
   align-content: unset;
+  overflow: auto;
+}
+.freeBox__gCaK {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  min-width: 980px /* plasmic-token: ZFMqzfmUo */;
 }
 .freeBox__vryEm {
   display: flex;
@@ -81,6 +102,7 @@
   flex-direction: column;
   width: 376px;
   height: 100%;
+  align-self: center;
   min-height: 0;
   padding: 27px 0px;
 }

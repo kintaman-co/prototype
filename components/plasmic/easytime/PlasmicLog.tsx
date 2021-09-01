@@ -37,8 +37,8 @@ import Header from "../../Header"; // plasmic-import: aBQwDwBIQz/component
 import RecordItem from "../../RecordItem"; // plasmic-import: _XArBkddKd/component
 import YmdhmInput from "../../YmdhmInput"; // plasmic-import: wYLwsz9PHx/component
 import BizSelect from "../../BizSelect"; // plasmic-import: SCY6plzZHs/component
-import Skeleton from "../../Skeleton"; // plasmic-import: wYIaMxnRFr/component
 import Button from "../../Button"; // plasmic-import: CM9oqbJYK7/component
+import Skeleton from "../../Skeleton"; // plasmic-import: wYIaMxnRFr/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
 import * as defaultcss from "../plasmic__default_style.module.css"; // plasmic-import: global/defaultcss
@@ -64,6 +64,8 @@ export type PlasmicLog__OverridesType = {
   start?: p.Flex<typeof YmdhmInput>;
   end?: p.Flex<typeof YmdhmInput>;
   biz?: p.Flex<typeof BizSelect>;
+  curMonth?: p.Flex<typeof Button>;
+  prevMonth?: p.Flex<typeof Button>;
   totalDuration?: p.Flex<"div">;
   createNew?: p.Flex<typeof Button>;
   exportCsv?: p.Flex<typeof Button>;
@@ -187,38 +189,72 @@ function PlasmicLog__RenderFunc(props: {
                 hasAll={"hasAll" as const}
               />
             </RecordItem>
+
+            <div className={classNames(defaultcss.all, sty.freeBox__pqmvv)}>
+              <Button
+                data-plasmic-name={"curMonth"}
+                data-plasmic-override={overrides.curMonth}
+                type={"text" as const}
+              >
+                {"今月分"}
+              </Button>
+
+              <Button
+                data-plasmic-name={"prevMonth"}
+                data-plasmic-override={overrides.prevMonth}
+                type={"text" as const}
+              >
+                <div
+                  className={classNames(
+                    defaultcss.all,
+                    defaultcss.__wab_text,
+                    sty.freeBox__owZb2
+                  )}
+                >
+                  {"先月分"}
+                </div>
+              </Button>
+            </div>
           </p.Stack>
 
           <div
             className={classNames(
               defaultcss.all,
               sty.freeBox__vzRmu,
-              "recordTable" as const
+              "" as const
             )}
           >
-            {p.renderPlasmicSlot({
-              defaultContents: (
-                <p.Stack
-                  as={"div"}
-                  hasGap={true}
-                  className={classNames(defaultcss.all, sty.freeBox__vryEm)}
-                >
-                  <Skeleton />
+            <div
+              className={classNames(
+                defaultcss.all,
+                sty.freeBox__gCaK,
+                "recordTable" as const
+              )}
+            >
+              {p.renderPlasmicSlot({
+                defaultContents: (
+                  <p.Stack
+                    as={"div"}
+                    hasGap={true}
+                    className={classNames(defaultcss.all, sty.freeBox__vryEm)}
+                  >
+                    <Skeleton />
 
-                  <Skeleton />
+                    <Skeleton />
 
-                  <Skeleton />
+                    <Skeleton />
 
-                  <Skeleton />
+                    <Skeleton />
 
-                  <Skeleton />
+                    <Skeleton />
 
-                  <Skeleton />
-                </p.Stack>
-              ),
+                    <Skeleton />
+                  </p.Stack>
+                ),
 
-              value: args.children,
-            })}
+                value: args.children,
+              })}
+            </div>
           </div>
 
           <p.Stack
@@ -281,6 +317,8 @@ const PlasmicDescendants = {
     "start",
     "end",
     "biz",
+    "curMonth",
+    "prevMonth",
     "totalDuration",
     "createNew",
     "exportCsv",
@@ -289,6 +327,8 @@ const PlasmicDescendants = {
   start: ["start"],
   end: ["end"],
   biz: ["biz"],
+  curMonth: ["curMonth"],
+  prevMonth: ["prevMonth"],
   totalDuration: ["totalDuration"],
   createNew: ["createNew"],
   exportCsv: ["exportCsv"],
@@ -302,6 +342,8 @@ type NodeDefaultElementType = {
   start: typeof YmdhmInput;
   end: typeof YmdhmInput;
   biz: typeof BizSelect;
+  curMonth: typeof Button;
+  prevMonth: typeof Button;
   totalDuration: "div";
   createNew: typeof Button;
   exportCsv: typeof Button;
@@ -372,6 +414,8 @@ export const PlasmicLog = Object.assign(
     start: makeNodeComponent("start"),
     end: makeNodeComponent("end"),
     biz: makeNodeComponent("biz"),
+    curMonth: makeNodeComponent("curMonth"),
+    prevMonth: makeNodeComponent("prevMonth"),
     totalDuration: makeNodeComponent("totalDuration"),
     createNew: makeNodeComponent("createNew"),
     exportCsv: makeNodeComponent("exportCsv"),
