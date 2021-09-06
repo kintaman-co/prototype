@@ -169,19 +169,6 @@
           "componentType": "component"
         },
         {
-          "id": "yqjHbDN1Sk",
-          "name": "EditableBizItem",
-          "type": "managed",
-          "projectId": "mBKHaRhjQbiZuznDyARcTS",
-          "renderModuleFilePath": "plasmic/easytime/PlasmicEditableBizItem.tsx",
-          "importSpec": {
-            "modulePath": "EditableBizItem.tsx"
-          },
-          "cssFilePath": "plasmic/easytime/PlasmicEditableBizItem.module.css",
-          "scheme": "blackbox",
-          "componentType": "component"
-        },
-        {
           "id": "Rp4JlG0GLd",
           "name": "Homepage",
           "type": "managed",
@@ -377,6 +364,46 @@
             "modulePath": "LogRecordHeaderItem.tsx"
           },
           "cssFilePath": "plasmic/easytime/PlasmicLogRecordHeaderItem.module.css",
+          "scheme": "blackbox",
+          "componentType": "component"
+        },
+        {
+          "id": "q75y63Cv6a",
+          "name": "EditBiz",
+          "type": "managed",
+          "projectId": "mBKHaRhjQbiZuznDyARcTS",
+          "renderModuleFilePath": "plasmic/easytime/PlasmicEditBiz.tsx",
+          "importSpec": {
+            "modulePath": "../pages/biz/[id].tsx"
+          },
+          "cssFilePath": "plasmic/easytime/PlasmicEditBiz.module.css",
+          "scheme": "blackbox",
+          "componentType": "page"
+        },
+        {
+          "id": "j0fmjgi6Tf",
+          "name": "Switch",
+          "type": "managed",
+          "projectId": "mBKHaRhjQbiZuznDyARcTS",
+          "renderModuleFilePath": "plasmic/easytime/PlasmicSwitch.tsx",
+          "importSpec": {
+            "modulePath": "Switch.tsx"
+          },
+          "cssFilePath": "plasmic/easytime/PlasmicSwitch.module.css",
+          "scheme": "blackbox",
+          "componentType": "component",
+          "plumeType": "switch"
+        },
+        {
+          "id": "WrlNulxyIS",
+          "name": "BizItem",
+          "type": "managed",
+          "projectId": "mBKHaRhjQbiZuznDyARcTS",
+          "renderModuleFilePath": "plasmic/easytime/PlasmicBizItem.tsx",
+          "importSpec": {
+            "modulePath": "BizItem.tsx"
+          },
+          "cssFilePath": "plasmic/easytime/PlasmicBizItem.module.css",
           "scheme": "blackbox",
           "componentType": "component"
         }

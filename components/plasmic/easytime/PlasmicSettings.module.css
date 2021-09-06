@@ -68,8 +68,32 @@
   display: flex;
   position: relative;
   flex-direction: column;
+}
+.bizList > :global(.__wab_flex-container) {
+  flex-direction: column;
   align-items: stretch;
   justify-content: flex-start;
+  margin-top: calc(0px - 4px);
+  height: calc(100% + 4px);
+}
+.bizList > :global(.__wab_flex-container) > *,
+.bizList > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.bizList > :global(.__wab_flex-container) > picture > img,
+.bizList
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-top: 4px;
+}
+.bizItem__cXsxG:global(.__wab_instance):global(.__wab_instance) {
+  position: relative;
+}
+.bizItem__ockkh:global(.__wab_instance):global(.__wab_instance) {
+  position: relative;
+}
+.bizItem__hePt1:global(.__wab_instance):global(.__wab_instance) {
+  position: relative;
 }
 .addBiz:global(.__wab_instance) {
   position: relative;

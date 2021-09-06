@@ -36,7 +36,7 @@ import {
 import Header from "../../Header"; // plasmic-import: aBQwDwBIQz/component
 import Container from "../../Container"; // plasmic-import: SuzMD14H1M/component
 import RecordItem from "../../RecordItem"; // plasmic-import: _XArBkddKd/component
-import EditableBizItem from "../../EditableBizItem"; // plasmic-import: yqjHbDN1Sk/component
+import BizItem from "../../BizItem"; // plasmic-import: WrlNulxyIS/component
 import Button from "../../Button"; // plasmic-import: CM9oqbJYK7/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
@@ -146,29 +146,47 @@ function PlasmicSettings__RenderFunc(props: {
                   hasGap={true}
                   className={classNames(defaultcss.all, sty.freeBox__lBosZ)}
                 >
-                  <div
+                  <p.Stack
+                    as={"div"}
                     data-plasmic-name={"bizList"}
                     data-plasmic-override={overrides.bizList}
+                    hasGap={true}
                     className={classNames(defaultcss.all, sty.bizList)}
                   >
                     {p.renderPlasmicSlot({
                       defaultContents: (
-                        <EditableBizItem
-                          className={classNames(
-                            "__wab_instance",
-                            sty.editableBizItem__igcaB
-                          )}
-                        />
-                      ),
+                        <React.Fragment>
+                          <BizItem
+                            className={classNames(
+                              "__wab_instance",
+                              sty.bizItem__cXsxG
+                            )}
+                          />
 
+                          <BizItem
+                            className={classNames(
+                              "__wab_instance",
+                              sty.bizItem__ockkh
+                            )}
+                          />
+
+                          <BizItem
+                            className={classNames(
+                              "__wab_instance",
+                              sty.bizItem__hePt1
+                            )}
+                          />
+                        </React.Fragment>
+                      ),
                       value: args.bizList,
                     })}
-                  </div>
+                  </p.Stack>
 
                   <Button
                     data-plasmic-name={"addBiz"}
                     data-plasmic-override={overrides.addBiz}
                     className={classNames("__wab_instance", sty.addBiz)}
+                    type={"text" as const}
                   >
                     {"会社を追加"}
                   </Button>

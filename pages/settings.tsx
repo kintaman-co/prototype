@@ -5,7 +5,8 @@ import { useList } from "react-firebase-hooks/database";
 import React from "react";
 import { ScreenVariantProvider } from "../components/plasmic/easytime/PlasmicGlobalVariant__Screen";
 import { PlasmicSettings } from "../components/plasmic/easytime/PlasmicSettings";
-import EditableBizItem from "../components/EditableBizItem";
+import BizItem from "../components/BizItem";
+import { useRouter } from "next/router";
 
 /** link current account to google account */
 async function linkToGoogle() {
@@ -57,6 +58,8 @@ function signOut() {
 }
 
 function Settings() {
+  const router = useRouter();
+
   const [user] = useAuthState(firebase.auth());
   const bizRef = user
     ? firebase.database().ref(`users/${user.uid}/businesses`)
@@ -68,20 +71,16 @@ function Settings() {
       bizList={snapshots
         ?.filter((biz) => !biz.val().deleted)
         .map((biz) => (
-          <EditableBizItem
-            key={biz.key}
-            value={biz.val().name}
-            onChange={(val) => {
-              biz.ref.update({ name: val });
-            }}
-            onDeleteClick={() => {
-              biz.ref.update({ deleted: true });
-            }}
-          />
+          <BizItem key={biz.key} id={biz.key || ""}>
+            {biz.val().name}
+          </BizItem>
         ))}
       addBiz={{
         onClick() {
-          bizRef?.push().set({ name: "" });
+          const key = bizRef?.push().key;
+          if (key) {
+            router.push(`/biz/${key}`);
+          }
         },
       }}
       linkToGitHub={{

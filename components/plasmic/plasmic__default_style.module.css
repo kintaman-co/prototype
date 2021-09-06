@@ -24,6 +24,7 @@
 .span {
   composes: all;
   display: inline;
+  position: static;
   font-family: inherit;
   line-height: inherit;
   font-size: inherit;
