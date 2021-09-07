@@ -1,0 +1,188 @@
+.root {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  padding: 2rem;
+}
+.root > :global(.__wab_flex-container) {
+  flex-direction: column;
+  margin-top: calc(0px - 1rem);
+  height: calc(100% + 1rem);
+}
+.root > :global(.__wab_flex-container) > *,
+.root > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.root > :global(.__wab_flex-container) > picture > img,
+.root > :global(.__wab_flex-container) > :global(.__wab_slot) > picture > img {
+  margin-top: 1rem;
+}
+.freeBox__xpttO {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.slotTitle {
+  font-size: 32px;
+  font-weight: 700;
+}
+.freeBox__qi6Gb {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+  height: auto;
+  width: 100%;
+  min-width: 0;
+}
+.freeBox__j32BI {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+.recipient__dvXci:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox__rdeix {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+.freeBox__vg2Fv {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+  min-width: 0;
+}
+.freeBox__vg2Fv > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+  margin-left: calc(0px - 1em);
+  width: calc(100% + 1em);
+}
+.freeBox__vg2Fv > :global(.__wab_flex-container) > *,
+.freeBox__vg2Fv > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox__vg2Fv > :global(.__wab_flex-container) > picture > img,
+.freeBox__vg2Fv
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 1em;
+}
+.freeBox__gncD {
+  height: auto;
+}
+.freeBox__kdvPa {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+  min-width: 0;
+}
+.freeBox__kdvPa > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+  margin-left: calc(0px - 1em);
+  width: calc(100% + 1em);
+}
+.freeBox__kdvPa > :global(.__wab_flex-container) > *,
+.freeBox__kdvPa > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox__kdvPa > :global(.__wab_flex-container) > picture > img,
+.freeBox__kdvPa
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 1em;
+}
+.freeBox__icPyz {
+  height: auto;
+}
+.freeBox__psmEz {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+.total__hwi2U:global(.__wab_instance) {
+  position: relative;
+}
+.sender__stcu3:global(.__wab_instance) {
+  position: relative;
+}
+.table {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+.tableRowHeader:global(.__wab_instance) {
+  position: relative;
+}
+.body {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+.tableRow__tYtas:global(.__wab_instance) {
+  position: relative;
+}
+.tableRow__bUr84:global(.__wab_instance) {
+  position: relative;
+}
+.tableRow__zTi7O:global(.__wab_instance) {
+  position: relative;
+}
+.tableRow__gropI:global(.__wab_instance) {
+  position: relative;
+}
+.tableRow___55Gyi:global(.__wab_instance) {
+  position: relative;
+}
+.payTo__jMUq8:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox__vMdqs {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  border-width: 1px;
+  border-style: dashed;
+}
+.freeBox__uAoBi {
+  position: relative;
+  padding: 4px;
+  margin: 2px;
+  border-width: 1px;
+  border-style: none;
+}
+.freeBox___2FMp9 {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  min-height: 100px;
+}

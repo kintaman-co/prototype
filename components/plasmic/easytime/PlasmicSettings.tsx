@@ -65,6 +65,10 @@ export type PlasmicSettings__OverridesType = {
   addBiz?: p.Flex<typeof Button>;
   linkToGoogle?: p.Flex<typeof Button>;
   linkToGitHub?: p.Flex<typeof Button>;
+  name?: p.Flex<"input">;
+  zipcode?: p.Flex<"input">;
+  address?: p.Flex<"textarea">;
+  bank?: p.Flex<"textarea">;
   signOut?: p.Flex<typeof Button>;
 };
 
@@ -220,6 +224,105 @@ function PlasmicSettings__RenderFunc(props: {
               </RecordItem>
 
               <RecordItem
+                className={classNames("__wab_instance", sty.recordItem___5AzV5)}
+                title={
+                  <div
+                    className={classNames(
+                      defaultcss.all,
+                      defaultcss.__wab_text,
+                      sty.freeBox___5Gzrx
+                    )}
+                  >
+                    {"名前"}
+                  </div>
+                }
+              >
+                <input
+                  data-plasmic-name={"name"}
+                  data-plasmic-override={overrides.name}
+                  className={classNames(defaultcss.input, sty.name)}
+                  placeholder={"請求書に記載されます" as const}
+                  size={1 as const}
+                  type={"text" as const}
+                  value={"" as const}
+                />
+              </RecordItem>
+
+              <RecordItem
+                className={classNames("__wab_instance", sty.recordItem__tc6AB)}
+                title={
+                  <div
+                    className={classNames(
+                      defaultcss.all,
+                      defaultcss.__wab_text,
+                      sty.freeBox__iNcVp
+                    )}
+                  >
+                    {"請求書に記載する住所"}
+                  </div>
+                }
+              >
+                <div className={classNames(defaultcss.all, sty.freeBox__znbZg)}>
+                  <RecordItem
+                    className={classNames(
+                      "__wab_instance",
+                      sty.recordItem___1Cl4F
+                    )}
+                    title={"郵便番号"}
+                  >
+                    <input
+                      data-plasmic-name={"zipcode"}
+                      data-plasmic-override={overrides.zipcode}
+                      className={classNames(defaultcss.input, sty.zipcode)}
+                      placeholder={"114-1919" as const}
+                      size={1 as const}
+                      type={"text" as const}
+                      value={"" as const}
+                    />
+                  </RecordItem>
+
+                  <RecordItem
+                    className={classNames(
+                      "__wab_instance",
+                      sty.recordItem__ubXsy
+                    )}
+                    title={"住所"}
+                  >
+                    <textarea
+                      data-plasmic-name={"address"}
+                      data-plasmic-override={overrides.address}
+                      className={classNames(defaultcss.textarea, sty.address)}
+                      placeholder={"千葉県松戸市六高台2-78-3" as const}
+                      value={"" as const}
+                    />
+                  </RecordItem>
+                </div>
+              </RecordItem>
+
+              <RecordItem
+                className={classNames("__wab_instance", sty.recordItem__crxkR)}
+                title={
+                  <div
+                    className={classNames(
+                      defaultcss.all,
+                      defaultcss.__wab_text,
+                      sty.freeBox__uYk
+                    )}
+                  >
+                    {"請求書に記載する振込先"}
+                  </div>
+                }
+              >
+                <textarea
+                  data-plasmic-name={"bank"}
+                  data-plasmic-override={overrides.bank}
+                  className={classNames(defaultcss.textarea, sty.bank)}
+                  placeholder={"チンコ銀行 マンコ支店 普通 1145141919" as const}
+                  value={"" as const}
+                />
+              </RecordItem>
+
+              <RecordItem
                 className={classNames("__wab_instance", sty.recordItem__wenbB)}
                 title={"ログアウトする"}
               >
@@ -248,6 +351,10 @@ const PlasmicDescendants = {
     "addBiz",
     "linkToGoogle",
     "linkToGitHub",
+    "name",
+    "zipcode",
+    "address",
+    "bank",
     "signOut",
   ],
   header: ["header"],
@@ -257,12 +364,20 @@ const PlasmicDescendants = {
     "addBiz",
     "linkToGoogle",
     "linkToGitHub",
+    "name",
+    "zipcode",
+    "address",
+    "bank",
     "signOut",
   ],
   bizList: ["bizList"],
   addBiz: ["addBiz"],
   linkToGoogle: ["linkToGoogle"],
   linkToGitHub: ["linkToGitHub"],
+  name: ["name"],
+  zipcode: ["zipcode"],
+  address: ["address"],
+  bank: ["bank"],
   signOut: ["signOut"],
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -276,6 +391,10 @@ type NodeDefaultElementType = {
   addBiz: typeof Button;
   linkToGoogle: typeof Button;
   linkToGitHub: typeof Button;
+  name: "input";
+  zipcode: "input";
+  address: "textarea";
+  bank: "textarea";
   signOut: typeof Button;
 };
 
@@ -346,6 +465,10 @@ export const PlasmicSettings = Object.assign(
     addBiz: makeNodeComponent("addBiz"),
     linkToGoogle: makeNodeComponent("linkToGoogle"),
     linkToGitHub: makeNodeComponent("linkToGitHub"),
+    _name: makeNodeComponent("name"),
+    zipcode: makeNodeComponent("zipcode"),
+    address: makeNodeComponent("address"),
+    bank: makeNodeComponent("bank"),
     signOut: makeNodeComponent("signOut"),
 
     // Metadata about props expected for PlasmicSettings

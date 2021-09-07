@@ -1,0 +1,71 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+.header:global(.__wab_instance) {
+  position: relative;
+  flex-shrink: 0;
+}
+.container:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox__d0Yh {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+.freeBox__tomml {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+.recordItem___1P6G:global(.__wab_instance) {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+.freeBox__bp4BS {
+  position: relative;
+  height: auto;
+}
+.biz:global(.__wab_instance) {
+  position: relative;
+  width: 157px;
+}
+.recordItem__b3VIf:global(.__wab_instance) {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+.freeBox__msSbT {
+  position: relative;
+}
+.memo {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+.generate:global(.__wab_instance) {
+  position: relative;
+  margin: 3px;
+}
+.freeBox__t4D3R {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-shadow: 1px 1px 6px 2px #2b2c341a /* plasmic-token: vaqn_vLIL */;
+  min-width: 0;
+  min-height: 0;
+  margin: 4px;
+  border: 1px solid #d1d1e9 /* plasmic-token: UuK4I_eTV */;
+}

@@ -67,8 +67,10 @@ export type PlasmicEditBiz__OverridesType = {
   container?: p.Flex<typeof Container>;
   bizName?: p.Flex<"input">;
   feePerHr?: p.Flex<"input">;
+  vatRate?: p.Flex<"input">;
   recipient?: p.Flex<"input">;
   isIndividual?: p.Flex<typeof Switch>;
+  topic?: p.Flex<"input">;
   deleteBiz?: p.Flex<typeof Button>;
   restoreDeletion?: p.Flex<typeof Button>;
 };
@@ -167,6 +169,38 @@ function PlasmicEditBiz__RenderFunc(props: {
                 <RecordItem
                   className={classNames(
                     "__wab_instance",
+                    sty.recordItem__yJLgW
+                  )}
+                  title={"消費税率"}
+                >
+                  <div
+                    className={classNames(defaultcss.all, sty.freeBox__bfx0Q)}
+                  >
+                    <input
+                      data-plasmic-name={"vatRate"}
+                      data-plasmic-override={overrides.vatRate}
+                      className={classNames(defaultcss.input, sty.vatRate)}
+                      placeholder={"消費税込みなら0をセット" as const}
+                      size={1 as const}
+                      type={"text" as const}
+                      value={"" as const}
+                    />
+
+                    <div
+                      className={classNames(
+                        defaultcss.all,
+                        defaultcss.__wab_text,
+                        sty.freeBox__kVggt
+                      )}
+                    >
+                      {"%"}
+                    </div>
+                  </div>
+                </RecordItem>
+
+                <RecordItem
+                  className={classNames(
+                    "__wab_instance",
                     sty.recordItem__xkS6P
                   )}
                   title={"宛名"}
@@ -192,6 +226,24 @@ function PlasmicEditBiz__RenderFunc(props: {
                       {"個人(敬称が様になります)"}
                     </Switch>
                   </div>
+                </RecordItem>
+
+                <RecordItem
+                  className={classNames(
+                    "__wab_instance",
+                    sty.recordItem__sDj1B
+                  )}
+                  title={"摘要"}
+                >
+                  <input
+                    data-plasmic-name={"topic"}
+                    data-plasmic-override={overrides.topic}
+                    className={classNames(defaultcss.input, sty.topic)}
+                    placeholder={"システム開発" as const}
+                    size={1 as const}
+                    type={"text" as const}
+                    value={"" as const}
+                  />
                 </RecordItem>
               </div>
 
@@ -273,8 +325,10 @@ const PlasmicDescendants = {
     "container",
     "bizName",
     "feePerHr",
+    "vatRate",
     "recipient",
     "isIndividual",
+    "topic",
     "deleteBiz",
     "restoreDeletion",
   ],
@@ -283,15 +337,19 @@ const PlasmicDescendants = {
     "container",
     "bizName",
     "feePerHr",
+    "vatRate",
     "recipient",
     "isIndividual",
+    "topic",
     "deleteBiz",
     "restoreDeletion",
   ],
   bizName: ["bizName"],
   feePerHr: ["feePerHr"],
+  vatRate: ["vatRate"],
   recipient: ["recipient"],
   isIndividual: ["isIndividual"],
+  topic: ["topic"],
   deleteBiz: ["deleteBiz"],
   restoreDeletion: ["restoreDeletion"],
 } as const;
@@ -304,8 +362,10 @@ type NodeDefaultElementType = {
   container: typeof Container;
   bizName: "input";
   feePerHr: "input";
+  vatRate: "input";
   recipient: "input";
   isIndividual: typeof Switch;
+  topic: "input";
   deleteBiz: typeof Button;
   restoreDeletion: typeof Button;
 };
@@ -375,8 +435,10 @@ export const PlasmicEditBiz = Object.assign(
     container: makeNodeComponent("container"),
     bizName: makeNodeComponent("bizName"),
     feePerHr: makeNodeComponent("feePerHr"),
+    vatRate: makeNodeComponent("vatRate"),
     recipient: makeNodeComponent("recipient"),
     isIndividual: makeNodeComponent("isIndividual"),
+    topic: makeNodeComponent("topic"),
     deleteBiz: makeNodeComponent("deleteBiz"),
     restoreDeletion: makeNodeComponent("restoreDeletion"),
 

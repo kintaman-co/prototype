@@ -406,6 +406,32 @@
           "cssFilePath": "plasmic/easytime/PlasmicBizItem.module.css",
           "scheme": "blackbox",
           "componentType": "component"
+        },
+        {
+          "id": "Lqdr_-SkhP",
+          "name": "Invoice",
+          "type": "managed",
+          "projectId": "mBKHaRhjQbiZuznDyARcTS",
+          "renderModuleFilePath": "plasmic/easytime/PlasmicInvoice.tsx",
+          "importSpec": {
+            "modulePath": "../pages/invoice.tsx"
+          },
+          "cssFilePath": "plasmic/easytime/PlasmicInvoice.module.css",
+          "scheme": "blackbox",
+          "componentType": "page"
+        },
+        {
+          "id": "Q2wcv59jeA",
+          "name": "PrintInvoice",
+          "type": "managed",
+          "projectId": "mBKHaRhjQbiZuznDyARcTS",
+          "renderModuleFilePath": "plasmic/easytime/PlasmicPrintInvoice.tsx",
+          "importSpec": {
+            "modulePath": "../pages/invoice/print.tsx"
+          },
+          "cssFilePath": "plasmic/easytime/PlasmicPrintInvoice.module.css",
+          "scheme": "blackbox",
+          "componentType": "page"
         }
       ],
       "icons": [
@@ -453,6 +479,6 @@
   "nextjsConfig": {
     "pagesDir": "../pages"
   },
-  "cliVersion": "0.1.160",
-  "$schema": "https://unpkg.com/@plasmicapp/cli@0.1.160/dist/plasmic.schema.json"
+  "cliVersion": "0.1.161",
+  "$schema": "https://unpkg.com/@plasmicapp/cli@0.1.161/dist/plasmic.schema.json"
 }

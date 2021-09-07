@@ -1,7 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useList } from "react-firebase-hooks/database";
+import { useList, useObjectVal } from "react-firebase-hooks/database";
 import React from "react";
 import { ScreenVariantProvider } from "../components/plasmic/easytime/PlasmicGlobalVariant__Screen";
 import { PlasmicSettings } from "../components/plasmic/easytime/PlasmicSettings";
@@ -61,11 +61,11 @@ function Settings() {
   const router = useRouter();
 
   const [user] = useAuthState(firebase.auth());
-  const bizRef = user
-    ? firebase.database().ref(`users/${user.uid}/businesses`)
-    : null;
+  const bizRef = firebase.database().ref(`users/${user!.uid}/businesses`);
+  const userRef = firebase.database().ref(`users/${user!.uid}/info`);
 
   const [snapshots, loading, error] = useList(bizRef);
+  const [userSnapshot, userLoading, userError] = useObjectVal(userRef);
   return (
     <PlasmicSettings
       bizList={snapshots
@@ -91,6 +91,30 @@ function Settings() {
       }}
       signOut={{
         onClick: signOut,
+      }}
+      name={{
+        value: userSnapshot?.name || "",
+        onChange: (e) => {
+          userRef.update({ name: e.target.value });
+        },
+      }}
+      zipcode={{
+        value: userSnapshot?.zipcode || "",
+        onChange: (e) => {
+          userRef.update({ zipcode: e.target.value });
+        },
+      }}
+      address={{
+        value: userSnapshot?.address || "",
+        onChange: (e) => {
+          userRef.update({ address: e.target.value });
+        },
+      }}
+      bank={{
+        value: userSnapshot?.bank || "",
+        onChange: (e) => {
+          userRef.update({ bank: e.target.value });
+        },
       }}
     />
   );

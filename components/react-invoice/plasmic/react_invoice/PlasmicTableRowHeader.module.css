@@ -1,0 +1,17 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-width: 0;
+}
+.tableRow:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox__q8AAx {
+  position: relative;
+}
+.freeBox {
+  height: auto;
+}

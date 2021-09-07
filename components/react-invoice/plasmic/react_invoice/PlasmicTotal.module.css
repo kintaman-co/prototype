@@ -1,0 +1,103 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  position: relative;
+  min-width: 0;
+}
+.freeBox__bjKSu {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+.freeBox__bTSw2 {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  padding: 0.5rem;
+  margin: 1rem;
+}
+.freeBox__bTSw2 > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  margin-left: calc(0px - 1em);
+  width: calc(100% + 1em);
+}
+.freeBox__bTSw2 > :global(.__wab_flex-container) > *,
+.freeBox__bTSw2 > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox__bTSw2 > :global(.__wab_flex-container) > picture > img,
+.freeBox__bTSw2
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 1em;
+}
+.freeBox___9QgN {
+  position: relative;
+  height: auto;
+  font-size: 1.5em;
+}
+.freeBox__hvI3H {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+.slotUnit {
+  font-size: 1.5em;
+}
+.slotAmount {
+  font-size: 1.5em;
+  font-weight: 700;
+}
+.freeBox__phTp7 {
+  display: none;
+  position: relative;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.freeBox__withTax__phTp7KZ5Yp {
+  display: flex;
+}
+.freeBox__hA76K {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+}
+.freeBox__hA76K > :global(.__wab_flex-container) {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-left: calc(0px - 0.5em);
+  width: calc(100% + 0.5em);
+}
+.freeBox__hA76K > :global(.__wab_flex-container) > *,
+.freeBox__hA76K > :global(.__wab_flex-container) > :global(.__wab_slot) > *,
+.freeBox__hA76K > :global(.__wab_flex-container) > picture > img,
+.freeBox__hA76K
+  > :global(.__wab_flex-container)
+  > :global(.__wab_slot)
+  > picture
+  > img {
+  margin-left: 0.5em;
+}
+.freeBox__xF0Jk {
+  position: relative;
+}
+.freeBox__fkn5P {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+}

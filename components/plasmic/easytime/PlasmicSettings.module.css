@@ -13,11 +13,15 @@
 }
 .container:global(.__wab_instance) {
   position: relative;
+  flex-shrink: 0;
+  min-width: 300px;
+  flex-grow: 1;
 }
 .freeBox___3R5W5 {
   display: flex;
   position: relative;
   flex-direction: column;
+  min-width: 300px;
   padding: 8px;
   margin: 0px;
 }
@@ -129,6 +133,67 @@
 }
 .linkToGitHub:global(.__wab_instance) {
   position: relative;
+}
+.recordItem___5AzV5:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox___5Gzrx {
+  position: relative;
+  height: auto;
+}
+.name {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+.recordItem__tc6AB:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox__iNcVp {
+  position: relative;
+  height: auto;
+}
+.freeBox__znbZg {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 8px;
+}
+.recordItem___1Cl4F:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox__fuKyX {
+  position: relative;
+}
+.zipcode {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+.recordItem__ubXsy:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox__ruFa {
+  position: relative;
+}
+.address {
+  position: relative;
+  width: 100%;
+  min-width: 200px;
+}
+.recordItem__crxkR:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox__uYk {
+  position: relative;
+  height: auto;
+}
+.bank {
+  position: relative;
+  width: 100%;
+  min-width: 200px;
 }
 .recordItem__wenbB:global(.__wab_instance) {
   position: relative;

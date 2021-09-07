@@ -48,6 +48,26 @@
   width: 100%;
   min-width: 0;
 }
+.recordItem__yJLgW:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox__jCCc3 {
+  position: relative;
+}
+.freeBox__bfx0Q {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.vatRate {
+  width: 100%;
+  min-width: 0;
+}
+.freeBox__kVggt {
+  position: relative;
+}
 .recordItem__xkS6P:global(.__wab_instance) {
   position: relative;
 }
@@ -68,6 +88,17 @@
 }
 .isIndividual:global(.__wab_instance) {
   position: relative;
+}
+.recordItem__sDj1B:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox___9RsHi {
+  position: relative;
+}
+.topic {
+  position: relative;
+  width: 100%;
+  min-width: 0;
 }
 .freeBox__q4MP {
   display: flex;

@@ -125,6 +125,13 @@ function PlasmicHeader__RenderFunc(props: {
         </HeaderButton>
 
         <HeaderButton
+          className={classNames("__wab_instance", sty.headerButton__nLq9E)}
+          to={"/invoice" as const}
+        >
+          {"請求書"}
+        </HeaderButton>
+
+        <HeaderButton
           className={classNames("__wab_instance", sty.headerButton___5LMdS)}
           to={"/settings" as const}
         >
