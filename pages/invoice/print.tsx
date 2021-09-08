@@ -12,12 +12,13 @@ import { ScreenVariantProvider } from "../../components/plasmic/easytime/Plasmic
 import { PlasmicPrintInvoice } from "../../components/plasmic/easytime/PlasmicPrintInvoice";
 import { useEffect } from "react";
 import { createHash } from "crypto";
+import QRCode from "qrcode.react";
 
 function PrintInvoice() {
   const router = useRouter();
   console.log(router);
 
-  const invJson = router.query.invoice;
+  const invJson = router.query.invoice?.toString();
   useEffect(() => {
     if (invJson) {
       try {
@@ -30,7 +31,7 @@ function PrintInvoice() {
   if (!invJson) {
     return <div>No invoice</div>;
   }
-  const invoice: SerializableInvoice = JSON.parse(invJson?.toString() ?? "");
+  const invoice: SerializableInvoice = JSON.parse(invJson ?? "");
   let total = 0;
   const tableBody = invoice.items.reduce((acc, item) => {
     const subtotal = item.price * item.amount;
@@ -53,7 +54,7 @@ function PrintInvoice() {
   }
   const sha256OfInvoice = createHash("sha256")
     .update(invJson.toString())
-    .digest("hex");
+    .digest("base64");
 
   const template = (
     <Template
@@ -87,6 +88,7 @@ function PrintInvoice() {
       }
       id={sha256OfInvoice.slice(0, 8)}
       memo={invoice.memo}
+      qrCode={<QRCode value={invJson} />}
     />
   );
 

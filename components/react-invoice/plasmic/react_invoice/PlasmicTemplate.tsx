@@ -58,6 +58,7 @@ export type PlasmicTemplate__ArgsType = {
   sender?: React.ReactNode;
   tableBody?: React.ReactNode;
   payTo?: React.ReactNode;
+  qrCode?: React.ReactNode;
 };
 
 type ArgPropType = keyof PlasmicTemplate__ArgsType;
@@ -70,7 +71,8 @@ export const PlasmicTemplate__ArgProps = new Array<ArgPropType>(
   "total",
   "sender",
   "tableBody",
-  "payTo"
+  "payTo",
+  "qrCode"
 );
 
 export type PlasmicTemplate__OverridesType = {
@@ -78,6 +80,7 @@ export type PlasmicTemplate__OverridesType = {
   table?: p.Flex<"div">;
   tableRowHeader?: p.Flex<typeof TableRowHeader>;
   body?: p.Flex<"div">;
+  spacer?: p.Flex<"div">;
 };
 
 export interface DefaultTemplateProps {
@@ -90,6 +93,7 @@ export interface DefaultTemplateProps {
   sender?: React.ReactNode;
   tableBody?: React.ReactNode;
   payTo?: React.ReactNode;
+  qrCode?: React.ReactNode;
   className?: string;
 }
 
@@ -248,6 +252,12 @@ function PlasmicTemplate__RenderFunc(props: {
         </div>
       </div>
 
+      <div
+        data-plasmic-name={"spacer"}
+        data-plasmic-override={overrides.spacer}
+        className={classNames(defaultcss.all, sty.spacer)}
+      />
+
       {p.renderPlasmicSlot({
         defaultContents: (
           <PayTo className={classNames("__wab_instance", sty.payTo__jMUq8)} />
@@ -256,33 +266,47 @@ function PlasmicTemplate__RenderFunc(props: {
         value: args.payTo
       })}
 
-      <div className={classNames(defaultcss.all, sty.freeBox__vMdqs)}>
-        <div
-          className={classNames(
-            defaultcss.all,
-            defaultcss.__wab_text,
-            sty.freeBox__uAoBi
-          )}
-        >
-          {"備考"}
+      <p.Stack
+        as={"div"}
+        hasGap={true}
+        className={classNames(defaultcss.all, sty.freeBox__c2Art)}
+      >
+        <div className={classNames(defaultcss.all, sty.freeBox__vMdqs)}>
+          <div
+            className={classNames(
+              defaultcss.all,
+              defaultcss.__wab_text,
+              sty.freeBox__uAoBi
+            )}
+          >
+            {"備考"}
+          </div>
+
+          <div className={classNames(defaultcss.all, sty.freeBox___2FMp9)}>
+            {p.renderPlasmicSlot({
+              defaultContents: "",
+              value: args.memo
+            })}
+          </div>
         </div>
 
-        <div className={classNames(defaultcss.all, sty.freeBox___2FMp9)}>
+        <div className={classNames(defaultcss.all, sty.freeBox__cuftb)}>
           {p.renderPlasmicSlot({
-            defaultContents: "",
-            value: args.memo
+            defaultContents: null,
+            value: args.qrCode
           })}
         </div>
-      </div>
+      </p.Stack>
     </p.Stack>
   ) as React.ReactElement | null;
 }
 
 const PlasmicDescendants = {
-  root: ["root", "table", "tableRowHeader", "body"],
+  root: ["root", "table", "tableRowHeader", "body", "spacer"],
   table: ["table", "tableRowHeader", "body"],
   tableRowHeader: ["tableRowHeader"],
-  body: ["body"]
+  body: ["body"],
+  spacer: ["spacer"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -292,6 +316,7 @@ type NodeDefaultElementType = {
   table: "div";
   tableRowHeader: typeof TableRowHeader;
   body: "div";
+  spacer: "div";
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -358,6 +383,7 @@ export const PlasmicTemplate = Object.assign(
     table: makeNodeComponent("table"),
     tableRowHeader: makeNodeComponent("tableRowHeader"),
     body: makeNodeComponent("body"),
+    spacer: makeNodeComponent("spacer"),
 
     // Metadata about props expected for PlasmicTemplate
     internalVariantProps: PlasmicTemplate__VariantProps,
