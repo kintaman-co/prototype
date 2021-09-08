@@ -1,5 +1,6 @@
 export type Minstamp = number;
 export type SerializableInvoice = {
+  version: "1";
   title: string;
   recipient: {
     name: string;

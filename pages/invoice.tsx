@@ -112,6 +112,7 @@ function Invoice() {
   const router = useRouter();
   const generate = () => {
     const invoice: SerializableInvoice = {
+      version: "1",
       title: "請求書",
       recipient: {
         name: bizVal?.recipient || "超誠覇神Z",

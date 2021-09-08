@@ -7,7 +7,7 @@ import TableRow from "../../components/react-invoice/TableRow";
 import Template from "../../components/react-invoice/Template";
 import Total from "../../components/react-invoice/Total";
 import { minstampToDate } from "../../utils/date";
-import { Minstamp, SerializableInvoice } from "../../utils/types";
+import { SerializableInvoice } from "../../utils/types";
 import { ScreenVariantProvider } from "../../components/plasmic/easytime/PlasmicGlobalVariant__Screen";
 import { PlasmicPrintInvoice } from "../../components/plasmic/easytime/PlasmicPrintInvoice";
 import { useEffect } from "react";
