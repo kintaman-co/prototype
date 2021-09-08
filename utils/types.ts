@@ -1,7 +1,7 @@
 export type Minstamp = number;
 export type SerializableInvoice = {
   version: "1";
-  title: string;
+  type: "invoice" | "estimate" | "receipt";
   recipient: {
     name: string;
     isIndividual: boolean;
@@ -12,7 +12,7 @@ export type SerializableInvoice = {
     address: string;
     name: string;
   };
-  payTo: {
+  payTo?: {
     due: Minstamp;
     bank: string;
   };

@@ -15,6 +15,14 @@
   align-items: stretch;
   justify-content: flex-start;
 }
+.freeBox__kbhAg {
+  height: auto;
+  width: auto;
+  display: inline-block;
+}
+.freeBox__action_estimate__kbhAgRm2Em {
+  height: auto;
+}
 .freeBox__bTSw2 {
   display: flex;
   position: relative;
@@ -53,12 +61,15 @@
   align-items: baseline;
   justify-content: space-between;
 }
-.slotUnit {
-  font-size: 1.5em;
-}
 .slotAmount {
   font-size: 1.5em;
   font-weight: 700;
+}
+.slotUnit {
+  font-size: 1.5em;
+}
+.freeBox__b1Dwi {
+  position: relative;
 }
 .freeBox__phTp7 {
   display: none;

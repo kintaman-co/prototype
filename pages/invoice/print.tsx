@@ -32,6 +32,17 @@ function PrintInvoice() {
     return <div>No invoice</div>;
   }
   const invoice: SerializableInvoice = JSON.parse(invJson ?? "");
+  let title = "";
+  if (invoice.type === "invoice") {
+    title = "請求書";
+  } else if (invoice.type === "receipt") {
+    title = "領収書";
+  } else if (invoice.type === "estimate") {
+    title = "見積書";
+  } else {
+    title = "不明";
+  }
+
   let total = 0;
   const tableBody = invoice.items.reduce((acc, item) => {
     const subtotal = item.price * item.amount;
@@ -58,7 +69,7 @@ function PrintInvoice() {
 
   const template = (
     <Template
-      title={invoice.title}
+      title={title}
       recipient={
         <Recipient
           name={invoice.recipient.name}
@@ -74,9 +85,13 @@ function PrintInvoice() {
         />
       }
       payTo={
-        <PayTo due={minstampToDate(invoice.payTo.due).toLocaleDateString()}>
-          {invoice.payTo.bank}
-        </PayTo>
+        invoice.payTo ? (
+          <PayTo due={minstampToDate(invoice.payTo.due).toLocaleDateString()}>
+            {invoice.payTo.bank}
+          </PayTo>
+        ) : (
+          <></>
+        )
       }
       tableBody={tableBody}
       total={
@@ -84,6 +99,7 @@ function PrintInvoice() {
           amount={total + vat}
           withTax={invoice.includeVat}
           includedTax={vat}
+          action={invoice.type}
         />
       }
       id={sha256OfInvoice.slice(0, 8)}

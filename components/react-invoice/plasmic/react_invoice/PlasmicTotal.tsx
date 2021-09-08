@@ -38,21 +38,25 @@ import * as sty from "./PlasmicTotal.module.css"; // plasmic-import: wPqxbOYlWi/
 
 export type PlasmicTotal__VariantMembers = {
   withTax: "withTax";
+  action: "invoice" | "receipt" | "estimate";
 };
 
 export type PlasmicTotal__VariantsArgs = {
   withTax?: SingleBooleanChoiceArg<"withTax">;
+  action?: SingleChoiceArg<"invoice" | "receipt" | "estimate">;
 };
 
 type VariantPropType = keyof PlasmicTotal__VariantsArgs;
-export const PlasmicTotal__VariantProps = new Array<VariantPropType>("withTax");
+export const PlasmicTotal__VariantProps = new Array<VariantPropType>(
+  "withTax",
+  "action"
+);
 
 export type PlasmicTotal__ArgsType = {
   unit?: React.ReactNode;
   amount?: React.ReactNode;
   taxUnit?: React.ReactNode;
   includedTax?: React.ReactNode;
-  action?: React.ReactNode;
 };
 
 type ArgPropType = keyof PlasmicTotal__ArgsType;
@@ -60,8 +64,7 @@ export const PlasmicTotal__ArgProps = new Array<ArgPropType>(
   "unit",
   "amount",
   "taxUnit",
-  "includedTax",
-  "action"
+  "includedTax"
 );
 
 export type PlasmicTotal__OverridesType = {
@@ -73,8 +76,8 @@ export interface DefaultTotalProps {
   amount?: React.ReactNode;
   taxUnit?: React.ReactNode;
   includedTax?: React.ReactNode;
-  action?: React.ReactNode;
   withTax?: SingleBooleanChoiceArg<"withTax">;
+  action?: SingleChoiceArg<"invoice" | "receipt" | "estimate">;
   className?: string;
 }
 
@@ -102,25 +105,43 @@ function PlasmicTotal__RenderFunc(props: {
           className={classNames(
             defaultcss.all,
             defaultcss.__wab_text,
-            sty.freeBox___6VaBx
+            sty.freeBox___6VaBx,
+            {
+              [sty.freeBox__action_estimate___6VaBxRm2Em]: hasVariant(
+                variants,
+                "action",
+                "estimate"
+              )
+            }
           )}
         >
           {"下記の通り"}
         </div>
 
-        {p.renderPlasmicSlot({
-          defaultContents: "ご請求",
-          value: args.action
-        })}
-
         <div
           className={classNames(
             defaultcss.all,
             defaultcss.__wab_text,
-            sty.freeBox___233YA
+            sty.freeBox__kbhAg,
+            {
+              [sty.freeBox__action_estimate__kbhAgRm2Em]: hasVariant(
+                variants,
+                "action",
+                "estimate"
+              ),
+              [sty.freeBox__action_receipt__kbhAgD1Bhc]: hasVariant(
+                variants,
+                "action",
+                "receipt"
+              )
+            }
           )}
         >
-          {"申し上げます"}
+          {hasVariant(variants, "action", "estimate")
+            ? "お見積申し上げます"
+            : hasVariant(variants, "action", "receipt")
+            ? "正に領収しました"
+            : "ご請求申し上げます"}
         </div>
       </div>
 
@@ -147,10 +168,10 @@ function PlasmicTotal__RenderFunc(props: {
 
         <div className={classNames(defaultcss.all, sty.freeBox__hvI3H)}>
           {p.renderPlasmicSlot({
-            defaultContents: "¥",
-            value: args.unit,
-            className: classNames(sty.slotUnit, {
-              [sty.slotUnit__withTax]: hasVariant(
+            defaultContents: "114514",
+            value: args.amount,
+            className: classNames(sty.slotAmount, {
+              [sty.slotAmount__withTax]: hasVariant(
                 variants,
                 "withTax",
                 "withTax"
@@ -159,10 +180,10 @@ function PlasmicTotal__RenderFunc(props: {
           })}
 
           {p.renderPlasmicSlot({
-            defaultContents: "114514",
-            value: args.amount,
-            className: classNames(sty.slotAmount, {
-              [sty.slotAmount__withTax]: hasVariant(
+            defaultContents: "円",
+            value: args.unit,
+            className: classNames(sty.slotUnit, {
+              [sty.slotUnit__withTax]: hasVariant(
                 variants,
                 "withTax",
                 "withTax"

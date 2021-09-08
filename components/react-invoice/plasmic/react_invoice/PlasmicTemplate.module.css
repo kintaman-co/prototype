@@ -114,6 +114,9 @@
 .freeBox__icPyz {
   height: auto;
 }
+.slotId {
+  font-family: Fira Mono;
+}
 .freeBox__psmEz {
   display: flex;
   position: relative;
@@ -122,6 +125,9 @@
   justify-content: space-between;
 }
 .total__hwi2U:global(.__wab_instance) {
+  position: relative;
+}
+.freeBox__i98PB {
   position: relative;
 }
 .sender__stcu3:global(.__wab_instance) {

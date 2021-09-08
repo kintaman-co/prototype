@@ -178,7 +178,8 @@ function PlasmicTemplate__RenderFunc(props: {
 
             {p.renderPlasmicSlot({
               defaultContents: "114514",
-              value: args.id
+              value: args.id,
+              className: classNames(sty.slotId)
             })}
           </p.Stack>
         </div>

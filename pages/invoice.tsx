@@ -113,7 +113,7 @@ function Invoice() {
   const generate = () => {
     const invoice: SerializableInvoice = {
       version: "1",
-      title: "請求書",
+      type: "invoice",
       recipient: {
         name: bizVal?.recipient || "超誠覇神Z",
         isIndividual: !!bizVal?.isIndividual,
