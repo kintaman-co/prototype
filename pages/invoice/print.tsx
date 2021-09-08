@@ -20,9 +20,13 @@ function PrintInvoice() {
   const invJson = router.query.invoice;
   useEffect(() => {
     if (invJson) {
-      window.print();
+      try {
+        window.print();
+      } catch (e) {
+        alert(`Error occured while printing: ${e?.message}`);
+      }
     }
-  }, []);
+  }, [invJson]);
   if (!invJson) {
     return <div>No invoice</div>;
   }
