@@ -50,7 +50,6 @@ export const PlasmicTableRowHeader__ArgProps = new Array<ArgPropType>();
 export type PlasmicTableRowHeader__OverridesType = {
   root?: p.Flex<"div">;
   tableRow?: p.Flex<typeof TableRow>;
-  freeBox?: p.Flex<"div">;
 };
 
 export interface DefaultTableRowHeaderProps {
@@ -77,18 +76,46 @@ function PlasmicTableRowHeader__RenderFunc(props: {
       <TableRow
         data-plasmic-name={"tableRow"}
         data-plasmic-override={overrides.tableRow}
-        amount={"数量"}
-        className={classNames("__wab_instance", sty.tableRow)}
-        price={"単価"}
-        topic={"摘要"}
-        total={
+        amount={
           <div
-            data-plasmic-name={"freeBox"}
-            data-plasmic-override={overrides.freeBox}
             className={classNames(
               defaultcss.all,
               defaultcss.__wab_text,
-              sty.freeBox
+              sty.freeBox__q8AAx
+            )}
+          >
+            {"数量"}
+          </div>
+        }
+        className={classNames("__wab_instance", sty.tableRow)}
+        price={
+          <div
+            className={classNames(
+              defaultcss.all,
+              defaultcss.__wab_text,
+              sty.freeBox__mmPNt
+            )}
+          >
+            {"単価"}
+          </div>
+        }
+        topic={
+          <div
+            className={classNames(
+              defaultcss.all,
+              defaultcss.__wab_text,
+              sty.freeBox__tthFp
+            )}
+          >
+            {"摘要"}
+          </div>
+        }
+        total={
+          <div
+            className={classNames(
+              defaultcss.all,
+              defaultcss.__wab_text,
+              sty.freeBox__c0Dcw
             )}
           >
             {"合計"}
@@ -100,9 +127,8 @@ function PlasmicTableRowHeader__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "tableRow", "freeBox"],
-  tableRow: ["tableRow", "freeBox"],
-  freeBox: ["freeBox"]
+  root: ["root", "tableRow"],
+  tableRow: ["tableRow"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -110,7 +136,6 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   tableRow: typeof TableRow;
-  freeBox: "div";
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -175,7 +200,6 @@ export const PlasmicTableRowHeader = Object.assign(
   {
     // Helper components rendering sub-elements
     tableRow: makeNodeComponent("tableRow"),
-    freeBox: makeNodeComponent("freeBox"),
 
     // Metadata about props expected for PlasmicTableRowHeader
     internalVariantProps: PlasmicTableRowHeader__VariantProps,

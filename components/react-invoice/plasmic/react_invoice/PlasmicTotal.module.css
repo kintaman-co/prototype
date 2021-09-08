@@ -1,11 +1,12 @@
 .root {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-start;
-  width: 100%;
+  width: auto;
   position: relative;
-  min-width: 0;
+  padding-right: 10%;
+  padding-left: 10%;
 }
 .freeBox__bjKSu {
   display: flex;
@@ -49,8 +50,8 @@
   display: flex;
   position: relative;
   flex-direction: row;
-  align-items: stretch;
-  justify-content: flex-start;
+  align-items: baseline;
+  justify-content: space-between;
 }
 .slotUnit {
   font-size: 1.5em;

@@ -28,7 +28,7 @@ import {
   useTrigger,
   StrictProps,
   deriveRenderOpts,
-  ensureGlobalVariants,
+  ensureGlobalVariants
 } from "@plasmicapp/react-web";
 import Recipient from "../../Recipient"; // plasmic-import: k6tMcidfEC/component
 import Total from "../../Total"; // plasmic-import: wPqxbOYlWi/component
@@ -116,7 +116,7 @@ function PlasmicTemplate__RenderFunc(props: {
         {p.renderPlasmicSlot({
           defaultContents: "請求書",
           value: args.title,
-          className: classNames(sty.slotTitle),
+          className: classNames(sty.slotTitle)
         })}
       </div>
 
@@ -130,7 +130,7 @@ function PlasmicTemplate__RenderFunc(props: {
                 />
               ),
 
-              value: args.recipient,
+              value: args.recipient
             })}
           </div>
         ) : null}
@@ -153,7 +153,7 @@ function PlasmicTemplate__RenderFunc(props: {
 
             {p.renderPlasmicSlot({
               defaultContents: "2021/1/1",
-              value: args.date,
+              value: args.date
             })}
           </p.Stack>
 
@@ -174,7 +174,7 @@ function PlasmicTemplate__RenderFunc(props: {
 
             {p.renderPlasmicSlot({
               defaultContents: "114514",
-              value: args.id,
+              value: args.id
             })}
           </p.Stack>
         </div>
@@ -189,7 +189,7 @@ function PlasmicTemplate__RenderFunc(props: {
             />
           ),
 
-          value: args.total,
+          value: args.total
         })}
 
         {p.renderPlasmicSlot({
@@ -199,7 +199,7 @@ function PlasmicTemplate__RenderFunc(props: {
             />
           ),
 
-          value: args.sender,
+          value: args.sender
         })}
       </div>
 
@@ -243,7 +243,7 @@ function PlasmicTemplate__RenderFunc(props: {
                 />
               </React.Fragment>
             ),
-            value: args.tableBody,
+            value: args.tableBody
           })}
         </div>
       </div>
@@ -253,7 +253,7 @@ function PlasmicTemplate__RenderFunc(props: {
           <PayTo className={classNames("__wab_instance", sty.payTo__jMUq8)} />
         ),
 
-        value: args.payTo,
+        value: args.payTo
       })}
 
       <div className={classNames(defaultcss.all, sty.freeBox__vMdqs)}>
@@ -270,7 +270,7 @@ function PlasmicTemplate__RenderFunc(props: {
         <div className={classNames(defaultcss.all, sty.freeBox___2FMp9)}>
           {p.renderPlasmicSlot({
             defaultContents: "",
-            value: args.memo,
+            value: args.memo
           })}
         </div>
       </div>
@@ -282,7 +282,7 @@ const PlasmicDescendants = {
   root: ["root", "table", "tableRowHeader", "body"],
   table: ["table", "tableRowHeader", "body"],
   tableRowHeader: ["tableRowHeader"],
-  body: ["body"],
+  body: ["body"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -329,7 +329,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
       name: nodeName,
       descendantNames: [...PlasmicDescendants[nodeName]],
       internalArgPropNames: PlasmicTemplate__ArgProps,
-      internalVariantPropNames: PlasmicTemplate__VariantProps,
+      internalVariantPropNames: PlasmicTemplate__VariantProps
     });
 
     const { dataFetches } = props;
@@ -339,7 +339,7 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
       args,
       overrides,
       dataFetches,
-      forNode: nodeName,
+      forNode: nodeName
     });
   };
   if (nodeName === "root") {
@@ -361,7 +361,7 @@ export const PlasmicTemplate = Object.assign(
 
     // Metadata about props expected for PlasmicTemplate
     internalVariantProps: PlasmicTemplate__VariantProps,
-    internalArgProps: PlasmicTemplate__ArgProps,
+    internalArgProps: PlasmicTemplate__ArgProps
   }
 );
 

@@ -9,9 +9,17 @@
 .tableRow:global(.__wab_instance) {
   position: relative;
 }
+.freeBox__tthFp {
+  font-weight: 700;
+}
+.freeBox__mmPNt {
+  font-weight: 700;
+}
 .freeBox__q8AAx {
   position: relative;
+  font-weight: 700;
 }
-.freeBox {
+.freeBox__c0Dcw {
   height: auto;
+  font-weight: 700;
 }
