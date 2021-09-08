@@ -61,8 +61,8 @@ function Settings() {
   const router = useRouter();
 
   const [user] = useAuthState(firebase.auth());
-  const bizRef = firebase.database().ref(`users/${user!.uid}/businesses`);
-  const userRef = firebase.database().ref(`users/${user!.uid}/info`);
+  const bizRef = firebase.database().ref(`users/${user?.uid}/businesses`);
+  const userRef = firebase.database().ref(`users/${user?.uid}/info`);
 
   const [snapshots, loading, error] = useList(bizRef);
   const [userSnapshot, userLoading, userError] = useObjectVal(userRef);
