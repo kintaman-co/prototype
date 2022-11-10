@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@plasmicapp/react-web": "^0.2.67",
-    "firebase": "^8.10.0",
+    "firebase": "^8.10.1",
     "next": "12.1.0",
     "qrcode.react": "^1.0.1",
     "react": "17.0.2",
