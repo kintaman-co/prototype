@@ -9,7 +9,7 @@
   align-content: unset;
   min-width: 0;
   padding: 4px;
-  border-bottom: 1px solid #2b2c34 /* plasmic-token: gFZV8R6YM */;
+  border-bottom: 1px solid var(--token-gFZV8R6YM);
 }
 .freeBox___1Gl2 {
   display: flex;
@@ -39,7 +39,7 @@
   position: relative;
 }
 .freeBox__d8Gjr {
-  display: flex;
+  display: block;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
@@ -56,7 +56,7 @@
   flex-column-gap: 0px;
   position: relative;
 }
-.freeBox__vml5D {
+.text__vml5D {
   position: relative;
 }
 .freeBox__xsO8E {
@@ -71,6 +71,6 @@
 .edit:global(.__wab_instance) {
   position: relative;
 }
-.freeBox__yB4Z {
+.text {
   height: auto;
 }

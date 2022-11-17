@@ -16,6 +16,7 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 
 import * as p from "@plasmicapp/react-web";
+import * as ph from "@plasmicapp/host";
 
 import {
   hasVariant,
@@ -35,12 +36,11 @@ import {
 } from "@plasmicapp/react-web";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
-import * as defaultcss from "../plasmic__default_style.module.css"; // plasmic-import: global/defaultcss
-import * as projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
-import * as sty from "./PlasmicContainer.module.css"; // plasmic-import: SuzMD14H1M/css
+
+import projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
+import sty from "./PlasmicContainer.module.css"; // plasmic-import: SuzMD14H1M/css
 
 export type PlasmicContainer__VariantMembers = {};
-
 export type PlasmicContainer__VariantsArgs = {};
 type VariantPropType = keyof PlasmicContainer__VariantsArgs;
 export const PlasmicContainer__VariantProps = new Array<VariantPropType>();
@@ -48,7 +48,6 @@ export const PlasmicContainer__VariantProps = new Array<VariantPropType>();
 export type PlasmicContainer__ArgsType = {
   children?: React.ReactNode;
 };
-
 type ArgPropType = keyof PlasmicContainer__ArgsType;
 export const PlasmicContainer__ArgProps = new Array<ArgPropType>("children");
 
@@ -66,10 +65,20 @@ function PlasmicContainer__RenderFunc(props: {
   variants: PlasmicContainer__VariantsArgs;
   args: PlasmicContainer__ArgsType;
   overrides: PlasmicContainer__OverridesType;
-  dataFetches?: PlasmicContainer__Fetches;
+
   forNode?: string;
 }) {
-  const { variants, args, overrides, forNode, dataFetches } = props;
+  const { variants, overrides, forNode } = props;
+
+  const $ctx = ph.useDataEnv?.() || {};
+  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+
+  const $props = {
+    ...args,
+    ...variants,
+  };
+
+  const currentUser = p.useCurrentUser?.() || {};
 
   return (
     <div
@@ -77,12 +86,19 @@ function PlasmicContainer__RenderFunc(props: {
       data-plasmic-override={overrides.root}
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
-      className={classNames(defaultcss.all, projectcss.root_reset, sty.root)}
+      className={classNames(
+        projectcss.all,
+        projectcss.root_reset,
+        projectcss.plasmic_default_styles,
+        projectcss.plasmic_mixins,
+        projectcss.plasmic_tokens,
+        sty.root
+      )}
     >
       <div
         data-plasmic-name={"freeBox"}
         data-plasmic-override={overrides.freeBox}
-        className={classNames(defaultcss.all, sty.freeBox)}
+        className={classNames(projectcss.all, sty.freeBox)}
       >
         {p.renderPlasmicSlot({
           defaultContents:
@@ -117,17 +133,16 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicContainer__VariantsArgs;
     args?: PlasmicContainer__ArgsType;
     overrides?: NodeOverridesType<T>;
-    dataFetches?: PlasmicContainer__Fetches;
   } & Omit<PlasmicContainer__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
-    // Specify args directly as props
-    Omit<PlasmicContainer__ArgsType, ReservedPropsType> &
-    // Specify overrides for each element directly as props
-    Omit<
+    /* Specify args directly as props*/ Omit<
+      PlasmicContainer__ArgsType,
+      ReservedPropsType
+    > &
+    /* Specify overrides for each element directly as props*/ Omit<
       NodeOverridesType<T>,
       ReservedPropsType | VariantPropType | ArgPropType
     > &
-    // Specify props for the root element
-    Omit<
+    /* Specify props for the root element*/ Omit<
       Partial<React.ComponentProps<NodeDefaultElementType[T]>>,
       ReservedPropsType | VariantPropType | ArgPropType | DescendantsType<T>
     >;
@@ -137,20 +152,21 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
   const func = function <T extends PropsType>(
     props: T & StrictProps<T, PropsType>
   ) {
-    const { variants, args, overrides } = deriveRenderOpts(props, {
-      name: nodeName,
-      descendantNames: [...PlasmicDescendants[nodeName]],
-      internalArgPropNames: PlasmicContainer__ArgProps,
-      internalVariantPropNames: PlasmicContainer__VariantProps,
-    });
-
-    const { dataFetches } = props;
+    const { variants, args, overrides } = React.useMemo(
+      () =>
+        deriveRenderOpts(props, {
+          name: nodeName,
+          descendantNames: [...PlasmicDescendants[nodeName]],
+          internalArgPropNames: PlasmicContainer__ArgProps,
+          internalVariantPropNames: PlasmicContainer__VariantProps,
+        }),
+      [props, nodeName]
+    );
 
     return PlasmicContainer__RenderFunc({
       variants,
       args,
       overrides,
-      dataFetches,
       forNode: nodeName,
     });
   };

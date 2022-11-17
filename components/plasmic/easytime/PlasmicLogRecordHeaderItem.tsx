@@ -16,6 +16,7 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 
 import * as p from "@plasmicapp/react-web";
+import * as ph from "@plasmicapp/host";
 
 import {
   hasVariant,
@@ -35,18 +36,16 @@ import {
 } from "@plasmicapp/react-web";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
-import * as defaultcss from "../plasmic__default_style.module.css"; // plasmic-import: global/defaultcss
-import * as projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
-import * as sty from "./PlasmicLogRecordHeaderItem.module.css"; // plasmic-import: BqNx1sQzzM/css
+
+import projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
+import sty from "./PlasmicLogRecordHeaderItem.module.css"; // plasmic-import: BqNx1sQzzM/css
 
 export type PlasmicLogRecordHeaderItem__VariantMembers = {
   order: "asc" | "desc";
 };
-
 export type PlasmicLogRecordHeaderItem__VariantsArgs = {
   order?: SingleChoiceArg<"asc" | "desc">;
 };
-
 type VariantPropType = keyof PlasmicLogRecordHeaderItem__VariantsArgs;
 export const PlasmicLogRecordHeaderItem__VariantProps =
   new Array<VariantPropType>("order");
@@ -54,7 +53,6 @@ export const PlasmicLogRecordHeaderItem__VariantProps =
 export type PlasmicLogRecordHeaderItem__ArgsType = {
   label?: React.ReactNode;
 };
-
 type ArgPropType = keyof PlasmicLogRecordHeaderItem__ArgsType;
 export const PlasmicLogRecordHeaderItem__ArgProps = new Array<ArgPropType>(
   "label"
@@ -74,10 +72,20 @@ function PlasmicLogRecordHeaderItem__RenderFunc(props: {
   variants: PlasmicLogRecordHeaderItem__VariantsArgs;
   args: PlasmicLogRecordHeaderItem__ArgsType;
   overrides: PlasmicLogRecordHeaderItem__OverridesType;
-  dataFetches?: PlasmicLogRecordHeaderItem__Fetches;
+
   forNode?: string;
 }) {
-  const { variants, args, overrides, forNode, dataFetches } = props;
+  const { variants, overrides, forNode } = props;
+
+  const $ctx = ph.useDataEnv?.() || {};
+  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+
+  const $props = {
+    ...args,
+    ...variants,
+  };
+
+  const currentUser = p.useCurrentUser?.() || {};
 
   return (
     <div
@@ -85,17 +93,27 @@ function PlasmicLogRecordHeaderItem__RenderFunc(props: {
       data-plasmic-override={overrides.root}
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
-      className={classNames(defaultcss.all, projectcss.root_reset, sty.root)}
+      className={classNames(
+        projectcss.all,
+        projectcss.root_reset,
+        projectcss.plasmic_default_styles,
+        projectcss.plasmic_mixins,
+        projectcss.plasmic_tokens,
+        sty.root
+      )}
     >
       {p.renderPlasmicSlot({
         defaultContents: "項目名",
         value: args.label,
-        className: classNames(sty.slotLabel, {
-          [sty.slotLabel__order_asc]: hasVariant(variants, "order", "asc"),
-          [sty.slotLabel__order_desc]: hasVariant(variants, "order", "desc"),
+        className: classNames(sty.slotTargetLabel, {
+          [sty.slotTargetLabelorder_asc]: hasVariant(variants, "order", "asc"),
+          [sty.slotTargetLabelorder_desc]: hasVariant(
+            variants,
+            "order",
+            "desc"
+          ),
         }),
       })}
-
       {(
         hasVariant(variants, "order", "desc")
           ? true
@@ -105,16 +123,16 @@ function PlasmicLogRecordHeaderItem__RenderFunc(props: {
       ) ? (
         <div
           className={classNames(
-            defaultcss.all,
-            defaultcss.__wab_text,
-            sty.freeBox__quMq2,
+            projectcss.all,
+            projectcss.__wab_text,
+            sty.text__quMq2,
             {
-              [sty.freeBox__order_asc__quMq2YnG0D]: hasVariant(
+              [sty.textorder_asc__quMq2YnG0D]: hasVariant(
                 variants,
                 "order",
                 "asc"
               ),
-              [sty.freeBox__order_desc__quMq2Tx5M3]: hasVariant(
+              [sty.textorder_desc__quMq2Tx5M3]: hasVariant(
                 variants,
                 "order",
                 "desc"
@@ -134,16 +152,16 @@ function PlasmicLogRecordHeaderItem__RenderFunc(props: {
       ) ? (
         <div
           className={classNames(
-            defaultcss.all,
-            defaultcss.__wab_text,
-            sty.freeBox__wsWy2,
+            projectcss.all,
+            projectcss.__wab_text,
+            sty.text__wsWy2,
             {
-              [sty.freeBox__order_asc__wsWy2YnG0D]: hasVariant(
+              [sty.textorder_asc__wsWy2YnG0D]: hasVariant(
                 variants,
                 "order",
                 "asc"
               ),
-              [sty.freeBox__order_desc__wsWy2Tx5M3]: hasVariant(
+              [sty.textorder_desc__wsWy2Tx5M3]: hasVariant(
                 variants,
                 "order",
                 "desc"
@@ -179,17 +197,16 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicLogRecordHeaderItem__VariantsArgs;
     args?: PlasmicLogRecordHeaderItem__ArgsType;
     overrides?: NodeOverridesType<T>;
-    dataFetches?: PlasmicLogRecordHeaderItem__Fetches;
   } & Omit<PlasmicLogRecordHeaderItem__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
-    // Specify args directly as props
-    Omit<PlasmicLogRecordHeaderItem__ArgsType, ReservedPropsType> &
-    // Specify overrides for each element directly as props
-    Omit<
+    /* Specify args directly as props*/ Omit<
+      PlasmicLogRecordHeaderItem__ArgsType,
+      ReservedPropsType
+    > &
+    /* Specify overrides for each element directly as props*/ Omit<
       NodeOverridesType<T>,
       ReservedPropsType | VariantPropType | ArgPropType
     > &
-    // Specify props for the root element
-    Omit<
+    /* Specify props for the root element*/ Omit<
       Partial<React.ComponentProps<NodeDefaultElementType[T]>>,
       ReservedPropsType | VariantPropType | ArgPropType | DescendantsType<T>
     >;
@@ -199,20 +216,21 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
   const func = function <T extends PropsType>(
     props: T & StrictProps<T, PropsType>
   ) {
-    const { variants, args, overrides } = deriveRenderOpts(props, {
-      name: nodeName,
-      descendantNames: [...PlasmicDescendants[nodeName]],
-      internalArgPropNames: PlasmicLogRecordHeaderItem__ArgProps,
-      internalVariantPropNames: PlasmicLogRecordHeaderItem__VariantProps,
-    });
-
-    const { dataFetches } = props;
+    const { variants, args, overrides } = React.useMemo(
+      () =>
+        deriveRenderOpts(props, {
+          name: nodeName,
+          descendantNames: [...PlasmicDescendants[nodeName]],
+          internalArgPropNames: PlasmicLogRecordHeaderItem__ArgProps,
+          internalVariantPropNames: PlasmicLogRecordHeaderItem__VariantProps,
+        }),
+      [props, nodeName]
+    );
 
     return PlasmicLogRecordHeaderItem__RenderFunc({
       variants,
       args,
       overrides,
-      dataFetches,
       forNode: nodeName,
     });
   };

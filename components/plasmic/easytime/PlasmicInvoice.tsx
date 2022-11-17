@@ -16,6 +16,7 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 
 import * as p from "@plasmicapp/react-web";
+import * as ph from "@plasmicapp/host";
 
 import {
   hasVariant,
@@ -40,12 +41,11 @@ import BizSelect from "../../BizSelect"; // plasmic-import: SCY6plzZHs/component
 import Button from "../../Button"; // plasmic-import: CM9oqbJYK7/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
-import * as defaultcss from "../plasmic__default_style.module.css"; // plasmic-import: global/defaultcss
-import * as projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
-import * as sty from "./PlasmicInvoice.module.css"; // plasmic-import: Lqdr_-SkhP/css
+
+import projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
+import sty from "./PlasmicInvoice.module.css"; // plasmic-import: Lqdr_-SkhP/css
 
 export type PlasmicInvoice__VariantMembers = {};
-
 export type PlasmicInvoice__VariantsArgs = {};
 type VariantPropType = keyof PlasmicInvoice__VariantsArgs;
 export const PlasmicInvoice__VariantProps = new Array<VariantPropType>();
@@ -53,7 +53,6 @@ export const PlasmicInvoice__VariantProps = new Array<VariantPropType>();
 export type PlasmicInvoice__ArgsType = {
   invoice?: React.ReactNode;
 };
-
 type ArgPropType = keyof PlasmicInvoice__ArgsType;
 export const PlasmicInvoice__ArgProps = new Array<ArgPropType>("invoice");
 
@@ -66,31 +65,30 @@ export type PlasmicInvoice__OverridesType = {
   generate?: p.Flex<typeof Button>;
 };
 
-export interface DefaultInvoiceProps {
-  dataFetches: PlasmicInvoice__Fetches;
-}
+export interface DefaultInvoiceProps {}
 
 function PlasmicInvoice__RenderFunc(props: {
   variants: PlasmicInvoice__VariantsArgs;
   args: PlasmicInvoice__ArgsType;
   overrides: PlasmicInvoice__OverridesType;
-  dataFetches?: PlasmicInvoice__Fetches;
+
   forNode?: string;
 }) {
-  const { variants, args, overrides, forNode, dataFetches } = props;
+  const { variants, overrides, forNode } = props;
+
+  const $ctx = ph.useDataEnv?.() || {};
+  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+
+  const $props = {
+    ...args,
+    ...variants,
+  };
+
+  const currentUser = p.useCurrentUser?.() || {};
 
   return (
     <React.Fragment>
-      <Head>
-        <title key="title">{""}</title>
-        <meta key="og:title" property="og:title" content={""} />
-        <meta
-          key="description"
-          name="description"
-          property="og:description"
-          content={""}
-        />
-      </Head>
+      <Head></Head>
 
       <style>{`
         body {
@@ -98,15 +96,18 @@ function PlasmicInvoice__RenderFunc(props: {
         }
       `}</style>
 
-      <div className={defaultcss.plasmic_page_wrapper}>
+      <div className={projectcss.plasmic_page_wrapper}>
         <div
           data-plasmic-name={"root"}
           data-plasmic-override={overrides.root}
           data-plasmic-root={true}
           data-plasmic-for-node={forNode}
           className={classNames(
-            defaultcss.all,
+            projectcss.all,
             projectcss.root_reset,
+            projectcss.plasmic_default_styles,
+            projectcss.plasmic_mixins,
+            projectcss.plasmic_tokens,
             sty.root
           )}
         >
@@ -121,8 +122,8 @@ function PlasmicInvoice__RenderFunc(props: {
             data-plasmic-override={overrides.container}
             className={classNames("__wab_instance", sty.container)}
           >
-            <div className={classNames(defaultcss.all, sty.freeBox__d0Yh)}>
-              <div className={classNames(defaultcss.all, sty.freeBox__tomml)}>
+            <div className={classNames(projectcss.all, sty.freeBox__d0Yh)}>
+              <div className={classNames(projectcss.all, sty.freeBox__tomml)}>
                 <RecordItem
                   className={classNames(
                     "__wab_instance",
@@ -131,9 +132,9 @@ function PlasmicInvoice__RenderFunc(props: {
                   title={
                     <div
                       className={classNames(
-                        defaultcss.all,
-                        defaultcss.__wab_text,
-                        sty.freeBox__bp4BS
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__bp4BS
                       )}
                     >
                       {"会社名"}
@@ -152,12 +153,26 @@ function PlasmicInvoice__RenderFunc(props: {
                     "__wab_instance",
                     sty.recordItem__b3VIf
                   )}
-                  title={"備考"}
+                  title={
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__msSbT
+                      )}
+                    >
+                      {"備考"}
+                    </div>
+                  }
                 >
                   <textarea
                     data-plasmic-name={"memo"}
                     data-plasmic-override={overrides.memo}
-                    className={classNames(defaultcss.textarea, sty.memo)}
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.textarea,
+                      sty.memo
+                    )}
                     value={"" as const}
                   />
                 </RecordItem>
@@ -171,7 +186,7 @@ function PlasmicInvoice__RenderFunc(props: {
                 </Button>
               </div>
 
-              <div className={classNames(defaultcss.all, sty.freeBox__t4D3R)}>
+              <div className={classNames(projectcss.all, sty.freeBox__t4D3R)}>
                 {p.renderPlasmicSlot({
                   defaultContents: null,
                   value: args.invoice,
@@ -216,17 +231,16 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicInvoice__VariantsArgs;
     args?: PlasmicInvoice__ArgsType;
     overrides?: NodeOverridesType<T>;
-    dataFetches?: PlasmicInvoice__Fetches;
   } & Omit<PlasmicInvoice__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
-    // Specify args directly as props
-    Omit<PlasmicInvoice__ArgsType, ReservedPropsType> &
-    // Specify overrides for each element directly as props
-    Omit<
+    /* Specify args directly as props*/ Omit<
+      PlasmicInvoice__ArgsType,
+      ReservedPropsType
+    > &
+    /* Specify overrides for each element directly as props*/ Omit<
       NodeOverridesType<T>,
       ReservedPropsType | VariantPropType | ArgPropType
     > &
-    // Specify props for the root element
-    Omit<
+    /* Specify props for the root element*/ Omit<
       Partial<React.ComponentProps<NodeDefaultElementType[T]>>,
       ReservedPropsType | VariantPropType | ArgPropType | DescendantsType<T>
     >;
@@ -236,20 +250,21 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
   const func = function <T extends PropsType>(
     props: T & StrictProps<T, PropsType>
   ) {
-    const { variants, args, overrides } = deriveRenderOpts(props, {
-      name: nodeName,
-      descendantNames: [...PlasmicDescendants[nodeName]],
-      internalArgPropNames: PlasmicInvoice__ArgProps,
-      internalVariantPropNames: PlasmicInvoice__VariantProps,
-    });
-
-    const { dataFetches } = props;
+    const { variants, args, overrides } = React.useMemo(
+      () =>
+        deriveRenderOpts(props, {
+          name: nodeName,
+          descendantNames: [...PlasmicDescendants[nodeName]],
+          internalArgPropNames: PlasmicInvoice__ArgProps,
+          internalVariantPropNames: PlasmicInvoice__VariantProps,
+        }),
+      [props, nodeName]
+    );
 
     return PlasmicInvoice__RenderFunc({
       variants,
       args,
       overrides,
-      dataFetches,
       forNode: nodeName,
     });
   };
@@ -275,6 +290,14 @@ export const PlasmicInvoice = Object.assign(
     // Metadata about props expected for PlasmicInvoice
     internalVariantProps: PlasmicInvoice__VariantProps,
     internalArgProps: PlasmicInvoice__ArgProps,
+
+    // Page metadata
+    pageMetadata: {
+      title: "",
+      description: "",
+      ogImageSrc: "",
+      canonical: "",
+    },
   }
 );
 

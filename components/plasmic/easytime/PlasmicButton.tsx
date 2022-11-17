@@ -16,6 +16,7 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 
 import * as p from "@plasmicapp/react-web";
+import * as ph from "@plasmicapp/host";
 
 import {
   hasVariant,
@@ -35,25 +36,22 @@ import {
 } from "@plasmicapp/react-web";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
-import * as defaultcss from "../plasmic__default_style.module.css"; // plasmic-import: global/defaultcss
-import * as projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
-import * as sty from "./PlasmicButton.module.css"; // plasmic-import: CM9oqbJYK7/css
+
+import projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
+import sty from "./PlasmicButton.module.css"; // plasmic-import: CM9oqbJYK7/css
 
 export type PlasmicButton__VariantMembers = {
   type: "primary" | "secondary" | "text";
 };
-
 export type PlasmicButton__VariantsArgs = {
   type?: SingleChoiceArg<"primary" | "secondary" | "text">;
 };
-
 type VariantPropType = keyof PlasmicButton__VariantsArgs;
 export const PlasmicButton__VariantProps = new Array<VariantPropType>("type");
 
 export type PlasmicButton__ArgsType = {
   children?: React.ReactNode;
 };
-
 type ArgPropType = keyof PlasmicButton__ArgsType;
 export const PlasmicButton__ArgProps = new Array<ArgPropType>("children");
 
@@ -71,10 +69,20 @@ function PlasmicButton__RenderFunc(props: {
   variants: PlasmicButton__VariantsArgs;
   args: PlasmicButton__ArgsType;
   overrides: PlasmicButton__OverridesType;
-  dataFetches?: PlasmicButton__Fetches;
+
   forNode?: string;
 }) {
-  const { variants, args, overrides, forNode, dataFetches } = props;
+  const { variants, overrides, forNode } = props;
+
+  const $ctx = ph.useDataEnv?.() || {};
+  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+
+  const $props = {
+    ...args,
+    ...variants,
+  };
+
+  const currentUser = p.useCurrentUser?.() || {};
 
   return (
     <button
@@ -83,31 +91,39 @@ function PlasmicButton__RenderFunc(props: {
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
       className={classNames(
-        defaultcss.button,
+        projectcss.all,
+        projectcss.button,
         projectcss.root_reset,
+        projectcss.plasmic_default_styles,
+        projectcss.plasmic_mixins,
+        projectcss.plasmic_tokens,
         sty.root,
         {
-          [sty.root__type_primary]: hasVariant(variants, "type", "primary"),
-          [sty.root__type_secondary]: hasVariant(variants, "type", "secondary"),
-          [sty.root__type_text]: hasVariant(variants, "type", "text"),
+          [sty.roottype_primary]: hasVariant(variants, "type", "primary"),
+          [sty.roottype_secondary]: hasVariant(variants, "type", "secondary"),
+          [sty.roottype_text]: hasVariant(variants, "type", "text"),
         }
       )}
     >
       {p.renderPlasmicSlot({
         defaultContents: "超誠覇神Z",
         value: args.children,
-        className: classNames(sty.slotChildren, {
-          [sty.slotChildren__type_primary]: hasVariant(
+        className: classNames(sty.slotTargetChildren, {
+          [sty.slotTargetChildrentype_primary]: hasVariant(
             variants,
             "type",
             "primary"
           ),
-          [sty.slotChildren__type_secondary]: hasVariant(
+          [sty.slotTargetChildrentype_secondary]: hasVariant(
             variants,
             "type",
             "secondary"
           ),
-          [sty.slotChildren__type_text]: hasVariant(variants, "type", "text"),
+          [sty.slotTargetChildrentype_text]: hasVariant(
+            variants,
+            "type",
+            "text"
+          ),
         }),
       })}
     </button>
@@ -135,17 +151,16 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicButton__VariantsArgs;
     args?: PlasmicButton__ArgsType;
     overrides?: NodeOverridesType<T>;
-    dataFetches?: PlasmicButton__Fetches;
   } & Omit<PlasmicButton__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
-    // Specify args directly as props
-    Omit<PlasmicButton__ArgsType, ReservedPropsType> &
-    // Specify overrides for each element directly as props
-    Omit<
+    /* Specify args directly as props*/ Omit<
+      PlasmicButton__ArgsType,
+      ReservedPropsType
+    > &
+    /* Specify overrides for each element directly as props*/ Omit<
       NodeOverridesType<T>,
       ReservedPropsType | VariantPropType | ArgPropType
     > &
-    // Specify props for the root element
-    Omit<
+    /* Specify props for the root element*/ Omit<
       Partial<React.ComponentProps<NodeDefaultElementType[T]>>,
       ReservedPropsType | VariantPropType | ArgPropType | DescendantsType<T>
     >;
@@ -155,20 +170,21 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
   const func = function <T extends PropsType>(
     props: T & StrictProps<T, PropsType>
   ) {
-    const { variants, args, overrides } = deriveRenderOpts(props, {
-      name: nodeName,
-      descendantNames: [...PlasmicDescendants[nodeName]],
-      internalArgPropNames: PlasmicButton__ArgProps,
-      internalVariantPropNames: PlasmicButton__VariantProps,
-    });
-
-    const { dataFetches } = props;
+    const { variants, args, overrides } = React.useMemo(
+      () =>
+        deriveRenderOpts(props, {
+          name: nodeName,
+          descendantNames: [...PlasmicDescendants[nodeName]],
+          internalArgPropNames: PlasmicButton__ArgProps,
+          internalVariantPropNames: PlasmicButton__VariantProps,
+        }),
+      [props, nodeName]
+    );
 
     return PlasmicButton__RenderFunc({
       variants,
       args,
       overrides,
-      dataFetches,
       forNode: nodeName,
     });
   };

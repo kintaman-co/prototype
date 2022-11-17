@@ -16,6 +16,7 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 
 import * as p from "@plasmicapp/react-web";
+import * as ph from "@plasmicapp/host";
 
 import {
   hasVariant,
@@ -37,12 +38,11 @@ import HeaderButton from "../../HeaderButton"; // plasmic-import: 8PUOayqXwP/com
 import Time from "../../Time"; // plasmic-import: tOmxC_Hwcz/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
-import * as defaultcss from "../plasmic__default_style.module.css"; // plasmic-import: global/defaultcss
-import * as projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
-import * as sty from "./PlasmicHeader.module.css"; // plasmic-import: aBQwDwBIQz/css
+
+import projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
+import sty from "./PlasmicHeader.module.css"; // plasmic-import: aBQwDwBIQz/css
 
 export type PlasmicHeader__VariantMembers = {};
-
 export type PlasmicHeader__VariantsArgs = {};
 type VariantPropType = keyof PlasmicHeader__VariantsArgs;
 export const PlasmicHeader__VariantProps = new Array<VariantPropType>();
@@ -54,6 +54,7 @@ export const PlasmicHeader__ArgProps = new Array<ArgPropType>();
 export type PlasmicHeader__OverridesType = {
   root?: p.Flex<"div">;
   left?: p.Flex<"div">;
+  text?: p.Flex<"div">;
   right?: p.Flex<"div">;
   freeBox?: p.Flex<"div">;
   time?: p.Flex<typeof Time>;
@@ -67,10 +68,20 @@ function PlasmicHeader__RenderFunc(props: {
   variants: PlasmicHeader__VariantsArgs;
   args: PlasmicHeader__ArgsType;
   overrides: PlasmicHeader__OverridesType;
-  dataFetches?: PlasmicHeader__Fetches;
+
   forNode?: string;
 }) {
-  const { variants, args, overrides, forNode, dataFetches } = props;
+  const { variants, overrides, forNode } = props;
+
+  const $ctx = ph.useDataEnv?.() || {};
+  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+
+  const $props = {
+    ...args,
+    ...variants,
+  };
+
+  const currentUser = p.useCurrentUser?.() || {};
 
   return (
     <div
@@ -78,30 +89,47 @@ function PlasmicHeader__RenderFunc(props: {
       data-plasmic-override={overrides.root}
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
-      className={classNames(defaultcss.all, projectcss.root_reset, sty.root)}
+      className={classNames(
+        projectcss.all,
+        projectcss.root_reset,
+        projectcss.plasmic_default_styles,
+        projectcss.plasmic_mixins,
+        projectcss.plasmic_tokens,
+        sty.root
+      )}
     >
       <div
         data-plasmic-name={"left"}
         data-plasmic-override={overrides.left}
-        className={classNames(defaultcss.all, sty.left)}
+        className={classNames(projectcss.all, sty.left)}
       >
         <HeaderButton
           className={classNames("__wab_instance", sty.headerButton__xQogy)}
-          to={"/" as const}
+          to={`/`}
         >
-          {"easytime"}
+          <div
+            data-plasmic-name={"text"}
+            data-plasmic-override={overrides.text}
+            className={classNames(
+              projectcss.all,
+              projectcss.__wab_text,
+              sty.text
+            )}
+          >
+            {"Kintaman"}
+          </div>
         </HeaderButton>
       </div>
 
       <div
         data-plasmic-name={"right"}
         data-plasmic-override={overrides.right}
-        className={classNames(defaultcss.all, sty.right)}
+        className={classNames(projectcss.all, sty.right)}
       >
         <div
           data-plasmic-name={"freeBox"}
           data-plasmic-override={overrides.freeBox}
-          className={classNames(defaultcss.all, sty.freeBox)}
+          className={classNames(projectcss.all, sty.freeBox)}
         >
           <Time
             data-plasmic-name={"time"}
@@ -112,28 +140,28 @@ function PlasmicHeader__RenderFunc(props: {
 
         <HeaderButton
           className={classNames("__wab_instance", sty.headerButton__rEl)}
-          to={"/" as const}
+          to={`/`}
         >
           {"勤怠管理"}
         </HeaderButton>
 
         <HeaderButton
           className={classNames("__wab_instance", sty.headerButton__nNgE)}
-          to={"/log" as const}
+          to={`/log`}
         >
           {"ログ"}
         </HeaderButton>
 
         <HeaderButton
           className={classNames("__wab_instance", sty.headerButton__nLq9E)}
-          to={"/invoice" as const}
+          to={`/invoice`}
         >
           {"請求書"}
         </HeaderButton>
 
         <HeaderButton
           className={classNames("__wab_instance", sty.headerButton___5LMdS)}
-          to={"/settings" as const}
+          to={`/settings`}
         >
           {"設定"}
         </HeaderButton>
@@ -143,8 +171,9 @@ function PlasmicHeader__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "left", "right", "freeBox", "time"],
-  left: ["left"],
+  root: ["root", "left", "text", "right", "freeBox", "time"],
+  left: ["left", "text"],
+  text: ["text"],
   right: ["right", "freeBox", "time"],
   freeBox: ["freeBox", "time"],
   time: ["time"],
@@ -155,6 +184,7 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   left: "div";
+  text: "div";
   right: "div";
   freeBox: "div";
   time: typeof Time;
@@ -171,17 +201,16 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicHeader__VariantsArgs;
     args?: PlasmicHeader__ArgsType;
     overrides?: NodeOverridesType<T>;
-    dataFetches?: PlasmicHeader__Fetches;
   } & Omit<PlasmicHeader__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
-    // Specify args directly as props
-    Omit<PlasmicHeader__ArgsType, ReservedPropsType> &
-    // Specify overrides for each element directly as props
-    Omit<
+    /* Specify args directly as props*/ Omit<
+      PlasmicHeader__ArgsType,
+      ReservedPropsType
+    > &
+    /* Specify overrides for each element directly as props*/ Omit<
       NodeOverridesType<T>,
       ReservedPropsType | VariantPropType | ArgPropType
     > &
-    // Specify props for the root element
-    Omit<
+    /* Specify props for the root element*/ Omit<
       Partial<React.ComponentProps<NodeDefaultElementType[T]>>,
       ReservedPropsType | VariantPropType | ArgPropType | DescendantsType<T>
     >;
@@ -191,20 +220,21 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
   const func = function <T extends PropsType>(
     props: T & StrictProps<T, PropsType>
   ) {
-    const { variants, args, overrides } = deriveRenderOpts(props, {
-      name: nodeName,
-      descendantNames: [...PlasmicDescendants[nodeName]],
-      internalArgPropNames: PlasmicHeader__ArgProps,
-      internalVariantPropNames: PlasmicHeader__VariantProps,
-    });
-
-    const { dataFetches } = props;
+    const { variants, args, overrides } = React.useMemo(
+      () =>
+        deriveRenderOpts(props, {
+          name: nodeName,
+          descendantNames: [...PlasmicDescendants[nodeName]],
+          internalArgPropNames: PlasmicHeader__ArgProps,
+          internalVariantPropNames: PlasmicHeader__VariantProps,
+        }),
+      [props, nodeName]
+    );
 
     return PlasmicHeader__RenderFunc({
       variants,
       args,
       overrides,
-      dataFetches,
       forNode: nodeName,
     });
   };
@@ -222,6 +252,7 @@ export const PlasmicHeader = Object.assign(
   {
     // Helper components rendering sub-elements
     left: makeNodeComponent("left"),
+    text: makeNodeComponent("text"),
     right: makeNodeComponent("right"),
     freeBox: makeNodeComponent("freeBox"),
     time: makeNodeComponent("time"),

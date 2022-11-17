@@ -16,6 +16,7 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 
 import * as p from "@plasmicapp/react-web";
+import * as ph from "@plasmicapp/host";
 
 import {
   hasVariant,
@@ -38,12 +39,11 @@ import Container from "../../Container"; // plasmic-import: SuzMD14H1M/component
 import Button from "../../Button"; // plasmic-import: CM9oqbJYK7/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
-import * as defaultcss from "../plasmic__default_style.module.css"; // plasmic-import: global/defaultcss
-import * as projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
-import * as sty from "./PlasmicSignin.module.css"; // plasmic-import: nOkcrTTsdU/css
+
+import projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
+import sty from "./PlasmicSignin.module.css"; // plasmic-import: nOkcrTTsdU/css
 
 export type PlasmicSignin__VariantMembers = {};
-
 export type PlasmicSignin__VariantsArgs = {};
 type VariantPropType = keyof PlasmicSignin__VariantsArgs;
 export const PlasmicSignin__VariantProps = new Array<VariantPropType>();
@@ -56,36 +56,36 @@ export type PlasmicSignin__OverridesType = {
   root?: p.Flex<"div">;
   header?: p.Flex<typeof Header>;
   container?: p.Flex<typeof Container>;
+  text?: p.Flex<"div">;
   google?: p.Flex<typeof Button>;
   github?: p.Flex<typeof Button>;
   anonymous?: p.Flex<typeof Button>;
 };
 
-export interface DefaultSigninProps {
-  dataFetches: PlasmicSignin__Fetches;
-}
+export interface DefaultSigninProps {}
 
 function PlasmicSignin__RenderFunc(props: {
   variants: PlasmicSignin__VariantsArgs;
   args: PlasmicSignin__ArgsType;
   overrides: PlasmicSignin__OverridesType;
-  dataFetches?: PlasmicSignin__Fetches;
+
   forNode?: string;
 }) {
-  const { variants, args, overrides, forNode, dataFetches } = props;
+  const { variants, overrides, forNode } = props;
+
+  const $ctx = ph.useDataEnv?.() || {};
+  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+
+  const $props = {
+    ...args,
+    ...variants,
+  };
+
+  const currentUser = p.useCurrentUser?.() || {};
 
   return (
     <React.Fragment>
-      <Head>
-        <title key="title">{""}</title>
-        <meta key="og:title" property="og:title" content={""} />
-        <meta
-          key="description"
-          name="description"
-          property="og:description"
-          content={""}
-        />
-      </Head>
+      <Head></Head>
 
       <style>{`
         body {
@@ -93,15 +93,18 @@ function PlasmicSignin__RenderFunc(props: {
         }
       `}</style>
 
-      <div className={defaultcss.plasmic_page_wrapper}>
+      <div className={projectcss.plasmic_page_wrapper}>
         <div
           data-plasmic-name={"root"}
           data-plasmic-override={overrides.root}
           data-plasmic-root={true}
           data-plasmic-for-node={forNode}
           className={classNames(
-            defaultcss.all,
+            projectcss.all,
             projectcss.root_reset,
+            projectcss.plasmic_default_styles,
+            projectcss.plasmic_mixins,
+            projectcss.plasmic_tokens,
             sty.root
           )}
         >
@@ -116,22 +119,24 @@ function PlasmicSignin__RenderFunc(props: {
             data-plasmic-override={overrides.container}
             className={classNames("__wab_instance", sty.container)}
           >
-            <div className={classNames(defaultcss.all, sty.freeBox__r2XL)}>
+            <div className={classNames(projectcss.all, sty.freeBox__r2XL)}>
               <div
+                data-plasmic-name={"text"}
+                data-plasmic-override={overrides.text}
                 className={classNames(
-                  defaultcss.all,
-                  defaultcss.__wab_text,
-                  sty.freeBox__fslz0
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text
                 )}
               >
                 {"ログインしてみましょう"}
               </div>
 
-              <div className={classNames(defaultcss.all, sty.freeBox__meYeN)}>
+              <div className={classNames(projectcss.all, sty.freeBox__meYeN)}>
                 <p.Stack
                   as={"div"}
                   hasGap={true}
-                  className={classNames(defaultcss.all, sty.freeBox__cnkjL)}
+                  className={classNames(projectcss.all, sty.freeBox__cnkjL)}
                 >
                   <Button
                     data-plasmic-name={"google"}
@@ -167,9 +172,18 @@ function PlasmicSignin__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "header", "container", "google", "github", "anonymous"],
+  root: [
+    "root",
+    "header",
+    "container",
+    "text",
+    "google",
+    "github",
+    "anonymous",
+  ],
   header: ["header"],
-  container: ["container", "google", "github", "anonymous"],
+  container: ["container", "text", "google", "github", "anonymous"],
+  text: ["text"],
   google: ["google"],
   github: ["github"],
   anonymous: ["anonymous"],
@@ -181,6 +195,7 @@ type NodeDefaultElementType = {
   root: "div";
   header: typeof Header;
   container: typeof Container;
+  text: "div";
   google: typeof Button;
   github: typeof Button;
   anonymous: typeof Button;
@@ -197,17 +212,16 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicSignin__VariantsArgs;
     args?: PlasmicSignin__ArgsType;
     overrides?: NodeOverridesType<T>;
-    dataFetches?: PlasmicSignin__Fetches;
   } & Omit<PlasmicSignin__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
-    // Specify args directly as props
-    Omit<PlasmicSignin__ArgsType, ReservedPropsType> &
-    // Specify overrides for each element directly as props
-    Omit<
+    /* Specify args directly as props*/ Omit<
+      PlasmicSignin__ArgsType,
+      ReservedPropsType
+    > &
+    /* Specify overrides for each element directly as props*/ Omit<
       NodeOverridesType<T>,
       ReservedPropsType | VariantPropType | ArgPropType
     > &
-    // Specify props for the root element
-    Omit<
+    /* Specify props for the root element*/ Omit<
       Partial<React.ComponentProps<NodeDefaultElementType[T]>>,
       ReservedPropsType | VariantPropType | ArgPropType | DescendantsType<T>
     >;
@@ -217,20 +231,21 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
   const func = function <T extends PropsType>(
     props: T & StrictProps<T, PropsType>
   ) {
-    const { variants, args, overrides } = deriveRenderOpts(props, {
-      name: nodeName,
-      descendantNames: [...PlasmicDescendants[nodeName]],
-      internalArgPropNames: PlasmicSignin__ArgProps,
-      internalVariantPropNames: PlasmicSignin__VariantProps,
-    });
-
-    const { dataFetches } = props;
+    const { variants, args, overrides } = React.useMemo(
+      () =>
+        deriveRenderOpts(props, {
+          name: nodeName,
+          descendantNames: [...PlasmicDescendants[nodeName]],
+          internalArgPropNames: PlasmicSignin__ArgProps,
+          internalVariantPropNames: PlasmicSignin__VariantProps,
+        }),
+      [props, nodeName]
+    );
 
     return PlasmicSignin__RenderFunc({
       variants,
       args,
       overrides,
-      dataFetches,
       forNode: nodeName,
     });
   };
@@ -249,6 +264,7 @@ export const PlasmicSignin = Object.assign(
     // Helper components rendering sub-elements
     header: makeNodeComponent("header"),
     container: makeNodeComponent("container"),
+    text: makeNodeComponent("text"),
     google: makeNodeComponent("google"),
     github: makeNodeComponent("github"),
     anonymous: makeNodeComponent("anonymous"),
@@ -256,6 +272,14 @@ export const PlasmicSignin = Object.assign(
     // Metadata about props expected for PlasmicSignin
     internalVariantProps: PlasmicSignin__VariantProps,
     internalArgProps: PlasmicSignin__ArgProps,
+
+    // Page metadata
+    pageMetadata: {
+      title: "",
+      description: "",
+      ogImageSrc: "",
+      canonical: "",
+    },
   }
 );
 

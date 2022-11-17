@@ -462,8 +462,21 @@
         }
       ],
       "images": [],
-      "codeComponents": [],
-      "projectApiToken": "Ex6L2DkdViuKvMCif24sfO8XZPOa8OZCXJZFea030Qp7nBAtl1hZyEza9T3gn9MfUjOOSt7vXZrTciwCymA"
+      "codeComponents": [
+        {
+          "id": "zmjN0agx-o",
+          "name": "PlasmicHead",
+          "componentImportPath": "@plasmicapp/react-web"
+        },
+        {
+          "id": "Sj6xKU6vWP",
+          "name": "Fetcher",
+          "componentImportPath": "@plasmicapp/data-sources"
+        }
+      ],
+      "projectApiToken": "Ex6L2DkdViuKvMCif24sfO8XZPOa8OZCXJZFea030Qp7nBAtl1hZyEza9T3gn9MfUjOOSt7vXZrTciwCymA",
+      "indirect": false,
+      "globalContextsFilePath": ""
     }
   ],
   "globalVariants": {
@@ -476,9 +489,10 @@
       }
     ]
   },
+  "wrapPagesWithGlobalContexts": true,
   "nextjsConfig": {
     "pagesDir": "../pages"
   },
-  "cliVersion": "0.1.161",
-  "$schema": "https://unpkg.com/@plasmicapp/cli@0.1.161/dist/plasmic.schema.json"
+  "cliVersion": "0.1.187",
+  "$schema": "https://unpkg.com/@plasmicapp/cli@0.1.187/dist/plasmic.schema.json"
 }

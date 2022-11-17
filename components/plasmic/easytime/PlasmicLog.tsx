@@ -16,6 +16,7 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 
 import * as p from "@plasmicapp/react-web";
+import * as ph from "@plasmicapp/host";
 
 import {
   hasVariant,
@@ -41,12 +42,11 @@ import Button from "../../Button"; // plasmic-import: CM9oqbJYK7/component
 import Skeleton from "../../Skeleton"; // plasmic-import: wYIaMxnRFr/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
-import * as defaultcss from "../plasmic__default_style.module.css"; // plasmic-import: global/defaultcss
-import * as projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
-import * as sty from "./PlasmicLog.module.css"; // plasmic-import: w3pwx0FCD6/css
+
+import projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
+import sty from "./PlasmicLog.module.css"; // plasmic-import: w3pwx0FCD6/css
 
 export type PlasmicLog__VariantMembers = {};
-
 export type PlasmicLog__VariantsArgs = {};
 type VariantPropType = keyof PlasmicLog__VariantsArgs;
 export const PlasmicLog__VariantProps = new Array<VariantPropType>();
@@ -54,7 +54,6 @@ export const PlasmicLog__VariantProps = new Array<VariantPropType>();
 export type PlasmicLog__ArgsType = {
   children?: React.ReactNode;
 };
-
 type ArgPropType = keyof PlasmicLog__ArgsType;
 export const PlasmicLog__ArgProps = new Array<ArgPropType>("children");
 
@@ -71,31 +70,30 @@ export type PlasmicLog__OverridesType = {
   exportCsv?: p.Flex<typeof Button>;
 };
 
-export interface DefaultLogProps {
-  dataFetches: PlasmicLog__Fetches;
-}
+export interface DefaultLogProps {}
 
 function PlasmicLog__RenderFunc(props: {
   variants: PlasmicLog__VariantsArgs;
   args: PlasmicLog__ArgsType;
   overrides: PlasmicLog__OverridesType;
-  dataFetches?: PlasmicLog__Fetches;
+
   forNode?: string;
 }) {
-  const { variants, args, overrides, forNode, dataFetches } = props;
+  const { variants, overrides, forNode } = props;
+
+  const $ctx = ph.useDataEnv?.() || {};
+  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+
+  const $props = {
+    ...args,
+    ...variants,
+  };
+
+  const currentUser = p.useCurrentUser?.() || {};
 
   return (
     <React.Fragment>
-      <Head>
-        <title key="title">{""}</title>
-        <meta key="og:title" property="og:title" content={""} />
-        <meta
-          key="description"
-          name="description"
-          property="og:description"
-          content={""}
-        />
-      </Head>
+      <Head></Head>
 
       <style>{`
         body {
@@ -103,15 +101,18 @@ function PlasmicLog__RenderFunc(props: {
         }
       `}</style>
 
-      <div className={defaultcss.plasmic_page_wrapper}>
+      <div className={projectcss.plasmic_page_wrapper}>
         <div
           data-plasmic-name={"root"}
           data-plasmic-override={overrides.root}
           data-plasmic-root={true}
           data-plasmic-for-node={forNode}
           className={classNames(
-            defaultcss.all,
+            projectcss.all,
             projectcss.root_reset,
+            projectcss.plasmic_default_styles,
+            projectcss.plasmic_mixins,
+            projectcss.plasmic_tokens,
             sty.root
           )}
         >
@@ -124,16 +125,16 @@ function PlasmicLog__RenderFunc(props: {
           <p.Stack
             as={"div"}
             hasGap={true}
-            className={classNames(defaultcss.all, sty.freeBox__qgmjE)}
+            className={classNames(projectcss.all, sty.freeBox__qgmjE)}
           >
             <RecordItem
               className={classNames("__wab_instance", sty.recordItem__fzulx)}
               title={
                 <div
                   className={classNames(
-                    defaultcss.all,
-                    defaultcss.__wab_text,
-                    sty.freeBox__dWwF1
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__dWwF1
                   )}
                 >
                   {"終了時刻 始点"}
@@ -149,9 +150,9 @@ function PlasmicLog__RenderFunc(props: {
 
             <div
               className={classNames(
-                defaultcss.all,
-                defaultcss.__wab_text,
-                sty.freeBox___6MwHr
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text___6MwHr
               )}
             >
               {"〜"}
@@ -162,9 +163,9 @@ function PlasmicLog__RenderFunc(props: {
               title={
                 <div
                   className={classNames(
-                    defaultcss.all,
-                    defaultcss.__wab_text,
-                    sty.freeBox___0FNqV
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text___0FNqV
                   )}
                 >
                   {"終了時刻 終点"}
@@ -180,17 +181,27 @@ function PlasmicLog__RenderFunc(props: {
 
             <RecordItem
               className={classNames("__wab_instance", sty.recordItem__fgH5)}
-              title={"会社名"}
+              title={
+                <div
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__f4J5
+                  )}
+                >
+                  {"会社名"}
+                </div>
+              }
             >
               <BizSelect
                 data-plasmic-name={"biz"}
                 data-plasmic-override={overrides.biz}
                 className={classNames("__wab_instance", sty.biz)}
-                hasAll={"hasAll" as const}
+                hasAll={true}
               />
             </RecordItem>
 
-            <div className={classNames(defaultcss.all, sty.freeBox__pqmvv)}>
+            <div className={classNames(projectcss.all, sty.freeBox__pqmvv)}>
               <Button
                 data-plasmic-name={"curMonth"}
                 data-plasmic-override={overrides.curMonth}
@@ -206,9 +217,9 @@ function PlasmicLog__RenderFunc(props: {
               >
                 <div
                   className={classNames(
-                    defaultcss.all,
-                    defaultcss.__wab_text,
-                    sty.freeBox__owZb2
+                    projectcss.all,
+                    projectcss.__wab_text,
+                    sty.text__owZb2
                   )}
                 >
                   {"先月分"}
@@ -219,14 +230,14 @@ function PlasmicLog__RenderFunc(props: {
 
           <div
             className={classNames(
-              defaultcss.all,
+              projectcss.all,
               sty.freeBox__vzRmu,
               "" as const
             )}
           >
             <div
               className={classNames(
-                defaultcss.all,
+                projectcss.all,
                 sty.freeBox__gCaK,
                 "recordTable" as const
               )}
@@ -236,7 +247,7 @@ function PlasmicLog__RenderFunc(props: {
                   <p.Stack
                     as={"div"}
                     hasGap={true}
-                    className={classNames(defaultcss.all, sty.freeBox__vryEm)}
+                    className={classNames(projectcss.all, sty.freeBox__vryEm)}
                   >
                     <Skeleton />
 
@@ -260,13 +271,13 @@ function PlasmicLog__RenderFunc(props: {
           <p.Stack
             as={"div"}
             hasGap={true}
-            className={classNames(defaultcss.all, sty.freeBox__apAwA)}
+            className={classNames(projectcss.all, sty.freeBox__apAwA)}
           >
             <div
               className={classNames(
-                defaultcss.all,
-                defaultcss.__wab_text,
-                sty.freeBox__oI100
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__oI100
               )}
             >
               {"合計時間"}
@@ -276,8 +287,8 @@ function PlasmicLog__RenderFunc(props: {
               data-plasmic-name={"totalDuration"}
               data-plasmic-override={overrides.totalDuration}
               className={classNames(
-                defaultcss.all,
-                defaultcss.__wab_text,
+                projectcss.all,
+                projectcss.__wab_text,
                 sty.totalDuration
               )}
             >
@@ -285,7 +296,7 @@ function PlasmicLog__RenderFunc(props: {
             </div>
           </p.Stack>
 
-          <div className={classNames(defaultcss.all, sty.freeBox__y3MJe)}>
+          <div className={classNames(projectcss.all, sty.freeBox__y3MJe)}>
             <Button
               data-plasmic-name={"createNew"}
               data-plasmic-override={overrides.createNew}
@@ -360,17 +371,16 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicLog__VariantsArgs;
     args?: PlasmicLog__ArgsType;
     overrides?: NodeOverridesType<T>;
-    dataFetches?: PlasmicLog__Fetches;
   } & Omit<PlasmicLog__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
-    // Specify args directly as props
-    Omit<PlasmicLog__ArgsType, ReservedPropsType> &
-    // Specify overrides for each element directly as props
-    Omit<
+    /* Specify args directly as props*/ Omit<
+      PlasmicLog__ArgsType,
+      ReservedPropsType
+    > &
+    /* Specify overrides for each element directly as props*/ Omit<
       NodeOverridesType<T>,
       ReservedPropsType | VariantPropType | ArgPropType
     > &
-    // Specify props for the root element
-    Omit<
+    /* Specify props for the root element*/ Omit<
       Partial<React.ComponentProps<NodeDefaultElementType[T]>>,
       ReservedPropsType | VariantPropType | ArgPropType | DescendantsType<T>
     >;
@@ -380,20 +390,21 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
   const func = function <T extends PropsType>(
     props: T & StrictProps<T, PropsType>
   ) {
-    const { variants, args, overrides } = deriveRenderOpts(props, {
-      name: nodeName,
-      descendantNames: [...PlasmicDescendants[nodeName]],
-      internalArgPropNames: PlasmicLog__ArgProps,
-      internalVariantPropNames: PlasmicLog__VariantProps,
-    });
-
-    const { dataFetches } = props;
+    const { variants, args, overrides } = React.useMemo(
+      () =>
+        deriveRenderOpts(props, {
+          name: nodeName,
+          descendantNames: [...PlasmicDescendants[nodeName]],
+          internalArgPropNames: PlasmicLog__ArgProps,
+          internalVariantPropNames: PlasmicLog__VariantProps,
+        }),
+      [props, nodeName]
+    );
 
     return PlasmicLog__RenderFunc({
       variants,
       args,
       overrides,
-      dataFetches,
       forNode: nodeName,
     });
   };
@@ -423,6 +434,14 @@ export const PlasmicLog = Object.assign(
     // Metadata about props expected for PlasmicLog
     internalVariantProps: PlasmicLog__VariantProps,
     internalArgProps: PlasmicLog__ArgProps,
+
+    // Page metadata
+    pageMetadata: {
+      title: "",
+      description: "",
+      ogImageSrc: "",
+      canonical: "",
+    },
   }
 );
 

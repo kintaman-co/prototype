@@ -16,6 +16,7 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 
 import * as p from "@plasmicapp/react-web";
+import * as ph from "@plasmicapp/host";
 
 import {
   hasVariant,
@@ -40,12 +41,11 @@ import BizItem from "../../BizItem"; // plasmic-import: WrlNulxyIS/component
 import Button from "../../Button"; // plasmic-import: CM9oqbJYK7/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
-import * as defaultcss from "../plasmic__default_style.module.css"; // plasmic-import: global/defaultcss
-import * as projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
-import * as sty from "./PlasmicSettings.module.css"; // plasmic-import: t8VWzd7npn/css
+
+import projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
+import sty from "./PlasmicSettings.module.css"; // plasmic-import: t8VWzd7npn/css
 
 export type PlasmicSettings__VariantMembers = {};
-
 export type PlasmicSettings__VariantsArgs = {};
 type VariantPropType = keyof PlasmicSettings__VariantsArgs;
 export const PlasmicSettings__VariantProps = new Array<VariantPropType>();
@@ -53,7 +53,6 @@ export const PlasmicSettings__VariantProps = new Array<VariantPropType>();
 export type PlasmicSettings__ArgsType = {
   bizList?: React.ReactNode;
 };
-
 type ArgPropType = keyof PlasmicSettings__ArgsType;
 export const PlasmicSettings__ArgProps = new Array<ArgPropType>("bizList");
 
@@ -72,31 +71,30 @@ export type PlasmicSettings__OverridesType = {
   signOut?: p.Flex<typeof Button>;
 };
 
-export interface DefaultSettingsProps {
-  dataFetches: PlasmicSettings__Fetches;
-}
+export interface DefaultSettingsProps {}
 
 function PlasmicSettings__RenderFunc(props: {
   variants: PlasmicSettings__VariantsArgs;
   args: PlasmicSettings__ArgsType;
   overrides: PlasmicSettings__OverridesType;
-  dataFetches?: PlasmicSettings__Fetches;
+
   forNode?: string;
 }) {
-  const { variants, args, overrides, forNode, dataFetches } = props;
+  const { variants, overrides, forNode } = props;
+
+  const $ctx = ph.useDataEnv?.() || {};
+  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+
+  const $props = {
+    ...args,
+    ...variants,
+  };
+
+  const currentUser = p.useCurrentUser?.() || {};
 
   return (
     <React.Fragment>
-      <Head>
-        <title key="title">{""}</title>
-        <meta key="og:title" property="og:title" content={""} />
-        <meta
-          key="description"
-          name="description"
-          property="og:description"
-          content={""}
-        />
-      </Head>
+      <Head></Head>
 
       <style>{`
         body {
@@ -104,15 +102,18 @@ function PlasmicSettings__RenderFunc(props: {
         }
       `}</style>
 
-      <div className={defaultcss.plasmic_page_wrapper}>
+      <div className={projectcss.plasmic_page_wrapper}>
         <div
           data-plasmic-name={"root"}
           data-plasmic-override={overrides.root}
           data-plasmic-root={true}
           data-plasmic-for-node={forNode}
           className={classNames(
-            defaultcss.all,
+            projectcss.all,
             projectcss.root_reset,
+            projectcss.plasmic_default_styles,
+            projectcss.plasmic_mixins,
+            projectcss.plasmic_tokens,
             sty.root
           )}
         >
@@ -130,15 +131,15 @@ function PlasmicSettings__RenderFunc(props: {
             <p.Stack
               as={"div"}
               hasGap={true}
-              className={classNames(defaultcss.all, sty.freeBox___3R5W5)}
+              className={classNames(projectcss.all, sty.freeBox___3R5W5)}
             >
               <RecordItem
                 title={
                   <div
                     className={classNames(
-                      defaultcss.all,
-                      defaultcss.__wab_text,
-                      sty.freeBox__epnN0
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__epnN0
                     )}
                   >
                     {"会社リスト"}
@@ -148,14 +149,14 @@ function PlasmicSettings__RenderFunc(props: {
                 <p.Stack
                   as={"div"}
                   hasGap={true}
-                  className={classNames(defaultcss.all, sty.freeBox__lBosZ)}
+                  className={classNames(projectcss.all, sty.freeBox__lBosZ)}
                 >
                   <p.Stack
                     as={"div"}
                     data-plasmic-name={"bizList"}
                     data-plasmic-override={overrides.bizList}
                     hasGap={true}
-                    className={classNames(defaultcss.all, sty.bizList)}
+                    className={classNames(projectcss.all, sty.bizList)}
                   >
                     {p.renderPlasmicSlot({
                       defaultContents: (
@@ -199,12 +200,22 @@ function PlasmicSettings__RenderFunc(props: {
 
               <RecordItem
                 className={classNames("__wab_instance", sty.recordItem__b0EXk)}
-                title={"別のアカウントと連携"}
+                title={
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text___7IbCz
+                    )}
+                  >
+                    {"別のアカウントと連携"}
+                  </div>
+                }
               >
                 <p.Stack
                   as={"div"}
                   hasGap={true}
-                  className={classNames(defaultcss.all, sty.freeBox__svdSp)}
+                  className={classNames(projectcss.all, sty.freeBox__svdSp)}
                 >
                   <Button
                     data-plasmic-name={"linkToGoogle"}
@@ -228,9 +239,9 @@ function PlasmicSettings__RenderFunc(props: {
                 title={
                   <div
                     className={classNames(
-                      defaultcss.all,
-                      defaultcss.__wab_text,
-                      sty.freeBox___5Gzrx
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text___5Gzrx
                     )}
                   >
                     {"名前"}
@@ -240,7 +251,11 @@ function PlasmicSettings__RenderFunc(props: {
                 <input
                   data-plasmic-name={"name"}
                   data-plasmic-override={overrides.name}
-                  className={classNames(defaultcss.input, sty.name)}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.input,
+                    sty.name
+                  )}
                   placeholder={"請求書に記載されます" as const}
                   size={1 as const}
                   type={"text" as const}
@@ -253,27 +268,41 @@ function PlasmicSettings__RenderFunc(props: {
                 title={
                   <div
                     className={classNames(
-                      defaultcss.all,
-                      defaultcss.__wab_text,
-                      sty.freeBox__iNcVp
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__iNcVp
                     )}
                   >
                     {"請求書に記載する住所"}
                   </div>
                 }
               >
-                <div className={classNames(defaultcss.all, sty.freeBox__znbZg)}>
+                <div className={classNames(projectcss.all, sty.freeBox__znbZg)}>
                   <RecordItem
                     className={classNames(
                       "__wab_instance",
                       sty.recordItem___1Cl4F
                     )}
-                    title={"郵便番号"}
+                    title={
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__fuKyX
+                        )}
+                      >
+                        {"郵便番号"}
+                      </div>
+                    }
                   >
                     <input
                       data-plasmic-name={"zipcode"}
                       data-plasmic-override={overrides.zipcode}
-                      className={classNames(defaultcss.input, sty.zipcode)}
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.input,
+                        sty.zipcode
+                      )}
                       placeholder={"114-1919" as const}
                       size={1 as const}
                       type={"text" as const}
@@ -286,12 +315,26 @@ function PlasmicSettings__RenderFunc(props: {
                       "__wab_instance",
                       sty.recordItem__ubXsy
                     )}
-                    title={"住所"}
+                    title={
+                      <div
+                        className={classNames(
+                          projectcss.all,
+                          projectcss.__wab_text,
+                          sty.text__ruFa
+                        )}
+                      >
+                        {"住所"}
+                      </div>
+                    }
                   >
                     <textarea
                       data-plasmic-name={"address"}
                       data-plasmic-override={overrides.address}
-                      className={classNames(defaultcss.textarea, sty.address)}
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.textarea,
+                        sty.address
+                      )}
                       placeholder={"千葉県松戸市六高台2-78-3" as const}
                       value={"" as const}
                     />
@@ -304,9 +347,9 @@ function PlasmicSettings__RenderFunc(props: {
                 title={
                   <div
                     className={classNames(
-                      defaultcss.all,
-                      defaultcss.__wab_text,
-                      sty.freeBox__uYk
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__uYk
                     )}
                   >
                     {"請求書に記載する振込先"}
@@ -316,7 +359,11 @@ function PlasmicSettings__RenderFunc(props: {
                 <textarea
                   data-plasmic-name={"bank"}
                   data-plasmic-override={overrides.bank}
-                  className={classNames(defaultcss.textarea, sty.bank)}
+                  className={classNames(
+                    projectcss.all,
+                    projectcss.textarea,
+                    sty.bank
+                  )}
                   placeholder={"チンコ銀行 マンコ支店 普通 1145141919" as const}
                   value={"" as const}
                 />
@@ -324,7 +371,17 @@ function PlasmicSettings__RenderFunc(props: {
 
               <RecordItem
                 className={classNames("__wab_instance", sty.recordItem__wenbB)}
-                title={"ログアウトする"}
+                title={
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__ykzP
+                    )}
+                  >
+                    {"ログアウトする"}
+                  </div>
+                }
               >
                 <Button
                   data-plasmic-name={"signOut"}
@@ -409,17 +466,16 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicSettings__VariantsArgs;
     args?: PlasmicSettings__ArgsType;
     overrides?: NodeOverridesType<T>;
-    dataFetches?: PlasmicSettings__Fetches;
   } & Omit<PlasmicSettings__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
-    // Specify args directly as props
-    Omit<PlasmicSettings__ArgsType, ReservedPropsType> &
-    // Specify overrides for each element directly as props
-    Omit<
+    /* Specify args directly as props*/ Omit<
+      PlasmicSettings__ArgsType,
+      ReservedPropsType
+    > &
+    /* Specify overrides for each element directly as props*/ Omit<
       NodeOverridesType<T>,
       ReservedPropsType | VariantPropType | ArgPropType
     > &
-    // Specify props for the root element
-    Omit<
+    /* Specify props for the root element*/ Omit<
       Partial<React.ComponentProps<NodeDefaultElementType[T]>>,
       ReservedPropsType | VariantPropType | ArgPropType | DescendantsType<T>
     >;
@@ -429,20 +485,21 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
   const func = function <T extends PropsType>(
     props: T & StrictProps<T, PropsType>
   ) {
-    const { variants, args, overrides } = deriveRenderOpts(props, {
-      name: nodeName,
-      descendantNames: [...PlasmicDescendants[nodeName]],
-      internalArgPropNames: PlasmicSettings__ArgProps,
-      internalVariantPropNames: PlasmicSettings__VariantProps,
-    });
-
-    const { dataFetches } = props;
+    const { variants, args, overrides } = React.useMemo(
+      () =>
+        deriveRenderOpts(props, {
+          name: nodeName,
+          descendantNames: [...PlasmicDescendants[nodeName]],
+          internalArgPropNames: PlasmicSettings__ArgProps,
+          internalVariantPropNames: PlasmicSettings__VariantProps,
+        }),
+      [props, nodeName]
+    );
 
     return PlasmicSettings__RenderFunc({
       variants,
       args,
       overrides,
-      dataFetches,
       forNode: nodeName,
     });
   };
@@ -474,6 +531,14 @@ export const PlasmicSettings = Object.assign(
     // Metadata about props expected for PlasmicSettings
     internalVariantProps: PlasmicSettings__VariantProps,
     internalArgProps: PlasmicSettings__ArgProps,
+
+    // Page metadata
+    pageMetadata: {
+      title: "",
+      description: "",
+      ogImageSrc: "",
+      canonical: "",
+    },
   }
 );
 

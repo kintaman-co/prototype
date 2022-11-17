@@ -5,26 +5,26 @@
   width: auto;
   height: auto;
 }
-.slotLabel {
+.slotTargetLabel {
   font-weight: 700;
 }
-.freeBox__quMq2 {
+.text__quMq2 {
   position: relative;
   display: none;
 }
-.freeBox__order_asc__quMq2YnG0D {
+.textorder_asc__quMq2YnG0D {
   display: none;
 }
-.freeBox__order_desc__quMq2Tx5M3 {
+.textorder_desc__quMq2Tx5M3 {
   display: block;
 }
-.freeBox__wsWy2 {
+.text__wsWy2 {
   position: relative;
   display: none;
 }
-.freeBox__order_asc__wsWy2YnG0D {
+.textorder_asc__wsWy2YnG0D {
   display: block;
 }
-.freeBox__order_desc__wsWy2Tx5M3 {
+.textorder_desc__wsWy2Tx5M3 {
   display: none;
 }

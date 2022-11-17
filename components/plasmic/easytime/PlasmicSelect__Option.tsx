@@ -16,6 +16,7 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 
 import * as p from "@plasmicapp/react-web";
+import * as ph from "@plasmicapp/host";
 import * as pp from "@plasmicapp/react-web";
 import {
   hasVariant,
@@ -35,9 +36,9 @@ import {
 } from "@plasmicapp/react-web";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
-import * as defaultcss from "../plasmic__default_style.module.css"; // plasmic-import: global/defaultcss
-import * as projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
-import * as sty from "./PlasmicSelect__Option.module.css"; // plasmic-import: tmCSccuYm0e/css
+
+import projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
+import sty from "./PlasmicSelect__Option.module.css"; // plasmic-import: tmCSccuYm0e/css
 
 import SUPER__PlasmicSelect from "./PlasmicSelect"; // plasmic-import: kz5Y7kNyM-O/render
 
@@ -46,13 +47,11 @@ export type PlasmicSelect__Option__VariantMembers = {
   isHighlighted: "isHighlighted";
   isDisabled: "isDisabled";
 };
-
 export type PlasmicSelect__Option__VariantsArgs = {
   isSelected?: SingleBooleanChoiceArg<"isSelected">;
   isHighlighted?: SingleBooleanChoiceArg<"isHighlighted">;
   isDisabled?: SingleBooleanChoiceArg<"isDisabled">;
 };
-
 type VariantPropType = keyof PlasmicSelect__Option__VariantsArgs;
 export const PlasmicSelect__Option__VariantProps = new Array<VariantPropType>(
   "isSelected",
@@ -65,7 +64,6 @@ export type PlasmicSelect__Option__ArgsType = {
   value?: string;
   textValue?: string;
 };
-
 type ArgPropType = keyof PlasmicSelect__Option__ArgsType;
 export const PlasmicSelect__Option__ArgProps = new Array<ArgPropType>(
   "children",
@@ -84,10 +82,20 @@ function PlasmicSelect__Option__RenderFunc(props: {
   variants: PlasmicSelect__Option__VariantsArgs;
   args: PlasmicSelect__Option__ArgsType;
   overrides: PlasmicSelect__Option__OverridesType;
-  dataFetches?: PlasmicSelect__Option__Fetches;
+
   forNode?: string;
 }) {
-  const { variants, args, overrides, forNode, dataFetches } = props;
+  const { variants, overrides, forNode } = props;
+
+  const $ctx = ph.useDataEnv?.() || {};
+  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+
+  const $props = {
+    ...args,
+    ...variants,
+  };
+
+  const currentUser = p.useCurrentUser?.() || {};
 
   const superContexts = {
     Select: React.useContext(SUPER__PlasmicSelect.Context),
@@ -99,39 +107,47 @@ function PlasmicSelect__Option__RenderFunc(props: {
       data-plasmic-override={overrides.root}
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
-      className={classNames(defaultcss.all, projectcss.root_reset, sty.root, {
-        [sty.root__isDisabled]: hasVariant(
-          variants,
-          "isDisabled",
-          "isDisabled"
-        ),
-        [sty.root__isHighlighted]: hasVariant(
-          variants,
-          "isHighlighted",
-          "isHighlighted"
-        ),
-        [sty.root__isSelected]: hasVariant(
-          variants,
-          "isSelected",
-          "isSelected"
-        ),
-      })}
+      className={classNames(
+        projectcss.all,
+        projectcss.root_reset,
+        projectcss.plasmic_default_styles,
+        projectcss.plasmic_mixins,
+        projectcss.plasmic_tokens,
+        sty.root,
+        {
+          [sty.rootisDisabled]: hasVariant(
+            variants,
+            "isDisabled",
+            "isDisabled"
+          ),
+          [sty.rootisHighlighted]: hasVariant(
+            variants,
+            "isHighlighted",
+            "isHighlighted"
+          ),
+          [sty.rootisSelected]: hasVariant(
+            variants,
+            "isSelected",
+            "isSelected"
+          ),
+        }
+      )}
     >
       <div
         data-plasmic-name={"labelContainer"}
         data-plasmic-override={overrides.labelContainer}
-        className={classNames(defaultcss.all, sty.labelContainer)}
+        className={classNames(projectcss.all, sty.labelContainer)}
       >
         {p.renderPlasmicSlot({
           defaultContents: "Option",
           value: args.children,
-          className: classNames(sty.slotChildren, {
-            [sty.slotChildren__isHighlighted]: hasVariant(
+          className: classNames(sty.slotTargetChildren, {
+            [sty.slotTargetChildrenisHighlighted]: hasVariant(
               variants,
               "isHighlighted",
               "isHighlighted"
             ),
-            [sty.slotChildren__isSelected]: hasVariant(
+            [sty.slotTargetChildrenisSelected]: hasVariant(
               variants,
               "isSelected",
               "isSelected"
@@ -161,7 +177,6 @@ function useBehavior<P extends pp.BaseSelectOptionProps>(
       root: "root",
       labelContainer: "labelContainer",
     },
-
     ref
   );
 }
@@ -189,17 +204,16 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicSelect__Option__VariantsArgs;
     args?: PlasmicSelect__Option__ArgsType;
     overrides?: NodeOverridesType<T>;
-    dataFetches?: PlasmicSelect__Option__Fetches;
   } & Omit<PlasmicSelect__Option__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
-    // Specify args directly as props
-    Omit<PlasmicSelect__Option__ArgsType, ReservedPropsType> &
-    // Specify overrides for each element directly as props
-    Omit<
+    /* Specify args directly as props*/ Omit<
+      PlasmicSelect__Option__ArgsType,
+      ReservedPropsType
+    > &
+    /* Specify overrides for each element directly as props*/ Omit<
       NodeOverridesType<T>,
       ReservedPropsType | VariantPropType | ArgPropType
     > &
-    // Specify props for the root element
-    Omit<
+    /* Specify props for the root element*/ Omit<
       Partial<React.ComponentProps<NodeDefaultElementType[T]>>,
       ReservedPropsType | VariantPropType | ArgPropType | DescendantsType<T>
     >;
@@ -209,20 +223,21 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
   const func = function <T extends PropsType>(
     props: T & StrictProps<T, PropsType>
   ) {
-    const { variants, args, overrides } = deriveRenderOpts(props, {
-      name: nodeName,
-      descendantNames: [...PlasmicDescendants[nodeName]],
-      internalArgPropNames: PlasmicSelect__Option__ArgProps,
-      internalVariantPropNames: PlasmicSelect__Option__VariantProps,
-    });
-
-    const { dataFetches } = props;
+    const { variants, args, overrides } = React.useMemo(
+      () =>
+        deriveRenderOpts(props, {
+          name: nodeName,
+          descendantNames: [...PlasmicDescendants[nodeName]],
+          internalArgPropNames: PlasmicSelect__Option__ArgProps,
+          internalVariantPropNames: PlasmicSelect__Option__VariantProps,
+        }),
+      [props, nodeName]
+    );
 
     return PlasmicSelect__Option__RenderFunc({
       variants,
       args,
       overrides,
-      dataFetches,
       forNode: nodeName,
     });
   };

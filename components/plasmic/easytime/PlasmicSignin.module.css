@@ -22,7 +22,7 @@
   justify-content: flex-start;
   padding: 16px;
 }
-.freeBox__fslz0 {
+.text {
   position: relative;
   height: auto;
 }
@@ -32,7 +32,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #d1d1e9;
+  background: var(--token-UuK4I_eTV);
   align-content: unset;
   left: auto;
   top: auto;
@@ -41,14 +41,14 @@
   margin: 8px;
 }
 .freeBox__cnkjL {
+  flex-direction: column;
   display: flex;
   position: relative;
-  flex-direction: column;
 }
 .freeBox__cnkjL > :global(.__wab_flex-container) {
   flex-direction: column;
-  align-items: stretch;
   justify-content: flex-start;
+  align-items: stretch;
   margin-top: calc(0px - 8px);
   height: calc(100% + 8px);
 }

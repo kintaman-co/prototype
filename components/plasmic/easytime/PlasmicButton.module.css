@@ -3,51 +3,59 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background: #6246ea;
+  background: var(--token-Qmv6O_gsE);
   position: relative;
   align-content: unset;
   transition-property: all;
   transition-duration: 200ms;
   transform: none;
   cursor: pointer;
+  -webkit-transition-property: all;
+  -webkit-transition-duration: 200ms;
   border-radius: 4px;
   padding: 10px;
   border-width: 1px;
   border-style: none;
 }
-.root__type_secondary {
-  background: #e45858;
+.roottype_secondary {
+  background: var(--token-tW_fDLDwj);
 }
-.root__type_text {
+.roottype_text {
   background: none;
 }
 .root:hover {
-  background: linear-gradient(#fffffe1a, #fffffe1a), #6246ea;
+  background: linear-gradient(var(--token-oJ5ckTeVO), var(--token-oJ5ckTeVO)),
+    var(--token-Qmv6O_gsE);
+}
+.roottype_primary:hover {
+  background: linear-gradient(var(--token-oJ5ckTeVO), var(--token-oJ5ckTeVO)),
+    var(--token-Qmv6O_gsE);
+}
+.roottype_secondary:hover {
+  background: linear-gradient(var(--token-oJ5ckTeVO), var(--token-oJ5ckTeVO)),
+    var(--token-tW_fDLDwj);
+}
+.roottype_text:hover {
+  background: var(--token-oJ5ckTeVO);
 }
 .root:active {
-  background: linear-gradient(#2b2c341a, #2b2c341a), #6246ea;
+  background: linear-gradient(var(--token-vaqn_vLIL), var(--token-vaqn_vLIL)),
+    var(--token-Qmv6O_gsE);
 }
-.root__type_primary:hover {
-  background: linear-gradient(#fffffe1a, #fffffe1a), #6246ea;
+.roottype_primary:active {
+  background: linear-gradient(var(--token-vaqn_vLIL), var(--token-vaqn_vLIL)),
+    var(--token-Qmv6O_gsE);
 }
-.root__type_primary:active {
-  background: linear-gradient(#2b2c341a, #2b2c341a), #6246ea;
+.roottype_secondary:active {
+  background: linear-gradient(var(--token-vaqn_vLIL), var(--token-vaqn_vLIL)),
+    var(--token-tW_fDLDwj);
 }
-.root__type_secondary:hover {
-  background: linear-gradient(#fffffe1a, #fffffe1a), #e45858;
+.roottype_text:active {
+  background: var(--token-vaqn_vLIL);
 }
-.root__type_secondary:active {
-  background: linear-gradient(#2b2c341a, #2b2c341a), #e45858;
+.slotTargetChildren {
+  color: var(--token-NyEsQChCc);
 }
-.root__type_text:hover {
-  background: #fffffe1a;
-}
-.root__type_text:active {
-  background: #2b2c341a;
-}
-.slotChildren {
-  color: #fffffe /* plasmic-token: NyEsQChCc */;
-}
-.slotChildren__type_text {
-  color: #6246ea /* plasmic-token: Qmv6O_gsE */;
+.slotTargetChildrentype_text {
+  color: var(--token-Qmv6O_gsE);
 }

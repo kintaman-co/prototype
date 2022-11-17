@@ -18,17 +18,17 @@
   flex-grow: 1;
 }
 .freeBox___3R5W5 {
+  flex-direction: column;
   display: flex;
   position: relative;
-  flex-direction: column;
   min-width: 300px;
   padding: 8px;
   margin: 0px;
 }
 .freeBox___3R5W5 > :global(.__wab_flex-container) {
   flex-direction: column;
-  align-items: stretch;
   justify-content: flex-start;
+  align-items: stretch;
   margin-top: calc(0px - 8px);
   height: calc(100% + 8px);
 }
@@ -42,19 +42,19 @@
   > img {
   margin-top: 8px;
 }
-.freeBox__epnN0 {
+.text__epnN0 {
   position: relative;
   height: auto;
 }
 .freeBox__lBosZ {
+  flex-direction: column;
   display: flex;
   position: relative;
-  flex-direction: column;
 }
 .freeBox__lBosZ > :global(.__wab_flex-container) {
   flex-direction: column;
-  align-items: stretch;
   justify-content: flex-start;
+  align-items: stretch;
   margin-top: calc(0px - 9px);
   height: calc(100% + 9px);
 }
@@ -69,14 +69,14 @@
   margin-top: 9px;
 }
 .bizList {
+  flex-direction: column;
   display: flex;
   position: relative;
-  flex-direction: column;
 }
 .bizList > :global(.__wab_flex-container) {
   flex-direction: column;
-  align-items: stretch;
   justify-content: flex-start;
+  align-items: stretch;
   margin-top: calc(0px - 4px);
   height: calc(100% + 4px);
 }
@@ -105,19 +105,19 @@
 .recordItem__b0EXk:global(.__wab_instance) {
   position: relative;
 }
-.freeBox___7IbCz {
+.text___7IbCz {
   position: relative;
 }
 .freeBox__svdSp {
+  flex-direction: column;
   display: flex;
   position: relative;
-  flex-direction: column;
   padding: 0px;
 }
 .freeBox__svdSp > :global(.__wab_flex-container) {
   flex-direction: column;
-  align-items: stretch;
   justify-content: flex-start;
+  align-items: stretch;
   margin-top: calc(0px - 8px);
   height: calc(100% + 8px);
 }
@@ -137,7 +137,7 @@
 .recordItem___5AzV5:global(.__wab_instance) {
   position: relative;
 }
-.freeBox___5Gzrx {
+.text___5Gzrx {
   position: relative;
   height: auto;
 }
@@ -149,7 +149,7 @@
 .recordItem__tc6AB:global(.__wab_instance) {
   position: relative;
 }
-.freeBox__iNcVp {
+.text__iNcVp {
   position: relative;
   height: auto;
 }
@@ -164,7 +164,7 @@
 .recordItem___1Cl4F:global(.__wab_instance) {
   position: relative;
 }
-.freeBox__fuKyX {
+.text__fuKyX {
   position: relative;
 }
 .zipcode {
@@ -175,7 +175,7 @@
 .recordItem__ubXsy:global(.__wab_instance) {
   position: relative;
 }
-.freeBox__ruFa {
+.text__ruFa {
   position: relative;
 }
 .address {
@@ -186,7 +186,7 @@
 .recordItem__crxkR:global(.__wab_instance) {
   position: relative;
 }
-.freeBox__uYk {
+.text__uYk {
   position: relative;
   height: auto;
 }
@@ -198,7 +198,7 @@
 .recordItem__wenbB:global(.__wab_instance) {
   position: relative;
 }
-.freeBox__ykzP {
+.text__ykzP {
   position: relative;
 }
 .signOut:global(.__wab_instance) {

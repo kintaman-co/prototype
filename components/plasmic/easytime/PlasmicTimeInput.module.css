@@ -6,18 +6,18 @@
   justify-content: center;
   align-content: unset;
 }
-.freeBox__tuQtm {
+.freeBox {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background: #fffffe;
+  background: var(--token-NyEsQChCc);
   align-content: unset;
 }
 .hour {
-  background: #fffffe;
+  background: var(--token-NyEsQChCc);
   width: 60px;
-  color: #2b2c34 /* plasmic-token: ZJfqmpfUm */;
+  color: var(--token-ZJfqmpfUm);
   font-size: 26px;
   position: relative;
   text-align: right;
@@ -25,10 +25,10 @@
   border-width: 1px;
   border-style: none;
 }
-.freeBox___1ZcV {
-  background: #fffffe;
+.text___1ZcV {
+  background: var(--token-NyEsQChCc);
   width: 10px;
-  color: #2b2c34 /* plasmic-token: ZJfqmpfUm */;
+  color: var(--token-ZJfqmpfUm);
   font-size: 26px;
   position: relative;
   align-self: auto;
@@ -38,9 +38,9 @@
   border-style: none;
 }
 .minute {
-  background: #fffffe;
+  background: var(--token-NyEsQChCc);
   width: 60px;
-  color: #2b2c34 /* plasmic-token: ZJfqmpfUm */;
+  color: var(--token-ZJfqmpfUm);
   font-size: 26px;
   position: relative;
   text-align: left;
@@ -49,18 +49,18 @@
   border-style: none;
 }
 .dayAgoCheckbox {
+  flex-direction: row;
   display: flex;
   position: relative;
-  flex-direction: row;
-  background: #fffffe1a;
+  background: var(--token-oJ5ckTeVO);
   border-radius: 4px;
   padding: 4px;
   margin: 4px;
 }
 .dayAgoCheckbox > :global(.__wab_flex-container) {
   flex-direction: row;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   align-content: unset;
   margin-left: calc(0px - 3px);
   width: calc(100% + 3px);
@@ -78,7 +78,7 @@
 .checkbox:global(.__wab_instance) {
   position: relative;
 }
-.freeBox__x3F9S {
+.text__x3F9S {
   position: relative;
-  color: #2b2c34 /* plasmic-token: okz0e5Hvl */;
+  color: var(--token-okz0e5Hvl);
 }

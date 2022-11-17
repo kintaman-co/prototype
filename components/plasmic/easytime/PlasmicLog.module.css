@@ -12,15 +12,15 @@
   flex-shrink: 0;
 }
 .freeBox__qgmjE {
+  flex-direction: row;
   display: flex;
   position: relative;
-  flex-direction: row;
 }
 .freeBox__qgmjE > :global(.__wab_flex-container) {
   flex-direction: row;
-  align-items: unset;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: unset;
   margin-left: calc(0px - 8px);
   width: calc(100% + 8px);
 }
@@ -37,20 +37,20 @@
 .recordItem__fzulx:global(.__wab_instance) {
   position: relative;
 }
-.freeBox__dWwF1 {
+.text__dWwF1 {
   position: relative;
   height: auto;
 }
 .start:global(.__wab_instance) {
   position: relative;
 }
-.freeBox___6MwHr {
+.text___6MwHr {
   position: relative;
 }
 .recordItem__t8V:global(.__wab_instance) {
   position: relative;
 }
-.freeBox___0FNqV {
+.text___0FNqV {
   position: relative;
   height: auto;
 }
@@ -60,7 +60,7 @@
 .recordItem__fgH5:global(.__wab_instance) {
   position: relative;
 }
-.freeBox__f4J5 {
+.text__f4J5 {
   position: relative;
 }
 .biz:global(.__wab_instance) {
@@ -74,10 +74,9 @@
   align-items: stretch;
   justify-content: flex-start;
 }
-.freeBox__owZb2 {
+.text__owZb2 {
   height: auto;
   width: auto;
-  display: inline-block;
 }
 .freeBox__vzRmu {
   display: flex;
@@ -94,12 +93,12 @@
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-start;
-  min-width: 980px /* plasmic-token: ZFMqzfmUo */;
+  min-width: var(--token-ZFMqzfmUo);
 }
 .freeBox__vryEm {
+  flex-direction: column;
   display: flex;
   position: relative;
-  flex-direction: column;
   width: 376px;
   height: 100%;
   align-self: center;
@@ -108,8 +107,9 @@
 }
 .freeBox__vryEm > :global(.__wab_flex-container) {
   flex-direction: column;
-  align-items: stretch;
   justify-content: flex-start;
+  align-items: stretch;
+  min-height: 0;
   margin-top: calc(0px - 4px);
   height: calc(100% + 4px);
 }
@@ -124,14 +124,14 @@
   margin-top: 4px;
 }
 .freeBox__apAwA {
+  flex-direction: row;
   display: flex;
   position: relative;
-  flex-direction: row;
 }
 .freeBox__apAwA > :global(.__wab_flex-container) {
   flex-direction: row;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   align-content: unset;
   margin-left: calc(0px - 12px);
   width: calc(100% + 12px);
@@ -146,13 +146,13 @@
   > img {
   margin-left: 12px;
 }
-.freeBox__oI100 {
+.text__oI100 {
   position: relative;
 }
 .totalDuration {
   position: relative;
   height: auto;
-  color: #2b2c34 /* plasmic-token: gFZV8R6YM */;
+  color: var(--token-gFZV8R6YM);
   font-weight: 700;
 }
 .freeBox__y3MJe {

@@ -11,6 +11,6 @@
 .root:active {
   background: #fffffe26;
 }
-.slotChildren {
-  color: #fffffe /* plasmic-token: Je54hxL4x */;
+.slotTargetChildren {
+  color: var(--token-Je54hxL4x);
 }

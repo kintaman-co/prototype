@@ -16,6 +16,7 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 
 import * as p from "@plasmicapp/react-web";
+import * as ph from "@plasmicapp/host";
 
 import {
   hasVariant,
@@ -37,12 +38,11 @@ import DtInput from "../../DtInput"; // plasmic-import: RlnXukMjMc/component
 import Skeleton from "../../Skeleton"; // plasmic-import: wYIaMxnRFr/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
-import * as defaultcss from "../plasmic__default_style.module.css"; // plasmic-import: global/defaultcss
-import * as projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
-import * as sty from "./PlasmicNotWorking.module.css"; // plasmic-import: wwJKNAAFSQ/css
+
+import projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
+import sty from "./PlasmicNotWorking.module.css"; // plasmic-import: wwJKNAAFSQ/css
 
 export type PlasmicNotWorking__VariantMembers = {};
-
 export type PlasmicNotWorking__VariantsArgs = {};
 type VariantPropType = keyof PlasmicNotWorking__VariantsArgs;
 export const PlasmicNotWorking__VariantProps = new Array<VariantPropType>();
@@ -50,14 +50,13 @@ export const PlasmicNotWorking__VariantProps = new Array<VariantPropType>();
 export type PlasmicNotWorking__ArgsType = {
   bizList?: React.ReactNode;
 };
-
 type ArgPropType = keyof PlasmicNotWorking__ArgsType;
 export const PlasmicNotWorking__ArgProps = new Array<ArgPropType>("bizList");
 
 export type PlasmicNotWorking__OverridesType = {
   root?: p.Flex<"div">;
   time?: p.Flex<typeof DtInput>;
-  freeBox?: p.Flex<"div">;
+  text?: p.Flex<"div">;
   bizList?: p.Flex<"div">;
 };
 
@@ -70,10 +69,20 @@ function PlasmicNotWorking__RenderFunc(props: {
   variants: PlasmicNotWorking__VariantsArgs;
   args: PlasmicNotWorking__ArgsType;
   overrides: PlasmicNotWorking__OverridesType;
-  dataFetches?: PlasmicNotWorking__Fetches;
+
   forNode?: string;
 }) {
-  const { variants, args, overrides, forNode, dataFetches } = props;
+  const { variants, overrides, forNode } = props;
+
+  const $ctx = ph.useDataEnv?.() || {};
+  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+
+  const $props = {
+    ...args,
+    ...variants,
+  };
+
+  const currentUser = p.useCurrentUser?.() || {};
 
   return (
     <div
@@ -81,7 +90,14 @@ function PlasmicNotWorking__RenderFunc(props: {
       data-plasmic-override={overrides.root}
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
-      className={classNames(defaultcss.all, projectcss.root_reset, sty.root)}
+      className={classNames(
+        projectcss.all,
+        projectcss.root_reset,
+        projectcss.plasmic_default_styles,
+        projectcss.plasmic_mixins,
+        projectcss.plasmic_tokens,
+        sty.root
+      )}
     >
       <DtInput
         data-plasmic-name={"time"}
@@ -90,13 +106,9 @@ function PlasmicNotWorking__RenderFunc(props: {
       />
 
       <div
-        data-plasmic-name={"freeBox"}
-        data-plasmic-override={overrides.freeBox}
-        className={classNames(
-          defaultcss.all,
-          defaultcss.__wab_text,
-          sty.freeBox
-        )}
+        data-plasmic-name={"text"}
+        data-plasmic-override={overrides.text}
+        className={classNames(projectcss.all, projectcss.__wab_text, sty.text)}
       >
         {"に以下で勤務開始"}
       </div>
@@ -106,7 +118,7 @@ function PlasmicNotWorking__RenderFunc(props: {
         data-plasmic-name={"bizList"}
         data-plasmic-override={overrides.bizList}
         hasGap={true}
-        className={classNames(defaultcss.all, sty.bizList)}
+        className={classNames(projectcss.all, sty.bizList)}
       >
         {p.renderPlasmicSlot({
           defaultContents: (
@@ -132,9 +144,9 @@ function PlasmicNotWorking__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "time", "freeBox", "bizList"],
+  root: ["root", "time", "text", "bizList"],
   time: ["time"],
-  freeBox: ["freeBox"],
+  text: ["text"],
   bizList: ["bizList"],
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -143,7 +155,7 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   time: typeof DtInput;
-  freeBox: "div";
+  text: "div";
   bizList: "div";
 };
 
@@ -158,17 +170,16 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicNotWorking__VariantsArgs;
     args?: PlasmicNotWorking__ArgsType;
     overrides?: NodeOverridesType<T>;
-    dataFetches?: PlasmicNotWorking__Fetches;
   } & Omit<PlasmicNotWorking__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
-    // Specify args directly as props
-    Omit<PlasmicNotWorking__ArgsType, ReservedPropsType> &
-    // Specify overrides for each element directly as props
-    Omit<
+    /* Specify args directly as props*/ Omit<
+      PlasmicNotWorking__ArgsType,
+      ReservedPropsType
+    > &
+    /* Specify overrides for each element directly as props*/ Omit<
       NodeOverridesType<T>,
       ReservedPropsType | VariantPropType | ArgPropType
     > &
-    // Specify props for the root element
-    Omit<
+    /* Specify props for the root element*/ Omit<
       Partial<React.ComponentProps<NodeDefaultElementType[T]>>,
       ReservedPropsType | VariantPropType | ArgPropType | DescendantsType<T>
     >;
@@ -178,20 +189,21 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
   const func = function <T extends PropsType>(
     props: T & StrictProps<T, PropsType>
   ) {
-    const { variants, args, overrides } = deriveRenderOpts(props, {
-      name: nodeName,
-      descendantNames: [...PlasmicDescendants[nodeName]],
-      internalArgPropNames: PlasmicNotWorking__ArgProps,
-      internalVariantPropNames: PlasmicNotWorking__VariantProps,
-    });
-
-    const { dataFetches } = props;
+    const { variants, args, overrides } = React.useMemo(
+      () =>
+        deriveRenderOpts(props, {
+          name: nodeName,
+          descendantNames: [...PlasmicDescendants[nodeName]],
+          internalArgPropNames: PlasmicNotWorking__ArgProps,
+          internalVariantPropNames: PlasmicNotWorking__VariantProps,
+        }),
+      [props, nodeName]
+    );
 
     return PlasmicNotWorking__RenderFunc({
       variants,
       args,
       overrides,
-      dataFetches,
       forNode: nodeName,
     });
   };
@@ -209,7 +221,7 @@ export const PlasmicNotWorking = Object.assign(
   {
     // Helper components rendering sub-elements
     time: makeNodeComponent("time"),
-    freeBox: makeNodeComponent("freeBox"),
+    text: makeNodeComponent("text"),
     bizList: makeNodeComponent("bizList"),
 
     // Metadata about props expected for PlasmicNotWorking

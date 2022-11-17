@@ -16,6 +16,7 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 
 import * as p from "@plasmicapp/react-web";
+import * as ph from "@plasmicapp/host";
 
 import {
   hasVariant,
@@ -35,12 +36,11 @@ import {
 } from "@plasmicapp/react-web";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
-import * as defaultcss from "../plasmic__default_style.module.css"; // plasmic-import: global/defaultcss
-import * as projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
-import * as sty from "./PlasmicYmdhmInput.module.css"; // plasmic-import: wYLwsz9PHx/css
+
+import projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
+import sty from "./PlasmicYmdhmInput.module.css"; // plasmic-import: wYLwsz9PHx/css
 
 export type PlasmicYmdhmInput__VariantMembers = {};
-
 export type PlasmicYmdhmInput__VariantsArgs = {};
 type VariantPropType = keyof PlasmicYmdhmInput__VariantsArgs;
 export const PlasmicYmdhmInput__VariantProps = new Array<VariantPropType>();
@@ -66,10 +66,20 @@ function PlasmicYmdhmInput__RenderFunc(props: {
   variants: PlasmicYmdhmInput__VariantsArgs;
   args: PlasmicYmdhmInput__ArgsType;
   overrides: PlasmicYmdhmInput__OverridesType;
-  dataFetches?: PlasmicYmdhmInput__Fetches;
+
   forNode?: string;
 }) {
-  const { variants, args, overrides, forNode, dataFetches } = props;
+  const { variants, overrides, forNode } = props;
+
+  const $ctx = ph.useDataEnv?.() || {};
+  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+
+  const $props = {
+    ...args,
+    ...variants,
+  };
+
+  const currentUser = p.useCurrentUser?.() || {};
 
   return (
     <p.Stack
@@ -79,22 +89,29 @@ function PlasmicYmdhmInput__RenderFunc(props: {
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
       hasGap={true}
-      className={classNames(defaultcss.all, projectcss.root_reset, sty.root)}
+      className={classNames(
+        projectcss.all,
+        projectcss.root_reset,
+        projectcss.plasmic_default_styles,
+        projectcss.plasmic_mixins,
+        projectcss.plasmic_tokens,
+        sty.root
+      )}
     >
-      <div className={classNames(defaultcss.all, sty.freeBox___3K9Gh)}>
+      <div className={classNames(projectcss.all, sty.freeBox___3K9Gh)}>
         <input
           data-plasmic-name={"year"}
           data-plasmic-override={overrides.year}
-          className={classNames(defaultcss.input, sty.year)}
+          className={classNames(projectcss.all, projectcss.input, sty.year)}
           size={1 as const}
           type={"text" as const}
         />
 
         <div
           className={classNames(
-            defaultcss.all,
-            defaultcss.__wab_text,
-            sty.freeBox__kdNt0
+            projectcss.all,
+            projectcss.__wab_text,
+            sty.text__kdNt0
           )}
         >
           {"/"}
@@ -103,16 +120,16 @@ function PlasmicYmdhmInput__RenderFunc(props: {
         <input
           data-plasmic-name={"month"}
           data-plasmic-override={overrides.month}
-          className={classNames(defaultcss.input, sty.month)}
+          className={classNames(projectcss.all, projectcss.input, sty.month)}
           size={1 as const}
           type={"text" as const}
         />
 
         <div
           className={classNames(
-            defaultcss.all,
-            defaultcss.__wab_text,
-            sty.freeBox__uaMt8
+            projectcss.all,
+            projectcss.__wab_text,
+            sty.text__uaMt8
           )}
         >
           {"/"}
@@ -121,26 +138,26 @@ function PlasmicYmdhmInput__RenderFunc(props: {
         <input
           data-plasmic-name={"day"}
           data-plasmic-override={overrides.day}
-          className={classNames(defaultcss.input, sty.day)}
+          className={classNames(projectcss.all, projectcss.input, sty.day)}
           size={1 as const}
           type={"text" as const}
         />
       </div>
 
-      <div className={classNames(defaultcss.all, sty.freeBox__gIiYa)}>
+      <div className={classNames(projectcss.all, sty.freeBox__gIiYa)}>
         <input
           data-plasmic-name={"hour"}
           data-plasmic-override={overrides.hour}
-          className={classNames(defaultcss.input, sty.hour)}
+          className={classNames(projectcss.all, projectcss.input, sty.hour)}
           size={1 as const}
           type={"text" as const}
         />
 
         <div
           className={classNames(
-            defaultcss.all,
-            defaultcss.__wab_text,
-            sty.freeBox__kYgnz
+            projectcss.all,
+            projectcss.__wab_text,
+            sty.text__kYgnz
           )}
         >
           {":"}
@@ -149,7 +166,7 @@ function PlasmicYmdhmInput__RenderFunc(props: {
         <input
           data-plasmic-name={"minute"}
           data-plasmic-override={overrides.minute}
-          className={classNames(defaultcss.input, sty.minute)}
+          className={classNames(projectcss.all, projectcss.input, sty.minute)}
           size={1 as const}
           type={"text" as const}
         />
@@ -189,17 +206,16 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicYmdhmInput__VariantsArgs;
     args?: PlasmicYmdhmInput__ArgsType;
     overrides?: NodeOverridesType<T>;
-    dataFetches?: PlasmicYmdhmInput__Fetches;
   } & Omit<PlasmicYmdhmInput__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
-    // Specify args directly as props
-    Omit<PlasmicYmdhmInput__ArgsType, ReservedPropsType> &
-    // Specify overrides for each element directly as props
-    Omit<
+    /* Specify args directly as props*/ Omit<
+      PlasmicYmdhmInput__ArgsType,
+      ReservedPropsType
+    > &
+    /* Specify overrides for each element directly as props*/ Omit<
       NodeOverridesType<T>,
       ReservedPropsType | VariantPropType | ArgPropType
     > &
-    // Specify props for the root element
-    Omit<
+    /* Specify props for the root element*/ Omit<
       Partial<React.ComponentProps<NodeDefaultElementType[T]>>,
       ReservedPropsType | VariantPropType | ArgPropType | DescendantsType<T>
     >;
@@ -209,20 +225,21 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
   const func = function <T extends PropsType>(
     props: T & StrictProps<T, PropsType>
   ) {
-    const { variants, args, overrides } = deriveRenderOpts(props, {
-      name: nodeName,
-      descendantNames: [...PlasmicDescendants[nodeName]],
-      internalArgPropNames: PlasmicYmdhmInput__ArgProps,
-      internalVariantPropNames: PlasmicYmdhmInput__VariantProps,
-    });
-
-    const { dataFetches } = props;
+    const { variants, args, overrides } = React.useMemo(
+      () =>
+        deriveRenderOpts(props, {
+          name: nodeName,
+          descendantNames: [...PlasmicDescendants[nodeName]],
+          internalArgPropNames: PlasmicYmdhmInput__ArgProps,
+          internalVariantPropNames: PlasmicYmdhmInput__VariantProps,
+        }),
+      [props, nodeName]
+    );
 
     return PlasmicYmdhmInput__RenderFunc({
       variants,
       args,
       overrides,
-      dataFetches,
       forNode: nodeName,
     });
   };

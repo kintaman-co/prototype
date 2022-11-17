@@ -10,11 +10,11 @@
   min-width: 0;
 }
 .freeBox {
-  display: inline-flex;
+  display: flex;
   position: relative;
   flex-direction: column;
   align-items: stretch;
   justify-content: flex-start;
-  max-width: 980px /* plasmic-token: ZFMqzfmUo */;
+  max-width: var(--token-ZFMqzfmUo);
   width: auto;
 }

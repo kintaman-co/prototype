@@ -9,39 +9,38 @@
   display: flex;
   flex-direction: row;
 }
-.slotHour__type_large {
-  color: #2b2c34 /* plasmic-token: okz0e5Hvl */;
+.slotTargetHourtype_large {
+  color: var(--token-okz0e5Hvl);
   font-size: 48px;
   font-family: "Lato", sans-serif;
 }
-.slotHour__type_inHeader {
+.slotTargetHourtype_inHeader {
   font-family: "Nunito Sans", sans-serif;
-  color: #fffffe /* plasmic-token: Je54hxL4x */;
+  color: var(--token-Je54hxL4x);
 }
-.freeBox__cFlr {
+.text {
   width: auto;
-  display: inline-block;
 }
-.freeBox__type_large__cFlRoNjWl {
-  color: #2b2c34 /* plasmic-token: okz0e5Hvl */;
+.texttype_large {
+  color: var(--token-okz0e5Hvl);
   font-size: 48px;
   font-family: "Lato", sans-serif;
 }
-.freeBox__type_inHeader__cFlRoJcOx {
+.texttype_inHeader {
   font-family: "Nunito Sans", sans-serif;
-  color: #fffffe /* plasmic-token: Je54hxL4x */;
+  color: var(--token-Je54hxL4x);
 }
 .freeBox__zLyZd {
   width: auto;
-  display: inline-flex;
+  display: flex;
   flex-direction: row;
 }
-.slotMin__type_large {
-  color: #2b2c34 /* plasmic-token: okz0e5Hvl */;
+.slotTargetMintype_large {
+  color: var(--token-okz0e5Hvl);
   font-size: 48px;
   font-family: "Lato", sans-serif;
 }
-.slotMin__type_inHeader {
+.slotTargetMintype_inHeader {
   font-family: "Nunito Sans", sans-serif;
-  color: #fffffe /* plasmic-token: Je54hxL4x */;
+  color: var(--token-Je54hxL4x);
 }

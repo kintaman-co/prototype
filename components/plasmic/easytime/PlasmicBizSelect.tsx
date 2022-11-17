@@ -16,6 +16,7 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 
 import * as p from "@plasmicapp/react-web";
+import * as ph from "@plasmicapp/host";
 
 import {
   hasVariant,
@@ -38,20 +39,18 @@ import Select__Option from "../../Select__Option"; // plasmic-import: tmCSccuYm0
 import Skeleton from "../../Skeleton"; // plasmic-import: wYIaMxnRFr/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
-import * as defaultcss from "../plasmic__default_style.module.css"; // plasmic-import: global/defaultcss
-import * as projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
-import * as sty from "./PlasmicBizSelect.module.css"; // plasmic-import: SCY6plzZHs/css
+
+import projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
+import sty from "./PlasmicBizSelect.module.css"; // plasmic-import: SCY6plzZHs/css
 
 export type PlasmicBizSelect__VariantMembers = {
   loading: "loading";
   hasAll: "hasAll";
 };
-
 export type PlasmicBizSelect__VariantsArgs = {
   loading?: SingleBooleanChoiceArg<"loading">;
   hasAll?: SingleBooleanChoiceArg<"hasAll">;
 };
-
 type VariantPropType = keyof PlasmicBizSelect__VariantsArgs;
 export const PlasmicBizSelect__VariantProps = new Array<VariantPropType>(
   "loading",
@@ -78,10 +77,20 @@ function PlasmicBizSelect__RenderFunc(props: {
   variants: PlasmicBizSelect__VariantsArgs;
   args: PlasmicBizSelect__ArgsType;
   overrides: PlasmicBizSelect__OverridesType;
-  dataFetches?: PlasmicBizSelect__Fetches;
+
   forNode?: string;
 }) {
-  const { variants, args, overrides, forNode, dataFetches } = props;
+  const { variants, overrides, forNode } = props;
+
+  const $ctx = ph.useDataEnv?.() || {};
+  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+
+  const $props = {
+    ...args,
+    ...variants,
+  };
+
+  const currentUser = p.useCurrentUser?.() || {};
 
   return (
     <div
@@ -89,17 +98,23 @@ function PlasmicBizSelect__RenderFunc(props: {
       data-plasmic-override={overrides.root}
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
-      className={classNames(defaultcss.all, projectcss.root_reset, sty.root, {
-        [sty.root__loading]: hasVariant(variants, "loading", "loading"),
-      })}
+      className={classNames(
+        projectcss.all,
+        projectcss.root_reset,
+        projectcss.plasmic_default_styles,
+        projectcss.plasmic_mixins,
+        projectcss.plasmic_tokens,
+        sty.root,
+        { [sty.rootloading]: hasVariant(variants, "loading", "loading") }
+      )}
     >
       {(hasVariant(variants, "loading", "loading") ? true : true) ? (
         <Select
           data-plasmic-name={"select"}
           data-plasmic-override={overrides.select}
           className={classNames("__wab_instance", sty.select, {
-            [sty.select__hasAll]: hasVariant(variants, "hasAll", "hasAll"),
-            [sty.select__loading]: hasVariant(variants, "loading", "loading"),
+            [sty.selecthasAll]: hasVariant(variants, "hasAll", "hasAll"),
+            [sty.selectloading]: hasVariant(variants, "loading", "loading"),
           })}
         />
       ) : null}
@@ -108,7 +123,7 @@ function PlasmicBizSelect__RenderFunc(props: {
           data-plasmic-name={"skeleton"}
           data-plasmic-override={overrides.skeleton}
           className={classNames("__wab_instance", sty.skeleton, {
-            [sty.skeleton__loading]: hasVariant(variants, "loading", "loading"),
+            [sty.skeletonloading]: hasVariant(variants, "loading", "loading"),
           })}
         />
       ) : null}
@@ -141,17 +156,16 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicBizSelect__VariantsArgs;
     args?: PlasmicBizSelect__ArgsType;
     overrides?: NodeOverridesType<T>;
-    dataFetches?: PlasmicBizSelect__Fetches;
   } & Omit<PlasmicBizSelect__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
-    // Specify args directly as props
-    Omit<PlasmicBizSelect__ArgsType, ReservedPropsType> &
-    // Specify overrides for each element directly as props
-    Omit<
+    /* Specify args directly as props*/ Omit<
+      PlasmicBizSelect__ArgsType,
+      ReservedPropsType
+    > &
+    /* Specify overrides for each element directly as props*/ Omit<
       NodeOverridesType<T>,
       ReservedPropsType | VariantPropType | ArgPropType
     > &
-    // Specify props for the root element
-    Omit<
+    /* Specify props for the root element*/ Omit<
       Partial<React.ComponentProps<NodeDefaultElementType[T]>>,
       ReservedPropsType | VariantPropType | ArgPropType | DescendantsType<T>
     >;
@@ -161,20 +175,21 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
   const func = function <T extends PropsType>(
     props: T & StrictProps<T, PropsType>
   ) {
-    const { variants, args, overrides } = deriveRenderOpts(props, {
-      name: nodeName,
-      descendantNames: [...PlasmicDescendants[nodeName]],
-      internalArgPropNames: PlasmicBizSelect__ArgProps,
-      internalVariantPropNames: PlasmicBizSelect__VariantProps,
-    });
-
-    const { dataFetches } = props;
+    const { variants, args, overrides } = React.useMemo(
+      () =>
+        deriveRenderOpts(props, {
+          name: nodeName,
+          descendantNames: [...PlasmicDescendants[nodeName]],
+          internalArgPropNames: PlasmicBizSelect__ArgProps,
+          internalVariantPropNames: PlasmicBizSelect__VariantProps,
+        }),
+      [props, nodeName]
+    );
 
     return PlasmicBizSelect__RenderFunc({
       variants,
       args,
       overrides,
-      dataFetches,
       forNode: nodeName,
     });
   };

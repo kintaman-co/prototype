@@ -47,7 +47,7 @@
 .start:global(.__wab_instance) {
   position: relative;
 }
-.start__loading:global(.__wab_instance) {
+.startloading:global(.__wab_instance) {
   display: none;
 }
 .skeleton__kocnA:global(.__wab_instance) {
@@ -56,13 +56,13 @@
 .recordItem__utEYg:global(.__wab_instance) {
   position: relative;
 }
-.freeBox__yNtqY {
+.text__yNtqY {
   position: relative;
 }
 .end:global(.__wab_instance) {
   position: relative;
 }
-.end__loading:global(.__wab_instance) {
+.endloading:global(.__wab_instance) {
   display: none;
 }
 .skeleton__qmHiR:global(.__wab_instance) {
@@ -71,11 +71,11 @@
 .recordItem__v0MwY:global(.__wab_instance) {
   position: relative;
 }
-.freeBox__yD5Sl {
+.text__yD5Sl {
   position: relative;
   height: auto;
 }
-.slotDuration {
+.slotTargetDuration {
   font-size: 24px;
 }
 .skeleton__kwGu:global(.__wab_instance) {
@@ -84,7 +84,7 @@
 .recordItem__ibrZ0:global(.__wab_instance) {
   position: relative;
 }
-.freeBox__fFiLl {
+.text__fFiLl {
   position: relative;
   height: auto;
 }
@@ -94,22 +94,22 @@
   min-height: 120px;
   min-width: 0;
 }
-.report__loading {
+.reportloading {
   display: none;
 }
 .skeleton__uxCq:global(.__wab_instance) {
   position: relative;
 }
 .freeBox__wpDgh {
+  flex-direction: column;
   display: flex;
   position: relative;
-  flex-direction: column;
   padding: 16px;
 }
 .freeBox__wpDgh > :global(.__wab_flex-container) {
   flex-direction: column;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   align-content: unset;
   margin-top: calc(0px - 4px);
   height: calc(100% + 4px);

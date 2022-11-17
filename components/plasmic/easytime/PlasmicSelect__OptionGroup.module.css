@@ -29,19 +29,51 @@
   justify-content: flex-start;
   padding: 4px 8px;
 }
-.slotTitle {
+.slotTargetTitle {
   color: #00000080;
   white-space: pre;
 }
-.slotTitle > *,
-.slotTitle > .__wab_slot > *,
-.slotTitle > .__wab_slot > .__wab_slot > *,
-.slotTitle > .__wab_slot > .__wab_slot > .__wab_slot > *,
-.slotTitle > picture > img,
-.slotTitle > .__wab_slot > picture > img,
-.slotTitle > .__wab_slot > .__wab_slot > picture > img,
-.slotTitle > .__wab_slot > .__wab_slot > .__wab_slot > picture > img {
+.slotTargetTitle > :global(.__wab_text),
+.slotTargetTitle > :global(.__wab_slot-string-wrapper),
+.slotTargetTitle > :global(.__wab_slot) > :global(.__wab_text),
+.slotTargetTitle > :global(.__wab_slot) > :global(.__wab_slot-string-wrapper),
+.slotTargetTitle
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_text),
+.slotTargetTitle
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot-string-wrapper),
+.slotTargetTitle
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_text),
+.slotTargetTitle
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot-string-wrapper) {
   text-overflow: ellipsis;
+}
+.slotTargetTitle > *,
+.slotTargetTitle > :global(.__wab_slot) > *,
+.slotTargetTitle > :global(.__wab_slot) > :global(.__wab_slot) > *,
+.slotTargetTitle
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > *,
+.slotTargetTitle > picture > img,
+.slotTargetTitle > :global(.__wab_slot) > picture > img,
+.slotTargetTitle > :global(.__wab_slot) > :global(.__wab_slot) > picture > img,
+.slotTargetTitle
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > picture
+  > img {
   overflow: hidden;
 }
 .optionsContainer {

@@ -16,6 +16,7 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 
 import * as p from "@plasmicapp/react-web";
+import * as ph from "@plasmicapp/host";
 
 import {
   hasVariant,
@@ -42,18 +43,16 @@ import Skeleton from "../../Skeleton"; // plasmic-import: wYIaMxnRFr/component
 import Button from "../../Button"; // plasmic-import: CM9oqbJYK7/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
-import * as defaultcss from "../plasmic__default_style.module.css"; // plasmic-import: global/defaultcss
-import * as projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
-import * as sty from "./PlasmicEditLog.module.css"; // plasmic-import: _FkSA8LL9h/css
+
+import projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
+import sty from "./PlasmicEditLog.module.css"; // plasmic-import: _FkSA8LL9h/css
 
 export type PlasmicEditLog__VariantMembers = {
   loading: "loading";
 };
-
 export type PlasmicEditLog__VariantsArgs = {
   loading?: SingleBooleanChoiceArg<"loading">;
 };
-
 type VariantPropType = keyof PlasmicEditLog__VariantsArgs;
 export const PlasmicEditLog__VariantProps = new Array<VariantPropType>(
   "loading"
@@ -62,7 +61,6 @@ export const PlasmicEditLog__VariantProps = new Array<VariantPropType>(
 export type PlasmicEditLog__ArgsType = {
   duration?: React.ReactNode;
 };
-
 type ArgPropType = keyof PlasmicEditLog__ArgsType;
 export const PlasmicEditLog__ArgProps = new Array<ArgPropType>("duration");
 
@@ -79,31 +77,30 @@ export type PlasmicEditLog__OverridesType = {
   back?: p.Flex<typeof Button>;
 };
 
-export interface DefaultEditLogProps {
-  dataFetches: PlasmicEditLog__Fetches;
-}
+export interface DefaultEditLogProps {}
 
 function PlasmicEditLog__RenderFunc(props: {
   variants: PlasmicEditLog__VariantsArgs;
   args: PlasmicEditLog__ArgsType;
   overrides: PlasmicEditLog__OverridesType;
-  dataFetches?: PlasmicEditLog__Fetches;
+
   forNode?: string;
 }) {
-  const { variants, args, overrides, forNode, dataFetches } = props;
+  const { variants, overrides, forNode } = props;
+
+  const $ctx = ph.useDataEnv?.() || {};
+  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+
+  const $props = {
+    ...args,
+    ...variants,
+  };
+
+  const currentUser = p.useCurrentUser?.() || {};
 
   return (
     <React.Fragment>
-      <Head>
-        <title key="title">{""}</title>
-        <meta key="og:title" property="og:title" content={""} />
-        <meta
-          key="description"
-          name="description"
-          property="og:description"
-          content={""}
-        />
-      </Head>
+      <Head></Head>
 
       <style>{`
         body {
@@ -111,17 +108,20 @@ function PlasmicEditLog__RenderFunc(props: {
         }
       `}</style>
 
-      <div className={defaultcss.plasmic_page_wrapper}>
+      <div className={projectcss.plasmic_page_wrapper}>
         <div
           data-plasmic-name={"root"}
           data-plasmic-override={overrides.root}
           data-plasmic-root={true}
           data-plasmic-for-node={forNode}
           className={classNames(
-            defaultcss.all,
+            projectcss.all,
             projectcss.root_reset,
+            projectcss.plasmic_default_styles,
+            projectcss.plasmic_mixins,
+            projectcss.plasmic_tokens,
             sty.root,
-            { [sty.root__loading]: hasVariant(variants, "loading", "loading") }
+            { [sty.rootloading]: hasVariant(variants, "loading", "loading") }
           )}
         >
           <Header
@@ -134,7 +134,7 @@ function PlasmicEditLog__RenderFunc(props: {
             data-plasmic-name={"container"}
             data-plasmic-override={overrides.container}
             className={classNames("__wab_instance", sty.container, {
-              [sty.container__loading]: hasVariant(
+              [sty.containerloading]: hasVariant(
                 variants,
                 "loading",
                 "loading"
@@ -143,8 +143,8 @@ function PlasmicEditLog__RenderFunc(props: {
           >
             {true ? (
               <div
-                className={classNames(defaultcss.all, sty.freeBox__b1Dbx, {
-                  [sty.freeBox__loading__b1DbxyKaCr]: hasVariant(
+                className={classNames(projectcss.all, sty.freeBox__b1Dbx, {
+                  [sty.freeBoxloading__b1DbxyKaCr]: hasVariant(
                     variants,
                     "loading",
                     "loading"
@@ -153,8 +153,8 @@ function PlasmicEditLog__RenderFunc(props: {
               >
                 {true ? (
                   <div
-                    className={classNames(defaultcss.all, sty.freeBox___41Rlx, {
-                      [sty.freeBox__loading___41RlXyKaCr]: hasVariant(
+                    className={classNames(projectcss.all, sty.freeBox___41Rlx, {
+                      [sty.freeBoxloading___41RlXyKaCr]: hasVariant(
                         variants,
                         "loading",
                         "loading"
@@ -170,15 +170,15 @@ function PlasmicEditLog__RenderFunc(props: {
                         title={
                           <div
                             className={classNames(
-                              defaultcss.all,
+                              projectcss.all,
                               sty.freeBox__pspW
                             )}
                           >
                             <div
                               className={classNames(
-                                defaultcss.all,
-                                defaultcss.__wab_text,
-                                sty.freeBox___4Rd0X
+                                projectcss.all,
+                                projectcss.__wab_text,
+                                sty.text___4Rd0X
                               )}
                             >
                               {"会社名"}
@@ -211,7 +211,7 @@ function PlasmicEditLog__RenderFunc(props: {
                           data-plasmic-name={"start"}
                           data-plasmic-override={overrides.start}
                           className={classNames("__wab_instance", sty.start, {
-                            [sty.start__loading]: hasVariant(
+                            [sty.startloading]: hasVariant(
                               variants,
                               "loading",
                               "loading"
@@ -229,7 +229,7 @@ function PlasmicEditLog__RenderFunc(props: {
                             "__wab_instance",
                             sty.skeleton__kocnA,
                             {
-                              [sty.skeleton__loading__kocnAyKaCr]: hasVariant(
+                              [sty.skeletonloading__kocnAyKaCr]: hasVariant(
                                 variants,
                                 "loading",
                                 "loading"
@@ -245,7 +245,17 @@ function PlasmicEditLog__RenderFunc(props: {
                         "__wab_instance",
                         sty.recordItem__utEYg
                       )}
-                      title={"終業時間"}
+                      title={
+                        <div
+                          className={classNames(
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text__yNtqY
+                          )}
+                        >
+                          {"終業時間"}
+                        </div>
+                      }
                     >
                       {(
                         hasVariant(variants, "loading", "loading") ? true : true
@@ -254,7 +264,7 @@ function PlasmicEditLog__RenderFunc(props: {
                           data-plasmic-name={"end"}
                           data-plasmic-override={overrides.end}
                           className={classNames("__wab_instance", sty.end, {
-                            [sty.end__loading]: hasVariant(
+                            [sty.endloading]: hasVariant(
                               variants,
                               "loading",
                               "loading"
@@ -272,7 +282,7 @@ function PlasmicEditLog__RenderFunc(props: {
                             "__wab_instance",
                             sty.skeleton__qmHiR,
                             {
-                              [sty.skeleton__loading__qmHiRyKaCr]: hasVariant(
+                              [sty.skeletonloading__qmHiRyKaCr]: hasVariant(
                                 variants,
                                 "loading",
                                 "loading"
@@ -291,9 +301,9 @@ function PlasmicEditLog__RenderFunc(props: {
                       title={
                         <div
                           className={classNames(
-                            defaultcss.all,
-                            defaultcss.__wab_text,
-                            sty.freeBox__yD5Sl
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text__yD5Sl
                           )}
                         >
                           {"稼働時間"}
@@ -311,7 +321,7 @@ function PlasmicEditLog__RenderFunc(props: {
                         ),
 
                         value: args.duration,
-                        className: classNames(sty.slotDuration),
+                        className: classNames(sty.slotTargetDuration),
                       })}
                     </RecordItem>
 
@@ -323,9 +333,9 @@ function PlasmicEditLog__RenderFunc(props: {
                       title={
                         <div
                           className={classNames(
-                            defaultcss.all,
-                            defaultcss.__wab_text,
-                            sty.freeBox__fFiLl
+                            projectcss.all,
+                            projectcss.__wab_text,
+                            sty.text__fFiLl
                           )}
                         >
                           {"日誌"}
@@ -339,10 +349,11 @@ function PlasmicEditLog__RenderFunc(props: {
                           data-plasmic-name={"report"}
                           data-plasmic-override={overrides.report}
                           className={classNames(
-                            defaultcss.textarea,
+                            projectcss.all,
+                            projectcss.textarea,
                             sty.report,
                             {
-                              [sty.report__loading]: hasVariant(
+                              [sty.reportloading]: hasVariant(
                                 variants,
                                 "loading",
                                 "loading"
@@ -362,7 +373,7 @@ function PlasmicEditLog__RenderFunc(props: {
                             "__wab_instance",
                             sty.skeleton__uxCq,
                             {
-                              [sty.skeleton__loading__uxCqyKaCr]: hasVariant(
+                              [sty.skeletonloading__uxCqyKaCr]: hasVariant(
                                 variants,
                                 "loading",
                                 "loading"
@@ -378,8 +389,8 @@ function PlasmicEditLog__RenderFunc(props: {
                 <p.Stack
                   as={"div"}
                   hasGap={true}
-                  className={classNames(defaultcss.all, sty.freeBox__wpDgh, {
-                    [sty.freeBox__loading__wpDghyKaCr]: hasVariant(
+                  className={classNames(projectcss.all, sty.freeBox__wpDgh, {
+                    [sty.freeBoxloading__wpDghyKaCr]: hasVariant(
                       variants,
                       "loading",
                       "loading"
@@ -481,17 +492,16 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicEditLog__VariantsArgs;
     args?: PlasmicEditLog__ArgsType;
     overrides?: NodeOverridesType<T>;
-    dataFetches?: PlasmicEditLog__Fetches;
   } & Omit<PlasmicEditLog__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
-    // Specify args directly as props
-    Omit<PlasmicEditLog__ArgsType, ReservedPropsType> &
-    // Specify overrides for each element directly as props
-    Omit<
+    /* Specify args directly as props*/ Omit<
+      PlasmicEditLog__ArgsType,
+      ReservedPropsType
+    > &
+    /* Specify overrides for each element directly as props*/ Omit<
       NodeOverridesType<T>,
       ReservedPropsType | VariantPropType | ArgPropType
     > &
-    // Specify props for the root element
-    Omit<
+    /* Specify props for the root element*/ Omit<
       Partial<React.ComponentProps<NodeDefaultElementType[T]>>,
       ReservedPropsType | VariantPropType | ArgPropType | DescendantsType<T>
     >;
@@ -501,20 +511,21 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
   const func = function <T extends PropsType>(
     props: T & StrictProps<T, PropsType>
   ) {
-    const { variants, args, overrides } = deriveRenderOpts(props, {
-      name: nodeName,
-      descendantNames: [...PlasmicDescendants[nodeName]],
-      internalArgPropNames: PlasmicEditLog__ArgProps,
-      internalVariantPropNames: PlasmicEditLog__VariantProps,
-    });
-
-    const { dataFetches } = props;
+    const { variants, args, overrides } = React.useMemo(
+      () =>
+        deriveRenderOpts(props, {
+          name: nodeName,
+          descendantNames: [...PlasmicDescendants[nodeName]],
+          internalArgPropNames: PlasmicEditLog__ArgProps,
+          internalVariantPropNames: PlasmicEditLog__VariantProps,
+        }),
+      [props, nodeName]
+    );
 
     return PlasmicEditLog__RenderFunc({
       variants,
       args,
       overrides,
-      dataFetches,
       forNode: nodeName,
     });
   };
@@ -544,6 +555,14 @@ export const PlasmicEditLog = Object.assign(
     // Metadata about props expected for PlasmicEditLog
     internalVariantProps: PlasmicEditLog__VariantProps,
     internalArgProps: PlasmicEditLog__ArgProps,
+
+    // Page metadata
+    pageMetadata: {
+      title: "",
+      description: "",
+      ogImageSrc: "",
+      canonical: "",
+    },
   }
 );
 

@@ -6,9 +6,9 @@
   height: auto;
 }
 .trigger {
+  flex-direction: row;
   position: relative;
   display: flex;
-  flex-direction: row;
   background: #fafafa;
   border-radius: 4px;
   padding: 3px 8px;
@@ -30,10 +30,10 @@
   > img {
   margin-left: 4px;
 }
-.trigger__isOpen {
+.triggerisOpen {
   background: #f2f2f7;
 }
-.trigger__isDisabled {
+.triggerisDisabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
@@ -41,7 +41,7 @@
   box-shadow: 0px 0px 0px 2px #007aff80;
   outline: none;
 }
-.root .trigger_____focusVisibleWithin {
+.root .trigger___focusVisibleWithin {
   outline: none;
   border-color: #007aff;
 }
@@ -58,59 +58,143 @@
   width: 100%;
   min-width: 0;
 }
-.slotSelectedContent {
+.slotTargetSelectedContent {
   white-space: pre;
 }
-.slotSelectedContent > *,
-.slotSelectedContent > .__wab_slot > *,
-.slotSelectedContent > .__wab_slot > .__wab_slot > *,
-.slotSelectedContent > .__wab_slot > .__wab_slot > .__wab_slot > *,
-.slotSelectedContent > picture > img,
-.slotSelectedContent > .__wab_slot > picture > img,
-.slotSelectedContent > .__wab_slot > .__wab_slot > picture > img,
-.slotSelectedContent > .__wab_slot > .__wab_slot > .__wab_slot > picture > img {
+.slotTargetSelectedContent > :global(.__wab_text),
+.slotTargetSelectedContent > :global(.__wab_slot-string-wrapper),
+.slotTargetSelectedContent > :global(.__wab_slot) > :global(.__wab_text),
+.slotTargetSelectedContent
+  > :global(.__wab_slot)
+  > :global(.__wab_slot-string-wrapper),
+.slotTargetSelectedContent
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_text),
+.slotTargetSelectedContent
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot-string-wrapper),
+.slotTargetSelectedContent
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_text),
+.slotTargetSelectedContent
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot-string-wrapper) {
   text-overflow: ellipsis;
+}
+.slotTargetSelectedContent > *,
+.slotTargetSelectedContent > :global(.__wab_slot) > *,
+.slotTargetSelectedContent > :global(.__wab_slot) > :global(.__wab_slot) > *,
+.slotTargetSelectedContent
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > *,
+.slotTargetSelectedContent > picture > img,
+.slotTargetSelectedContent > :global(.__wab_slot) > picture > img,
+.slotTargetSelectedContent
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > picture
+  > img,
+.slotTargetSelectedContent
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > picture
+  > img {
   overflow: hidden;
 }
-.root:focus-within .slotSelectedContent > *,
-.root:focus-within .slotSelectedContent > .__wab_slot > *,
-.root:focus-within .slotSelectedContent > .__wab_slot > .__wab_slot > *,
+.root:focus-within .slotTargetSelectedContent > *,
+.root:focus-within .slotTargetSelectedContent > :global(.__wab_slot) > *,
 .root:focus-within
-  .slotSelectedContent
-  > .__wab_slot
-  > .__wab_slot
-  > .__wab_slot
+  .slotTargetSelectedContent
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
   > *,
-.root:focus-within .slotSelectedContent > picture > img,
-.root:focus-within .slotSelectedContent > .__wab_slot > picture > img,
 .root:focus-within
-  .slotSelectedContent
-  > .__wab_slot
-  > .__wab_slot
+  .slotTargetSelectedContent
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > *,
+.root:focus-within .slotTargetSelectedContent > picture > img,
+.root:focus-within
+  .slotTargetSelectedContent
+  > :global(.__wab_slot)
   > picture
   > img,
 .root:focus-within
-  .slotSelectedContent
-  > .__wab_slot
-  > .__wab_slot
-  > .__wab_slot
+  .slotTargetSelectedContent
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > picture
+  > img,
+.root:focus-within
+  .slotTargetSelectedContent
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
   > picture
   > img {
   outline: none;
 }
-.slotPlaceholder {
+.slotTargetPlaceholder {
   white-space: pre;
   color: #00000080;
 }
-.slotPlaceholder > *,
-.slotPlaceholder > .__wab_slot > *,
-.slotPlaceholder > .__wab_slot > .__wab_slot > *,
-.slotPlaceholder > .__wab_slot > .__wab_slot > .__wab_slot > *,
-.slotPlaceholder > picture > img,
-.slotPlaceholder > .__wab_slot > picture > img,
-.slotPlaceholder > .__wab_slot > .__wab_slot > picture > img,
-.slotPlaceholder > .__wab_slot > .__wab_slot > .__wab_slot > picture > img {
+.slotTargetPlaceholder > :global(.__wab_text),
+.slotTargetPlaceholder > :global(.__wab_slot-string-wrapper),
+.slotTargetPlaceholder > :global(.__wab_slot) > :global(.__wab_text),
+.slotTargetPlaceholder
+  > :global(.__wab_slot)
+  > :global(.__wab_slot-string-wrapper),
+.slotTargetPlaceholder
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_text),
+.slotTargetPlaceholder
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot-string-wrapper),
+.slotTargetPlaceholder
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_text),
+.slotTargetPlaceholder
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot-string-wrapper) {
   text-overflow: ellipsis;
+}
+.slotTargetPlaceholder > *,
+.slotTargetPlaceholder > :global(.__wab_slot) > *,
+.slotTargetPlaceholder > :global(.__wab_slot) > :global(.__wab_slot) > *,
+.slotTargetPlaceholder
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > *,
+.slotTargetPlaceholder > picture > img,
+.slotTargetPlaceholder > :global(.__wab_slot) > picture > img,
+.slotTargetPlaceholder
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > picture
+  > img,
+.slotTargetPlaceholder
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > picture
+  > img {
   overflow: hidden;
 }
 .dropdownIcon {
@@ -120,7 +204,7 @@
   height: 20px;
   flex-shrink: 0;
 }
-.root .dropdownIcon_____focusVisibleWithin {
+.root .dropdownIcon___focusVisibleWithin {
   outline: none;
 }
 .overlay:global(.__wab_instance) {
@@ -130,7 +214,7 @@
   z-index: 1000;
 }
 .optionsContainer {
-  display: inline-flex;
+  display: flex;
   position: relative;
   flex-direction: column;
   align-items: stretch;

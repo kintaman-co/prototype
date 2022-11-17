@@ -16,6 +16,7 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 
 import * as p from "@plasmicapp/react-web";
+import * as ph from "@plasmicapp/host";
 
 import {
   hasVariant,
@@ -35,18 +36,16 @@ import {
 } from "@plasmicapp/react-web";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
-import * as defaultcss from "../plasmic__default_style.module.css"; // plasmic-import: global/defaultcss
-import * as projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
-import * as sty from "./PlasmicTime.module.css"; // plasmic-import: tOmxC_Hwcz/css
+
+import projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
+import sty from "./PlasmicTime.module.css"; // plasmic-import: tOmxC_Hwcz/css
 
 export type PlasmicTime__VariantMembers = {
   type: "large" | "inHeader";
 };
-
 export type PlasmicTime__VariantsArgs = {
   type?: SingleChoiceArg<"large" | "inHeader">;
 };
-
 type VariantPropType = keyof PlasmicTime__VariantsArgs;
 export const PlasmicTime__VariantProps = new Array<VariantPropType>("type");
 
@@ -54,12 +53,12 @@ export type PlasmicTime__ArgsType = {
   hour?: React.ReactNode;
   min?: React.ReactNode;
 };
-
 type ArgPropType = keyof PlasmicTime__ArgsType;
 export const PlasmicTime__ArgProps = new Array<ArgPropType>("hour", "min");
 
 export type PlasmicTime__OverridesType = {
   root?: p.Flex<"div">;
+  text?: p.Flex<"div">;
 };
 
 export interface DefaultTimeProps {
@@ -73,10 +72,20 @@ function PlasmicTime__RenderFunc(props: {
   variants: PlasmicTime__VariantsArgs;
   args: PlasmicTime__ArgsType;
   overrides: PlasmicTime__OverridesType;
-  dataFetches?: PlasmicTime__Fetches;
+
   forNode?: string;
 }) {
-  const { variants, args, overrides, forNode, dataFetches } = props;
+  const { variants, overrides, forNode } = props;
+
+  const $ctx = ph.useDataEnv?.() || {};
+  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+
+  const $props = {
+    ...args,
+    ...variants,
+  };
+
+  const currentUser = p.useCurrentUser?.() || {};
 
   return (
     <div
@@ -84,18 +93,24 @@ function PlasmicTime__RenderFunc(props: {
       data-plasmic-override={overrides.root}
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
-      className={classNames(defaultcss.all, projectcss.root_reset, sty.root, {
-        [sty.root__type_large]: hasVariant(variants, "type", "large"),
-      })}
+      className={classNames(
+        projectcss.all,
+        projectcss.root_reset,
+        projectcss.plasmic_default_styles,
+        projectcss.plasmic_mixins,
+        projectcss.plasmic_tokens,
+        sty.root,
+        { [sty.roottype_large]: hasVariant(variants, "type", "large") }
+      )}
     >
       <div
-        className={classNames(defaultcss.all, sty.freeBox__nwg, {
-          [sty.freeBox__type_inHeader__nwgOJcOx]: hasVariant(
+        className={classNames(projectcss.all, sty.freeBox__nwg, {
+          [sty.freeBoxtype_inHeader__nwgOJcOx]: hasVariant(
             variants,
             "type",
             "inHeader"
           ),
-          [sty.freeBox__type_large__nwgONjWl]: hasVariant(
+          [sty.freeBoxtype_large__nwgONjWl]: hasVariant(
             variants,
             "type",
             "large"
@@ -105,47 +120,40 @@ function PlasmicTime__RenderFunc(props: {
         {p.renderPlasmicSlot({
           defaultContents: "08",
           value: args.hour,
-          className: classNames(sty.slotHour, {
-            [sty.slotHour__type_inHeader]: hasVariant(
+          className: classNames(sty.slotTargetHour, {
+            [sty.slotTargetHourtype_inHeader]: hasVariant(
               variants,
               "type",
               "inHeader"
             ),
-            [sty.slotHour__type_large]: hasVariant(variants, "type", "large"),
+            [sty.slotTargetHourtype_large]: hasVariant(
+              variants,
+              "type",
+              "large"
+            ),
           }),
         })}
       </div>
 
       <div
-        className={classNames(
-          defaultcss.all,
-          defaultcss.__wab_text,
-          sty.freeBox__cFlr,
-          {
-            [sty.freeBox__type_inHeader__cFlRoJcOx]: hasVariant(
-              variants,
-              "type",
-              "inHeader"
-            ),
-            [sty.freeBox__type_large__cFlRoNjWl]: hasVariant(
-              variants,
-              "type",
-              "large"
-            ),
-          }
-        )}
+        data-plasmic-name={"text"}
+        data-plasmic-override={overrides.text}
+        className={classNames(projectcss.all, projectcss.__wab_text, sty.text, {
+          [sty.texttype_inHeader]: hasVariant(variants, "type", "inHeader"),
+          [sty.texttype_large]: hasVariant(variants, "type", "large"),
+        })}
       >
         {":"}
       </div>
 
       <div
-        className={classNames(defaultcss.all, sty.freeBox__zLyZd, {
-          [sty.freeBox__type_inHeader__zLyZDoJcOx]: hasVariant(
+        className={classNames(projectcss.all, sty.freeBox__zLyZd, {
+          [sty.freeBoxtype_inHeader__zLyZDoJcOx]: hasVariant(
             variants,
             "type",
             "inHeader"
           ),
-          [sty.freeBox__type_large__zLyZDoNjWl]: hasVariant(
+          [sty.freeBoxtype_large__zLyZDoNjWl]: hasVariant(
             variants,
             "type",
             "large"
@@ -155,13 +163,17 @@ function PlasmicTime__RenderFunc(props: {
         {p.renderPlasmicSlot({
           defaultContents: "10",
           value: args.min,
-          className: classNames(sty.slotMin, {
-            [sty.slotMin__type_inHeader]: hasVariant(
+          className: classNames(sty.slotTargetMin, {
+            [sty.slotTargetMintype_inHeader]: hasVariant(
               variants,
               "type",
               "inHeader"
             ),
-            [sty.slotMin__type_large]: hasVariant(variants, "type", "large"),
+            [sty.slotTargetMintype_large]: hasVariant(
+              variants,
+              "type",
+              "large"
+            ),
           }),
         })}
       </div>
@@ -170,13 +182,15 @@ function PlasmicTime__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root"],
+  root: ["root", "text"],
+  text: ["text"],
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
   typeof PlasmicDescendants[T][number];
 type NodeDefaultElementType = {
   root: "div";
+  text: "div";
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -190,17 +204,16 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicTime__VariantsArgs;
     args?: PlasmicTime__ArgsType;
     overrides?: NodeOverridesType<T>;
-    dataFetches?: PlasmicTime__Fetches;
   } & Omit<PlasmicTime__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
-    // Specify args directly as props
-    Omit<PlasmicTime__ArgsType, ReservedPropsType> &
-    // Specify overrides for each element directly as props
-    Omit<
+    /* Specify args directly as props*/ Omit<
+      PlasmicTime__ArgsType,
+      ReservedPropsType
+    > &
+    /* Specify overrides for each element directly as props*/ Omit<
       NodeOverridesType<T>,
       ReservedPropsType | VariantPropType | ArgPropType
     > &
-    // Specify props for the root element
-    Omit<
+    /* Specify props for the root element*/ Omit<
       Partial<React.ComponentProps<NodeDefaultElementType[T]>>,
       ReservedPropsType | VariantPropType | ArgPropType | DescendantsType<T>
     >;
@@ -210,20 +223,21 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
   const func = function <T extends PropsType>(
     props: T & StrictProps<T, PropsType>
   ) {
-    const { variants, args, overrides } = deriveRenderOpts(props, {
-      name: nodeName,
-      descendantNames: [...PlasmicDescendants[nodeName]],
-      internalArgPropNames: PlasmicTime__ArgProps,
-      internalVariantPropNames: PlasmicTime__VariantProps,
-    });
-
-    const { dataFetches } = props;
+    const { variants, args, overrides } = React.useMemo(
+      () =>
+        deriveRenderOpts(props, {
+          name: nodeName,
+          descendantNames: [...PlasmicDescendants[nodeName]],
+          internalArgPropNames: PlasmicTime__ArgProps,
+          internalVariantPropNames: PlasmicTime__VariantProps,
+        }),
+      [props, nodeName]
+    );
 
     return PlasmicTime__RenderFunc({
       variants,
       args,
       overrides,
-      dataFetches,
       forNode: nodeName,
     });
   };
@@ -240,6 +254,7 @@ export const PlasmicTime = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
+    text: makeNodeComponent("text"),
 
     // Metadata about props expected for PlasmicTime
     internalVariantProps: PlasmicTime__VariantProps,

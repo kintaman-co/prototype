@@ -16,6 +16,7 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 
 import * as p from "@plasmicapp/react-web";
+import * as ph from "@plasmicapp/host";
 
 import {
   hasVariant,
@@ -40,18 +41,16 @@ import Switch from "../../Switch"; // plasmic-import: j0fmjgi6Tf/component
 import Button from "../../Button"; // plasmic-import: CM9oqbJYK7/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
-import * as defaultcss from "../plasmic__default_style.module.css"; // plasmic-import: global/defaultcss
-import * as projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
-import * as sty from "./PlasmicEditBiz.module.css"; // plasmic-import: q75y63Cv6a/css
+
+import projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
+import sty from "./PlasmicEditBiz.module.css"; // plasmic-import: q75y63Cv6a/css
 
 export type PlasmicEditBiz__VariantMembers = {
   deleted: "deleted";
 };
-
 export type PlasmicEditBiz__VariantsArgs = {
   deleted?: SingleBooleanChoiceArg<"deleted">;
 };
-
 type VariantPropType = keyof PlasmicEditBiz__VariantsArgs;
 export const PlasmicEditBiz__VariantProps = new Array<VariantPropType>(
   "deleted"
@@ -75,31 +74,30 @@ export type PlasmicEditBiz__OverridesType = {
   restoreDeletion?: p.Flex<typeof Button>;
 };
 
-export interface DefaultEditBizProps {
-  dataFetches: PlasmicEditBiz__Fetches;
-}
+export interface DefaultEditBizProps {}
 
 function PlasmicEditBiz__RenderFunc(props: {
   variants: PlasmicEditBiz__VariantsArgs;
   args: PlasmicEditBiz__ArgsType;
   overrides: PlasmicEditBiz__OverridesType;
-  dataFetches?: PlasmicEditBiz__Fetches;
+
   forNode?: string;
 }) {
-  const { variants, args, overrides, forNode, dataFetches } = props;
+  const { variants, overrides, forNode } = props;
+
+  const $ctx = ph.useDataEnv?.() || {};
+  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+
+  const $props = {
+    ...args,
+    ...variants,
+  };
+
+  const currentUser = p.useCurrentUser?.() || {};
 
   return (
     <React.Fragment>
-      <Head>
-        <title key="title">{""}</title>
-        <meta key="og:title" property="og:title" content={""} />
-        <meta
-          key="description"
-          name="description"
-          property="og:description"
-          content={""}
-        />
-      </Head>
+      <Head></Head>
 
       <style>{`
         body {
@@ -107,17 +105,20 @@ function PlasmicEditBiz__RenderFunc(props: {
         }
       `}</style>
 
-      <div className={defaultcss.plasmic_page_wrapper}>
+      <div className={projectcss.plasmic_page_wrapper}>
         <div
           data-plasmic-name={"root"}
           data-plasmic-override={overrides.root}
           data-plasmic-root={true}
           data-plasmic-for-node={forNode}
           className={classNames(
-            defaultcss.all,
+            projectcss.all,
             projectcss.root_reset,
+            projectcss.plasmic_default_styles,
+            projectcss.plasmic_mixins,
+            projectcss.plasmic_tokens,
             sty.root,
-            { [sty.root__deleted]: hasVariant(variants, "deleted", "deleted") }
+            { [sty.rootdeleted]: hasVariant(variants, "deleted", "deleted") }
           )}
         >
           <Header
@@ -130,20 +131,36 @@ function PlasmicEditBiz__RenderFunc(props: {
             data-plasmic-name={"container"}
             data-plasmic-override={overrides.container}
             className={classNames("__wab_instance", sty.container, {
-              [sty.container__deleted]: hasVariant(
+              [sty.containerdeleted]: hasVariant(
                 variants,
                 "deleted",
                 "deleted"
               ),
             })}
           >
-            <div className={classNames(defaultcss.all, sty.freeBox___8Tq8B)}>
-              <div className={classNames(defaultcss.all, sty.freeBox__kJdfg)}>
-                <RecordItem title={"会社名"}>
+            <div className={classNames(projectcss.all, sty.freeBox___8Tq8B)}>
+              <div className={classNames(projectcss.all, sty.freeBox__kJdfg)}>
+                <RecordItem
+                  title={
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__yb0G
+                      )}
+                    >
+                      {"会社名"}
+                    </div>
+                  }
+                >
                   <input
                     data-plasmic-name={"bizName"}
                     data-plasmic-override={overrides.bizName}
-                    className={classNames(defaultcss.input, sty.bizName)}
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.input,
+                      sty.bizName
+                    )}
                     placeholder={"会社名" as const}
                     size={1 as const}
                     type={"text" as const}
@@ -153,12 +170,26 @@ function PlasmicEditBiz__RenderFunc(props: {
 
                 <RecordItem
                   className={classNames("__wab_instance", sty.recordItem__blWs)}
-                  title={"単価"}
+                  title={
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text___6F9Vi
+                      )}
+                    >
+                      {"単価"}
+                    </div>
+                  }
                 >
                   <input
                     data-plasmic-name={"feePerHr"}
                     data-plasmic-override={overrides.feePerHr}
-                    className={classNames(defaultcss.input, sty.feePerHr)}
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.input,
+                      sty.feePerHr
+                    )}
                     placeholder={"円/時間" as const}
                     size={1 as const}
                     type={"text" as const}
@@ -171,15 +202,29 @@ function PlasmicEditBiz__RenderFunc(props: {
                     "__wab_instance",
                     sty.recordItem__yJLgW
                   )}
-                  title={"消費税率"}
+                  title={
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__jCCc3
+                      )}
+                    >
+                      {"消費税率"}
+                    </div>
+                  }
                 >
                   <div
-                    className={classNames(defaultcss.all, sty.freeBox__bfx0Q)}
+                    className={classNames(projectcss.all, sty.freeBox__bfx0Q)}
                   >
                     <input
                       data-plasmic-name={"vatRate"}
                       data-plasmic-override={overrides.vatRate}
-                      className={classNames(defaultcss.input, sty.vatRate)}
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.input,
+                        sty.vatRate
+                      )}
                       placeholder={"消費税込みなら0をセット" as const}
                       size={1 as const}
                       type={"text" as const}
@@ -188,9 +233,9 @@ function PlasmicEditBiz__RenderFunc(props: {
 
                     <div
                       className={classNames(
-                        defaultcss.all,
-                        defaultcss.__wab_text,
-                        sty.freeBox__kVggt
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__kVggt
                       )}
                     >
                       {"%"}
@@ -203,15 +248,29 @@ function PlasmicEditBiz__RenderFunc(props: {
                     "__wab_instance",
                     sty.recordItem__xkS6P
                   )}
-                  title={"宛名"}
+                  title={
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__m0GA
+                      )}
+                    >
+                      {"宛名"}
+                    </div>
+                  }
                 >
                   <div
-                    className={classNames(defaultcss.all, sty.freeBox__q1WRz)}
+                    className={classNames(projectcss.all, sty.freeBox__q1WRz)}
                   >
                     <input
                       data-plasmic-name={"recipient"}
                       data-plasmic-override={overrides.recipient}
-                      className={classNames(defaultcss.input, sty.recipient)}
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.input,
+                        sty.recipient
+                      )}
                       placeholder={"請求書に表示されます" as const}
                       size={1 as const}
                       type={"text" as const}
@@ -233,12 +292,26 @@ function PlasmicEditBiz__RenderFunc(props: {
                     "__wab_instance",
                     sty.recordItem__sDj1B
                   )}
-                  title={"摘要"}
+                  title={
+                    <div
+                      className={classNames(
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text___9RsHi
+                      )}
+                    >
+                      {"摘要"}
+                    </div>
+                  }
                 >
                   <input
                     data-plasmic-name={"topic"}
                     data-plasmic-override={overrides.topic}
-                    className={classNames(defaultcss.input, sty.topic)}
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.input,
+                      sty.topic
+                    )}
                     placeholder={"システム開発" as const}
                     size={1 as const}
                     type={"text" as const}
@@ -250,14 +323,14 @@ function PlasmicEditBiz__RenderFunc(props: {
               <p.Stack
                 as={"div"}
                 hasGap={true}
-                className={classNames(defaultcss.all, sty.freeBox__q4MP)}
+                className={classNames(projectcss.all, sty.freeBox__q4MP)}
               >
                 {(hasVariant(variants, "deleted", "deleted") ? true : true) ? (
                   <Button
                     data-plasmic-name={"deleteBiz"}
                     data-plasmic-override={overrides.deleteBiz}
                     className={classNames("__wab_instance", sty.deleteBiz, {
-                      [sty.deleteBiz__deleted]: hasVariant(
+                      [sty.deleteBizdeleted]: hasVariant(
                         variants,
                         "deleted",
                         "deleted"
@@ -276,7 +349,7 @@ function PlasmicEditBiz__RenderFunc(props: {
                       "__wab_instance",
                       sty.restoreDeletion,
                       {
-                        [sty.restoreDeletion__deleted]: hasVariant(
+                        [sty.restoreDeletiondeleted]: hasVariant(
                           variants,
                           "deleted",
                           "deleted"
@@ -291,11 +364,11 @@ function PlasmicEditBiz__RenderFunc(props: {
                   >
                     <div
                       className={classNames(
-                        defaultcss.all,
-                        defaultcss.__wab_text,
-                        sty.freeBox__yiCpm,
+                        projectcss.all,
+                        projectcss.__wab_text,
+                        sty.text__yiCpm,
                         {
-                          [sty.freeBox__deleted__yiCpmi4ICm]: hasVariant(
+                          [sty.textdeleted__yiCpmi4ICm]: hasVariant(
                             variants,
                             "deleted",
                             "deleted"
@@ -381,17 +454,16 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicEditBiz__VariantsArgs;
     args?: PlasmicEditBiz__ArgsType;
     overrides?: NodeOverridesType<T>;
-    dataFetches?: PlasmicEditBiz__Fetches;
   } & Omit<PlasmicEditBiz__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
-    // Specify args directly as props
-    Omit<PlasmicEditBiz__ArgsType, ReservedPropsType> &
-    // Specify overrides for each element directly as props
-    Omit<
+    /* Specify args directly as props*/ Omit<
+      PlasmicEditBiz__ArgsType,
+      ReservedPropsType
+    > &
+    /* Specify overrides for each element directly as props*/ Omit<
       NodeOverridesType<T>,
       ReservedPropsType | VariantPropType | ArgPropType
     > &
-    // Specify props for the root element
-    Omit<
+    /* Specify props for the root element*/ Omit<
       Partial<React.ComponentProps<NodeDefaultElementType[T]>>,
       ReservedPropsType | VariantPropType | ArgPropType | DescendantsType<T>
     >;
@@ -401,20 +473,21 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
   const func = function <T extends PropsType>(
     props: T & StrictProps<T, PropsType>
   ) {
-    const { variants, args, overrides } = deriveRenderOpts(props, {
-      name: nodeName,
-      descendantNames: [...PlasmicDescendants[nodeName]],
-      internalArgPropNames: PlasmicEditBiz__ArgProps,
-      internalVariantPropNames: PlasmicEditBiz__VariantProps,
-    });
-
-    const { dataFetches } = props;
+    const { variants, args, overrides } = React.useMemo(
+      () =>
+        deriveRenderOpts(props, {
+          name: nodeName,
+          descendantNames: [...PlasmicDescendants[nodeName]],
+          internalArgPropNames: PlasmicEditBiz__ArgProps,
+          internalVariantPropNames: PlasmicEditBiz__VariantProps,
+        }),
+      [props, nodeName]
+    );
 
     return PlasmicEditBiz__RenderFunc({
       variants,
       args,
       overrides,
-      dataFetches,
       forNode: nodeName,
     });
   };
@@ -445,6 +518,14 @@ export const PlasmicEditBiz = Object.assign(
     // Metadata about props expected for PlasmicEditBiz
     internalVariantProps: PlasmicEditBiz__VariantProps,
     internalArgProps: PlasmicEditBiz__ArgProps,
+
+    // Page metadata
+    pageMetadata: {
+      title: "",
+      description: "",
+      ogImageSrc: "",
+      canonical: "",
+    },
   }
 );
 

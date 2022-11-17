@@ -16,6 +16,7 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 
 import * as p from "@plasmicapp/react-web";
+import * as ph from "@plasmicapp/host";
 
 import {
   hasVariant,
@@ -35,12 +36,11 @@ import {
 } from "@plasmicapp/react-web";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
-import * as defaultcss from "../plasmic__default_style.module.css"; // plasmic-import: global/defaultcss
-import * as projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
-import * as sty from "./PlasmicPrintInvoice.module.css"; // plasmic-import: Q2wcv59jeA/css
+
+import projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
+import sty from "./PlasmicPrintInvoice.module.css"; // plasmic-import: Q2wcv59jeA/css
 
 export type PlasmicPrintInvoice__VariantMembers = {};
-
 export type PlasmicPrintInvoice__VariantsArgs = {};
 type VariantPropType = keyof PlasmicPrintInvoice__VariantsArgs;
 export const PlasmicPrintInvoice__VariantProps = new Array<VariantPropType>();
@@ -48,7 +48,6 @@ export const PlasmicPrintInvoice__VariantProps = new Array<VariantPropType>();
 export type PlasmicPrintInvoice__ArgsType = {
   children?: React.ReactNode;
 };
-
 type ArgPropType = keyof PlasmicPrintInvoice__ArgsType;
 export const PlasmicPrintInvoice__ArgProps = new Array<ArgPropType>("children");
 
@@ -56,31 +55,30 @@ export type PlasmicPrintInvoice__OverridesType = {
   root?: p.Flex<"div">;
 };
 
-export interface DefaultPrintInvoiceProps {
-  dataFetches: PlasmicPrintInvoice__Fetches;
-}
+export interface DefaultPrintInvoiceProps {}
 
 function PlasmicPrintInvoice__RenderFunc(props: {
   variants: PlasmicPrintInvoice__VariantsArgs;
   args: PlasmicPrintInvoice__ArgsType;
   overrides: PlasmicPrintInvoice__OverridesType;
-  dataFetches?: PlasmicPrintInvoice__Fetches;
+
   forNode?: string;
 }) {
-  const { variants, args, overrides, forNode, dataFetches } = props;
+  const { variants, overrides, forNode } = props;
+
+  const $ctx = ph.useDataEnv?.() || {};
+  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+
+  const $props = {
+    ...args,
+    ...variants,
+  };
+
+  const currentUser = p.useCurrentUser?.() || {};
 
   return (
     <React.Fragment>
-      <Head>
-        <title key="title">{""}</title>
-        <meta key="og:title" property="og:title" content={""} />
-        <meta
-          key="description"
-          name="description"
-          property="og:description"
-          content={""}
-        />
-      </Head>
+      <Head></Head>
 
       <style>{`
         body {
@@ -88,15 +86,18 @@ function PlasmicPrintInvoice__RenderFunc(props: {
         }
       `}</style>
 
-      <div className={defaultcss.plasmic_page_wrapper}>
+      <div className={projectcss.plasmic_page_wrapper}>
         <div
           data-plasmic-name={"root"}
           data-plasmic-override={overrides.root}
           data-plasmic-root={true}
           data-plasmic-for-node={forNode}
           className={classNames(
-            defaultcss.all,
+            projectcss.all,
             projectcss.root_reset,
+            projectcss.plasmic_default_styles,
+            projectcss.plasmic_mixins,
+            projectcss.plasmic_tokens,
             sty.root
           )}
         >
@@ -131,17 +132,16 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicPrintInvoice__VariantsArgs;
     args?: PlasmicPrintInvoice__ArgsType;
     overrides?: NodeOverridesType<T>;
-    dataFetches?: PlasmicPrintInvoice__Fetches;
   } & Omit<PlasmicPrintInvoice__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
-    // Specify args directly as props
-    Omit<PlasmicPrintInvoice__ArgsType, ReservedPropsType> &
-    // Specify overrides for each element directly as props
-    Omit<
+    /* Specify args directly as props*/ Omit<
+      PlasmicPrintInvoice__ArgsType,
+      ReservedPropsType
+    > &
+    /* Specify overrides for each element directly as props*/ Omit<
       NodeOverridesType<T>,
       ReservedPropsType | VariantPropType | ArgPropType
     > &
-    // Specify props for the root element
-    Omit<
+    /* Specify props for the root element*/ Omit<
       Partial<React.ComponentProps<NodeDefaultElementType[T]>>,
       ReservedPropsType | VariantPropType | ArgPropType | DescendantsType<T>
     >;
@@ -151,20 +151,21 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
   const func = function <T extends PropsType>(
     props: T & StrictProps<T, PropsType>
   ) {
-    const { variants, args, overrides } = deriveRenderOpts(props, {
-      name: nodeName,
-      descendantNames: [...PlasmicDescendants[nodeName]],
-      internalArgPropNames: PlasmicPrintInvoice__ArgProps,
-      internalVariantPropNames: PlasmicPrintInvoice__VariantProps,
-    });
-
-    const { dataFetches } = props;
+    const { variants, args, overrides } = React.useMemo(
+      () =>
+        deriveRenderOpts(props, {
+          name: nodeName,
+          descendantNames: [...PlasmicDescendants[nodeName]],
+          internalArgPropNames: PlasmicPrintInvoice__ArgProps,
+          internalVariantPropNames: PlasmicPrintInvoice__VariantProps,
+        }),
+      [props, nodeName]
+    );
 
     return PlasmicPrintInvoice__RenderFunc({
       variants,
       args,
       overrides,
-      dataFetches,
       forNode: nodeName,
     });
   };
@@ -185,6 +186,14 @@ export const PlasmicPrintInvoice = Object.assign(
     // Metadata about props expected for PlasmicPrintInvoice
     internalVariantProps: PlasmicPrintInvoice__VariantProps,
     internalArgProps: PlasmicPrintInvoice__ArgProps,
+
+    // Page metadata
+    pageMetadata: {
+      title: "",
+      description: "",
+      ogImageSrc: "",
+      canonical: "",
+    },
   }
 );
 

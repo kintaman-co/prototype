@@ -16,6 +16,7 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 
 import * as p from "@plasmicapp/react-web";
+import * as ph from "@plasmicapp/host";
 
 import {
   hasVariant,
@@ -36,12 +37,11 @@ import {
 import Button from "../../Button"; // plasmic-import: CM9oqbJYK7/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
-import * as defaultcss from "../plasmic__default_style.module.css"; // plasmic-import: global/defaultcss
-import * as projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
-import * as sty from "./PlasmicBizItem.module.css"; // plasmic-import: WrlNulxyIS/css
+
+import projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
+import sty from "./PlasmicBizItem.module.css"; // plasmic-import: WrlNulxyIS/css
 
 export type PlasmicBizItem__VariantMembers = {};
-
 export type PlasmicBizItem__VariantsArgs = {};
 type VariantPropType = keyof PlasmicBizItem__VariantsArgs;
 export const PlasmicBizItem__VariantProps = new Array<VariantPropType>();
@@ -62,10 +62,20 @@ function PlasmicBizItem__RenderFunc(props: {
   variants: PlasmicBizItem__VariantsArgs;
   args: PlasmicBizItem__ArgsType;
   overrides: PlasmicBizItem__OverridesType;
-  dataFetches?: PlasmicBizItem__Fetches;
+
   forNode?: string;
 }) {
-  const { variants, args, overrides, forNode, dataFetches } = props;
+  const { variants, overrides, forNode } = props;
+
+  const $ctx = ph.useDataEnv?.() || {};
+  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+
+  const $props = {
+    ...args,
+    ...variants,
+  };
+
+  const currentUser = p.useCurrentUser?.() || {};
 
   return (
     <Button
@@ -101,17 +111,16 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicBizItem__VariantsArgs;
     args?: PlasmicBizItem__ArgsType;
     overrides?: NodeOverridesType<T>;
-    dataFetches?: PlasmicBizItem__Fetches;
   } & Omit<PlasmicBizItem__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
-    // Specify args directly as props
-    Omit<PlasmicBizItem__ArgsType, ReservedPropsType> &
-    // Specify overrides for each element directly as props
-    Omit<
+    /* Specify args directly as props*/ Omit<
+      PlasmicBizItem__ArgsType,
+      ReservedPropsType
+    > &
+    /* Specify overrides for each element directly as props*/ Omit<
       NodeOverridesType<T>,
       ReservedPropsType | VariantPropType | ArgPropType
     > &
-    // Specify props for the root element
-    Omit<
+    /* Specify props for the root element*/ Omit<
       Partial<React.ComponentProps<NodeDefaultElementType[T]>>,
       ReservedPropsType | VariantPropType | ArgPropType | DescendantsType<T>
     >;
@@ -121,20 +130,21 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
   const func = function <T extends PropsType>(
     props: T & StrictProps<T, PropsType>
   ) {
-    const { variants, args, overrides } = deriveRenderOpts(props, {
-      name: nodeName,
-      descendantNames: [...PlasmicDescendants[nodeName]],
-      internalArgPropNames: PlasmicBizItem__ArgProps,
-      internalVariantPropNames: PlasmicBizItem__VariantProps,
-    });
-
-    const { dataFetches } = props;
+    const { variants, args, overrides } = React.useMemo(
+      () =>
+        deriveRenderOpts(props, {
+          name: nodeName,
+          descendantNames: [...PlasmicDescendants[nodeName]],
+          internalArgPropNames: PlasmicBizItem__ArgProps,
+          internalVariantPropNames: PlasmicBizItem__VariantProps,
+        }),
+      [props, nodeName]
+    );
 
     return PlasmicBizItem__RenderFunc({
       variants,
       args,
       overrides,
-      dataFetches,
       forNode: nodeName,
     });
   };

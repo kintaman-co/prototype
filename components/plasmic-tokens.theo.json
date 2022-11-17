@@ -13,7 +13,7 @@
     {
       "name": "button",
       "type": "color",
-      "value": "#6246EA",
+      "value": "#356DCE",
       "category": "color",
       "meta": {
         "projectId": "mBKHaRhjQbiZuznDyARcTS",
@@ -43,7 +43,7 @@
     {
       "name": "header",
       "type": "color",
-      "value": "#6246EA",
+      "value": "#356DCE",
       "category": "color",
       "meta": {
         "projectId": "mBKHaRhjQbiZuznDyARcTS",
@@ -73,7 +73,7 @@
     {
       "name": "highlight",
       "type": "color",
-      "value": "#6246EA",
+      "value": "#356DCE",
       "category": "color",
       "meta": {
         "projectId": "mBKHaRhjQbiZuznDyARcTS",

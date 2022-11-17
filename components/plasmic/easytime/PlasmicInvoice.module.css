@@ -33,7 +33,7 @@
   width: 100%;
   min-width: 0;
 }
-.freeBox__bp4BS {
+.text__bp4BS {
   position: relative;
   height: auto;
 }
@@ -46,7 +46,7 @@
   width: 100%;
   min-width: 0;
 }
-.freeBox__msSbT {
+.text__msSbT {
   position: relative;
 }
 .memo {
@@ -63,9 +63,9 @@
   position: relative;
   width: 100%;
   height: 100%;
-  box-shadow: 1px 1px 6px 2px #2b2c341a /* plasmic-token: vaqn_vLIL */;
+  box-shadow: 1px 1px 6px 2px var(--token-vaqn_vLIL);
   min-width: 0;
   min-height: 0;
   margin: 4px;
-  border: 1px solid #d1d1e9 /* plasmic-token: UuK4I_eTV */;
+  border: 1px solid var(--token-UuK4I_eTV);
 }

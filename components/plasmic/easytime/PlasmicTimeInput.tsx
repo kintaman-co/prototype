@@ -16,6 +16,7 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 
 import * as p from "@plasmicapp/react-web";
+import * as ph from "@plasmicapp/host";
 
 import {
   hasVariant,
@@ -36,18 +37,16 @@ import {
 import Checkbox from "../../Checkbox"; // plasmic-import: j-zkNvYO40/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
-import * as defaultcss from "../plasmic__default_style.module.css"; // plasmic-import: global/defaultcss
-import * as projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
-import * as sty from "./PlasmicTimeInput.module.css"; // plasmic-import: FN-EzPooHT/css
+
+import projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
+import sty from "./PlasmicTimeInput.module.css"; // plasmic-import: FN-EzPooHT/css
 
 export type PlasmicTimeInput__VariantMembers = {
   dayAgo: "dayAgo";
 };
-
 export type PlasmicTimeInput__VariantsArgs = {
   dayAgo?: SingleBooleanChoiceArg<"dayAgo">;
 };
-
 type VariantPropType = keyof PlasmicTimeInput__VariantsArgs;
 export const PlasmicTimeInput__VariantProps = new Array<VariantPropType>(
   "dayAgo"
@@ -59,6 +58,7 @@ export const PlasmicTimeInput__ArgProps = new Array<ArgPropType>();
 
 export type PlasmicTimeInput__OverridesType = {
   root?: p.Flex<"div">;
+  freeBox?: p.Flex<"div">;
   hour?: p.Flex<"input">;
   minute?: p.Flex<"input">;
   dayAgoCheckbox?: p.Flex<"div">;
@@ -74,10 +74,20 @@ function PlasmicTimeInput__RenderFunc(props: {
   variants: PlasmicTimeInput__VariantsArgs;
   args: PlasmicTimeInput__ArgsType;
   overrides: PlasmicTimeInput__OverridesType;
-  dataFetches?: PlasmicTimeInput__Fetches;
+
   forNode?: string;
 }) {
-  const { variants, args, overrides, forNode, dataFetches } = props;
+  const { variants, overrides, forNode } = props;
+
+  const $ctx = ph.useDataEnv?.() || {};
+  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+
+  const $props = {
+    ...args,
+    ...variants,
+  };
+
+  const currentUser = p.useCurrentUser?.() || {};
 
   return (
     <div
@@ -85,22 +95,33 @@ function PlasmicTimeInput__RenderFunc(props: {
       data-plasmic-override={overrides.root}
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
-      className={classNames(defaultcss.all, projectcss.root_reset, sty.root)}
+      className={classNames(
+        projectcss.all,
+        projectcss.root_reset,
+        projectcss.plasmic_default_styles,
+        projectcss.plasmic_mixins,
+        projectcss.plasmic_tokens,
+        sty.root
+      )}
     >
-      <div className={classNames(defaultcss.all, sty.freeBox__tuQtm)}>
+      <div
+        data-plasmic-name={"freeBox"}
+        data-plasmic-override={overrides.freeBox}
+        className={classNames(projectcss.all, sty.freeBox)}
+      >
         <input
           data-plasmic-name={"hour"}
           data-plasmic-override={overrides.hour}
-          className={classNames(defaultcss.input, sty.hour)}
+          className={classNames(projectcss.all, projectcss.input, sty.hour)}
           size={1 as const}
           type={"text" as const}
         />
 
         <div
           className={classNames(
-            defaultcss.all,
-            defaultcss.__wab_text,
-            sty.freeBox___1ZcV
+            projectcss.all,
+            projectcss.__wab_text,
+            sty.text___1ZcV
           )}
         >
           {":"}
@@ -109,7 +130,7 @@ function PlasmicTimeInput__RenderFunc(props: {
         <input
           data-plasmic-name={"minute"}
           data-plasmic-override={overrides.minute}
-          className={classNames(defaultcss.input, sty.minute)}
+          className={classNames(projectcss.all, projectcss.input, sty.minute)}
           size={1 as const}
           type={"text" as const}
         />
@@ -120,32 +141,24 @@ function PlasmicTimeInput__RenderFunc(props: {
         data-plasmic-name={"dayAgoCheckbox"}
         data-plasmic-override={overrides.dayAgoCheckbox}
         hasGap={true}
-        className={classNames(defaultcss.all, sty.dayAgoCheckbox, {
-          [sty.dayAgoCheckbox__dayAgo]: hasVariant(
-            variants,
-            "dayAgo",
-            "dayAgo"
-          ),
+        className={classNames(projectcss.all, sty.dayAgoCheckbox, {
+          [sty.dayAgoCheckboxdayAgo]: hasVariant(variants, "dayAgo", "dayAgo"),
         })}
       >
         <Checkbox
           data-plasmic-name={"checkbox"}
           data-plasmic-override={overrides.checkbox}
           className={classNames("__wab_instance", sty.checkbox, {
-            [sty.checkbox__dayAgo]: hasVariant(variants, "dayAgo", "dayAgo"),
+            [sty.checkboxdayAgo]: hasVariant(variants, "dayAgo", "dayAgo"),
           })}
-          selected={
-            hasVariant(variants, "dayAgo", "dayAgo")
-              ? ("selected" as const)
-              : undefined
-          }
+          selected={hasVariant(variants, "dayAgo", "dayAgo") ? true : undefined}
         />
 
         <div
           className={classNames(
-            defaultcss.all,
-            defaultcss.__wab_text,
-            sty.freeBox__x3F9S
+            projectcss.all,
+            projectcss.__wab_text,
+            sty.text__x3F9S
           )}
         >
           {"前日"}
@@ -156,7 +169,8 @@ function PlasmicTimeInput__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "hour", "minute", "dayAgoCheckbox", "checkbox"],
+  root: ["root", "freeBox", "hour", "minute", "dayAgoCheckbox", "checkbox"],
+  freeBox: ["freeBox", "hour", "minute"],
   hour: ["hour"],
   minute: ["minute"],
   dayAgoCheckbox: ["dayAgoCheckbox", "checkbox"],
@@ -167,6 +181,7 @@ type DescendantsType<T extends NodeNameType> =
   typeof PlasmicDescendants[T][number];
 type NodeDefaultElementType = {
   root: "div";
+  freeBox: "div";
   hour: "input";
   minute: "input";
   dayAgoCheckbox: "div";
@@ -184,17 +199,16 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicTimeInput__VariantsArgs;
     args?: PlasmicTimeInput__ArgsType;
     overrides?: NodeOverridesType<T>;
-    dataFetches?: PlasmicTimeInput__Fetches;
   } & Omit<PlasmicTimeInput__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
-    // Specify args directly as props
-    Omit<PlasmicTimeInput__ArgsType, ReservedPropsType> &
-    // Specify overrides for each element directly as props
-    Omit<
+    /* Specify args directly as props*/ Omit<
+      PlasmicTimeInput__ArgsType,
+      ReservedPropsType
+    > &
+    /* Specify overrides for each element directly as props*/ Omit<
       NodeOverridesType<T>,
       ReservedPropsType | VariantPropType | ArgPropType
     > &
-    // Specify props for the root element
-    Omit<
+    /* Specify props for the root element*/ Omit<
       Partial<React.ComponentProps<NodeDefaultElementType[T]>>,
       ReservedPropsType | VariantPropType | ArgPropType | DescendantsType<T>
     >;
@@ -204,20 +218,21 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
   const func = function <T extends PropsType>(
     props: T & StrictProps<T, PropsType>
   ) {
-    const { variants, args, overrides } = deriveRenderOpts(props, {
-      name: nodeName,
-      descendantNames: [...PlasmicDescendants[nodeName]],
-      internalArgPropNames: PlasmicTimeInput__ArgProps,
-      internalVariantPropNames: PlasmicTimeInput__VariantProps,
-    });
-
-    const { dataFetches } = props;
+    const { variants, args, overrides } = React.useMemo(
+      () =>
+        deriveRenderOpts(props, {
+          name: nodeName,
+          descendantNames: [...PlasmicDescendants[nodeName]],
+          internalArgPropNames: PlasmicTimeInput__ArgProps,
+          internalVariantPropNames: PlasmicTimeInput__VariantProps,
+        }),
+      [props, nodeName]
+    );
 
     return PlasmicTimeInput__RenderFunc({
       variants,
       args,
       overrides,
-      dataFetches,
       forNode: nodeName,
     });
   };
@@ -234,6 +249,7 @@ export const PlasmicTimeInput = Object.assign(
   makeNodeComponent("root"),
   {
     // Helper components rendering sub-elements
+    freeBox: makeNodeComponent("freeBox"),
     hour: makeNodeComponent("hour"),
     minute: makeNodeComponent("minute"),
     dayAgoCheckbox: makeNodeComponent("dayAgoCheckbox"),

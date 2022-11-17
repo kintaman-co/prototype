@@ -16,6 +16,7 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 
 import * as p from "@plasmicapp/react-web";
+import * as ph from "@plasmicapp/host";
 
 import {
   hasVariant,
@@ -40,18 +41,16 @@ import Skeleton from "../../Skeleton"; // plasmic-import: wYIaMxnRFr/component
 import Working from "../../Working"; // plasmic-import: FGt7QMp0cE/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
-import * as defaultcss from "../plasmic__default_style.module.css"; // plasmic-import: global/defaultcss
-import * as projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
-import * as sty from "./PlasmicHomepage.module.css"; // plasmic-import: Rp4JlG0GLd/css
+
+import projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
+import sty from "./PlasmicHomepage.module.css"; // plasmic-import: Rp4JlG0GLd/css
 
 export type PlasmicHomepage__VariantMembers = {
   isWorking: "isWorking";
 };
-
 export type PlasmicHomepage__VariantsArgs = {
   isWorking?: SingleBooleanChoiceArg<"isWorking">;
 };
-
 type VariantPropType = keyof PlasmicHomepage__VariantsArgs;
 export const PlasmicHomepage__VariantProps = new Array<VariantPropType>(
   "isWorking"
@@ -69,31 +68,30 @@ export type PlasmicHomepage__OverridesType = {
   working?: p.Flex<typeof Working>;
 };
 
-export interface DefaultHomepageProps {
-  dataFetches: PlasmicHomepage__Fetches;
-}
+export interface DefaultHomepageProps {}
 
 function PlasmicHomepage__RenderFunc(props: {
   variants: PlasmicHomepage__VariantsArgs;
   args: PlasmicHomepage__ArgsType;
   overrides: PlasmicHomepage__OverridesType;
-  dataFetches?: PlasmicHomepage__Fetches;
+
   forNode?: string;
 }) {
-  const { variants, args, overrides, forNode, dataFetches } = props;
+  const { variants, overrides, forNode } = props;
+
+  const $ctx = ph.useDataEnv?.() || {};
+  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+
+  const $props = {
+    ...args,
+    ...variants,
+  };
+
+  const currentUser = p.useCurrentUser?.() || {};
 
   return (
     <React.Fragment>
-      <Head>
-        <title key="title">{""}</title>
-        <meta key="og:title" property="og:title" content={""} />
-        <meta
-          key="description"
-          name="description"
-          property="og:description"
-          content={""}
-        />
-      </Head>
+      <Head></Head>
 
       <style>{`
         body {
@@ -101,18 +99,21 @@ function PlasmicHomepage__RenderFunc(props: {
         }
       `}</style>
 
-      <div className={defaultcss.plasmic_page_wrapper}>
+      <div className={projectcss.plasmic_page_wrapper}>
         <div
           data-plasmic-name={"root"}
           data-plasmic-override={overrides.root}
           data-plasmic-root={true}
           data-plasmic-for-node={forNode}
           className={classNames(
-            defaultcss.all,
+            projectcss.all,
             projectcss.root_reset,
+            projectcss.plasmic_default_styles,
+            projectcss.plasmic_mixins,
+            projectcss.plasmic_tokens,
             sty.root,
             {
-              [sty.root__isWorking]: hasVariant(
+              [sty.rootisWorking]: hasVariant(
                 variants,
                 "isWorking",
                 "isWorking"
@@ -133,8 +134,8 @@ function PlasmicHomepage__RenderFunc(props: {
           >
             {(hasVariant(variants, "isWorking", "isWorking") ? true : true) ? (
               <div
-                className={classNames(defaultcss.all, sty.freeBox___2DQ47, {
-                  [sty.freeBox__isWorking___2DQ479VcX4]: hasVariant(
+                className={classNames(projectcss.all, sty.freeBox___2DQ47, {
+                  [sty.freeBoxisWorking___2DQ479VcX4]: hasVariant(
                     variants,
                     "isWorking",
                     "isWorking"
@@ -170,7 +171,7 @@ function PlasmicHomepage__RenderFunc(props: {
                       </React.Fragment>
                     }
                     className={classNames("__wab_instance", sty.notWorking, {
-                      [sty.notWorking__isWorking]: hasVariant(
+                      [sty.notWorkingisWorking]: hasVariant(
                         variants,
                         "isWorking",
                         "isWorking"
@@ -182,8 +183,8 @@ function PlasmicHomepage__RenderFunc(props: {
             ) : null}
             {(hasVariant(variants, "isWorking", "isWorking") ? true : true) ? (
               <div
-                className={classNames(defaultcss.all, sty.freeBox__iv4CX, {
-                  [sty.freeBox__isWorking__iv4CX9VcX4]: hasVariant(
+                className={classNames(projectcss.all, sty.freeBox__iv4CX, {
+                  [sty.freeBoxisWorking__iv4CX9VcX4]: hasVariant(
                     variants,
                     "isWorking",
                     "isWorking"
@@ -235,17 +236,16 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicHomepage__VariantsArgs;
     args?: PlasmicHomepage__ArgsType;
     overrides?: NodeOverridesType<T>;
-    dataFetches?: PlasmicHomepage__Fetches;
   } & Omit<PlasmicHomepage__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
-    // Specify args directly as props
-    Omit<PlasmicHomepage__ArgsType, ReservedPropsType> &
-    // Specify overrides for each element directly as props
-    Omit<
+    /* Specify args directly as props*/ Omit<
+      PlasmicHomepage__ArgsType,
+      ReservedPropsType
+    > &
+    /* Specify overrides for each element directly as props*/ Omit<
       NodeOverridesType<T>,
       ReservedPropsType | VariantPropType | ArgPropType
     > &
-    // Specify props for the root element
-    Omit<
+    /* Specify props for the root element*/ Omit<
       Partial<React.ComponentProps<NodeDefaultElementType[T]>>,
       ReservedPropsType | VariantPropType | ArgPropType | DescendantsType<T>
     >;
@@ -255,20 +255,21 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
   const func = function <T extends PropsType>(
     props: T & StrictProps<T, PropsType>
   ) {
-    const { variants, args, overrides } = deriveRenderOpts(props, {
-      name: nodeName,
-      descendantNames: [...PlasmicDescendants[nodeName]],
-      internalArgPropNames: PlasmicHomepage__ArgProps,
-      internalVariantPropNames: PlasmicHomepage__VariantProps,
-    });
-
-    const { dataFetches } = props;
+    const { variants, args, overrides } = React.useMemo(
+      () =>
+        deriveRenderOpts(props, {
+          name: nodeName,
+          descendantNames: [...PlasmicDescendants[nodeName]],
+          internalArgPropNames: PlasmicHomepage__ArgProps,
+          internalVariantPropNames: PlasmicHomepage__VariantProps,
+        }),
+      [props, nodeName]
+    );
 
     return PlasmicHomepage__RenderFunc({
       variants,
       args,
       overrides,
-      dataFetches,
       forNode: nodeName,
     });
   };
@@ -293,6 +294,14 @@ export const PlasmicHomepage = Object.assign(
     // Metadata about props expected for PlasmicHomepage
     internalVariantProps: PlasmicHomepage__VariantProps,
     internalArgProps: PlasmicHomepage__ArgProps,
+
+    // Page metadata
+    pageMetadata: {
+      title: "",
+      description: "",
+      ogImageSrc: "",
+      canonical: "",
+    },
   }
 );
 

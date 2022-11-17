@@ -16,6 +16,7 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 
 import * as p from "@plasmicapp/react-web";
+import * as ph from "@plasmicapp/host";
 
 import {
   hasVariant,
@@ -36,12 +37,11 @@ import {
 import Button from "../../Button"; // plasmic-import: CM9oqbJYK7/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
-import * as defaultcss from "../plasmic__default_style.module.css"; // plasmic-import: global/defaultcss
-import * as projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
-import * as sty from "./PlasmicLogRecord.module.css"; // plasmic-import: F0onFvhtbG/css
+
+import projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
+import sty from "./PlasmicLogRecord.module.css"; // plasmic-import: F0onFvhtbG/css
 
 export type PlasmicLogRecord__VariantMembers = {};
-
 export type PlasmicLogRecord__VariantsArgs = {};
 type VariantPropType = keyof PlasmicLogRecord__VariantsArgs;
 export const PlasmicLogRecord__VariantProps = new Array<VariantPropType>();
@@ -54,7 +54,6 @@ export type PlasmicLogRecord__ArgsType = {
   duration?: React.ReactNode;
   bizId?: string;
 };
-
 type ArgPropType = keyof PlasmicLogRecord__ArgsType;
 export const PlasmicLogRecord__ArgProps = new Array<ArgPropType>(
   "biz",
@@ -68,6 +67,7 @@ export const PlasmicLogRecord__ArgProps = new Array<ArgPropType>(
 export type PlasmicLogRecord__OverridesType = {
   root?: p.Flex<"div">;
   edit?: p.Flex<typeof Button>;
+  text?: p.Flex<"div">;
 };
 
 export interface DefaultLogRecordProps {
@@ -84,10 +84,20 @@ function PlasmicLogRecord__RenderFunc(props: {
   variants: PlasmicLogRecord__VariantsArgs;
   args: PlasmicLogRecord__ArgsType;
   overrides: PlasmicLogRecord__OverridesType;
-  dataFetches?: PlasmicLogRecord__Fetches;
+
   forNode?: string;
 }) {
-  const { variants, args, overrides, forNode, dataFetches } = props;
+  const { variants, overrides, forNode } = props;
+
+  const $ctx = ph.useDataEnv?.() || {};
+  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+
+  const $props = {
+    ...args,
+    ...variants,
+  };
+
+  const currentUser = p.useCurrentUser?.() || {};
 
   return (
     <div
@@ -96,15 +106,18 @@ function PlasmicLogRecord__RenderFunc(props: {
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
       className={classNames(
-        defaultcss.all,
+        projectcss.all,
         projectcss.root_reset,
+        projectcss.plasmic_default_styles,
+        projectcss.plasmic_mixins,
+        projectcss.plasmic_tokens,
         sty.root,
         "recordRow" as const
       )}
     >
       <div
         className={classNames(
-          defaultcss.all,
+          projectcss.all,
           sty.freeBox___1Gl2,
           "recordCell" as const
         )}
@@ -117,7 +130,7 @@ function PlasmicLogRecord__RenderFunc(props: {
 
       <div
         className={classNames(
-          defaultcss.all,
+          projectcss.all,
           sty.freeBox___0EFJ,
           "recordCell" as const
         )}
@@ -130,13 +143,24 @@ function PlasmicLogRecord__RenderFunc(props: {
 
       <div
         className={classNames(
-          defaultcss.all,
+          projectcss.all,
           sty.freeBox__xXXdt,
           "recordCell" as const
         )}
       >
         {p.renderPlasmicSlot({
-          defaultContents: "終了時刻",
+          defaultContents: (
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__wIcHd
+              )}
+            >
+              {"終了時刻"}
+            </div>
+          ),
+
           value: args.end,
         })}
       </div>
@@ -144,14 +168,25 @@ function PlasmicLogRecord__RenderFunc(props: {
       {true ? (
         <div
           className={classNames(
-            defaultcss.all,
+            projectcss.all,
             sty.freeBox__d8Gjr,
             "recordCell" as const
           )}
         >
           {true
             ? p.renderPlasmicSlot({
-                defaultContents: "労働時間",
+                defaultContents: (
+                  <div
+                    className={classNames(
+                      projectcss.all,
+                      projectcss.__wab_text,
+                      sty.text__kk1GV
+                    )}
+                  >
+                    {"労働時間"}
+                  </div>
+                ),
+
                 value: args.duration,
               })
             : null}
@@ -160,20 +195,31 @@ function PlasmicLogRecord__RenderFunc(props: {
 
       <div
         className={classNames(
-          defaultcss.all,
+          projectcss.all,
           sty.freeBox__vSsos,
           "recordCell" as const
         )}
       >
         {p.renderPlasmicSlot({
-          defaultContents: "日報",
+          defaultContents: (
+            <div
+              className={classNames(
+                projectcss.all,
+                projectcss.__wab_text,
+                sty.text__vml5D
+              )}
+            >
+              {"日報"}
+            </div>
+          ),
+
           value: args.report,
         })}
       </div>
 
       <div
         className={classNames(
-          defaultcss.all,
+          projectcss.all,
           sty.freeBox__xsO8E,
           "recordCell" as const
         )}
@@ -184,10 +230,12 @@ function PlasmicLogRecord__RenderFunc(props: {
           className={classNames("__wab_instance", sty.edit)}
         >
           <div
+            data-plasmic-name={"text"}
+            data-plasmic-override={overrides.text}
             className={classNames(
-              defaultcss.all,
-              defaultcss.__wab_text,
-              sty.freeBox__yB4Z
+              projectcss.all,
+              projectcss.__wab_text,
+              sty.text
             )}
           >
             {"編集"}
@@ -199,8 +247,9 @@ function PlasmicLogRecord__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "edit"],
-  edit: ["edit"],
+  root: ["root", "edit", "text"],
+  edit: ["edit", "text"],
+  text: ["text"],
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -208,6 +257,7 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   edit: typeof Button;
+  text: "div";
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -221,17 +271,16 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicLogRecord__VariantsArgs;
     args?: PlasmicLogRecord__ArgsType;
     overrides?: NodeOverridesType<T>;
-    dataFetches?: PlasmicLogRecord__Fetches;
   } & Omit<PlasmicLogRecord__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
-    // Specify args directly as props
-    Omit<PlasmicLogRecord__ArgsType, ReservedPropsType> &
-    // Specify overrides for each element directly as props
-    Omit<
+    /* Specify args directly as props*/ Omit<
+      PlasmicLogRecord__ArgsType,
+      ReservedPropsType
+    > &
+    /* Specify overrides for each element directly as props*/ Omit<
       NodeOverridesType<T>,
       ReservedPropsType | VariantPropType | ArgPropType
     > &
-    // Specify props for the root element
-    Omit<
+    /* Specify props for the root element*/ Omit<
       Partial<React.ComponentProps<NodeDefaultElementType[T]>>,
       ReservedPropsType | VariantPropType | ArgPropType | DescendantsType<T>
     >;
@@ -241,20 +290,21 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
   const func = function <T extends PropsType>(
     props: T & StrictProps<T, PropsType>
   ) {
-    const { variants, args, overrides } = deriveRenderOpts(props, {
-      name: nodeName,
-      descendantNames: [...PlasmicDescendants[nodeName]],
-      internalArgPropNames: PlasmicLogRecord__ArgProps,
-      internalVariantPropNames: PlasmicLogRecord__VariantProps,
-    });
-
-    const { dataFetches } = props;
+    const { variants, args, overrides } = React.useMemo(
+      () =>
+        deriveRenderOpts(props, {
+          name: nodeName,
+          descendantNames: [...PlasmicDescendants[nodeName]],
+          internalArgPropNames: PlasmicLogRecord__ArgProps,
+          internalVariantPropNames: PlasmicLogRecord__VariantProps,
+        }),
+      [props, nodeName]
+    );
 
     return PlasmicLogRecord__RenderFunc({
       variants,
       args,
       overrides,
-      dataFetches,
       forNode: nodeName,
     });
   };
@@ -272,6 +322,7 @@ export const PlasmicLogRecord = Object.assign(
   {
     // Helper components rendering sub-elements
     edit: makeNodeComponent("edit"),
+    text: makeNodeComponent("text"),
 
     // Metadata about props expected for PlasmicLogRecord
     internalVariantProps: PlasmicLogRecord__VariantProps,

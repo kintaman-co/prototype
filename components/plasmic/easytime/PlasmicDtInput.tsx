@@ -16,6 +16,7 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 
 import * as p from "@plasmicapp/react-web";
+import * as ph from "@plasmicapp/host";
 
 import {
   hasVariant,
@@ -38,18 +39,16 @@ import Button from "../../Button"; // plasmic-import: CM9oqbJYK7/component
 import TimeInput from "../../TimeInput"; // plasmic-import: FN-EzPooHT/component
 
 import "@plasmicapp/react-web/lib/plasmic.css";
-import * as defaultcss from "../plasmic__default_style.module.css"; // plasmic-import: global/defaultcss
-import * as projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
-import * as sty from "./PlasmicDtInput.module.css"; // plasmic-import: RlnXukMjMc/css
+
+import projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
+import sty from "./PlasmicDtInput.module.css"; // plasmic-import: RlnXukMjMc/css
 
 export type PlasmicDtInput__VariantMembers = {
   type: "now" | "custom";
 };
-
 export type PlasmicDtInput__VariantsArgs = {
   type?: SingleChoiceArg<"now" | "custom">;
 };
-
 type VariantPropType = keyof PlasmicDtInput__VariantsArgs;
 export const PlasmicDtInput__VariantProps = new Array<VariantPropType>("type");
 
@@ -61,6 +60,7 @@ export type PlasmicDtInput__OverridesType = {
   root?: p.Flex<"div">;
   now?: p.Flex<"div">;
   custom?: p.Flex<"div">;
+  text?: p.Flex<"div">;
   customTime?: p.Flex<typeof TimeInput>;
 };
 
@@ -73,10 +73,20 @@ function PlasmicDtInput__RenderFunc(props: {
   variants: PlasmicDtInput__VariantsArgs;
   args: PlasmicDtInput__ArgsType;
   overrides: PlasmicDtInput__OverridesType;
-  dataFetches?: PlasmicDtInput__Fetches;
+
   forNode?: string;
 }) {
-  const { variants, args, overrides, forNode, dataFetches } = props;
+  const { variants, overrides, forNode } = props;
+
+  const $ctx = ph.useDataEnv?.() || {};
+  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+
+  const $props = {
+    ...args,
+    ...variants,
+  };
+
+  const currentUser = p.useCurrentUser?.() || {};
 
   return (
     <div
@@ -84,15 +94,21 @@ function PlasmicDtInput__RenderFunc(props: {
       data-plasmic-override={overrides.root}
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
-      className={classNames(defaultcss.all, projectcss.root_reset, sty.root, {
-        [sty.root__type_now]: hasVariant(variants, "type", "now"),
-      })}
+      className={classNames(
+        projectcss.all,
+        projectcss.root_reset,
+        projectcss.plasmic_default_styles,
+        projectcss.plasmic_mixins,
+        projectcss.plasmic_tokens,
+        sty.root,
+        { [sty.roottype_now]: hasVariant(variants, "type", "now") }
+      )}
     >
       <p.Stack
         as={"div"}
         hasGap={true}
-        className={classNames(defaultcss.all, sty.freeBox__ovUiv, {
-          [sty.freeBox__type_custom__ovUivtUuxl]: hasVariant(
+        className={classNames(projectcss.all, sty.freeBox__ovUiv, {
+          [sty.freeBoxtype_custom__ovUivtUuxl]: hasVariant(
             variants,
             "type",
             "custom"
@@ -104,31 +120,27 @@ function PlasmicDtInput__RenderFunc(props: {
           data-plasmic-name={"now"}
           data-plasmic-override={overrides.now}
           hasGap={true}
-          className={classNames(defaultcss.all, sty.now)}
+          className={classNames(projectcss.all, sty.now)}
         >
           <Radio
             className={classNames("__wab_instance", sty.radio__fQFz6, {
-              [sty.radio__type_now__fQFz6MEudU]: hasVariant(
+              [sty.radiotype_now__fQFz6MEudU]: hasVariant(
                 variants,
                 "type",
                 "now"
               ),
             })}
-            selected={
-              hasVariant(variants, "type", "now")
-                ? ("selected" as const)
-                : undefined
-            }
+            selected={hasVariant(variants, "type", "now") ? true : undefined}
           />
 
           <Button
             className={classNames("__wab_instance", sty.button__f6Ukz, {
-              [sty.button__type_custom__f6UkztUuxl]: hasVariant(
+              [sty.buttontype_custom__f6UkztUuxl]: hasVariant(
                 variants,
                 "type",
                 "custom"
               ),
-              [sty.button__type_now__f6UkzmEudU]: hasVariant(
+              [sty.buttontype_now__f6UkzmEudU]: hasVariant(
                 variants,
                 "type",
                 "now"
@@ -151,31 +163,32 @@ function PlasmicDtInput__RenderFunc(props: {
           data-plasmic-name={"custom"}
           data-plasmic-override={overrides.custom}
           hasGap={true}
-          className={classNames(defaultcss.all, sty.custom, {
-            [sty.custom__type_custom]: hasVariant(variants, "type", "custom"),
-            [sty.custom__type_now]: hasVariant(variants, "type", "now"),
+          className={classNames(projectcss.all, sty.custom, {
+            [sty.customtype_custom]: hasVariant(variants, "type", "custom"),
+            [sty.customtype_now]: hasVariant(variants, "type", "now"),
           })}
         >
           <Radio
             className={classNames("__wab_instance", sty.radio___6Hrv7, {
-              [sty.radio__type_custom___6Hrv7TUuxl]: hasVariant(
+              [sty.radiotype_custom___6Hrv7TUuxl]: hasVariant(
                 variants,
                 "type",
                 "custom"
               ),
+              [sty.radiotype_now___6Hrv7MEudU]: hasVariant(
+                variants,
+                "type",
+                "now"
+              ),
             })}
-            selected={
-              hasVariant(variants, "type", "custom")
-                ? ("selected" as const)
-                : undefined
-            }
+            selected={hasVariant(variants, "type", "custom") ? true : undefined}
           />
 
           <p.Stack
             as={"div"}
             hasGap={true}
-            className={classNames(defaultcss.all, sty.freeBox__qxmWq, {
-              [sty.freeBox__type_now__qxmWqmEudU]: hasVariant(
+            className={classNames(projectcss.all, sty.freeBox__qxmWq, {
+              [sty.freeBoxtype_now__qxmWqmEudU]: hasVariant(
                 variants,
                 "type",
                 "now"
@@ -184,12 +197,12 @@ function PlasmicDtInput__RenderFunc(props: {
           >
             <Button
               className={classNames("__wab_instance", sty.button__ogIwm, {
-                [sty.button__type_custom__ogIwmtUuxl]: hasVariant(
+                [sty.buttontype_custom__ogIwmtUuxl]: hasVariant(
                   variants,
                   "type",
                   "custom"
                 ),
-                [sty.button__type_now__ogIwmmEudU]: hasVariant(
+                [sty.buttontype_now__ogIwmmEudU]: hasVariant(
                   variants,
                   "type",
                   "now"
@@ -204,21 +217,19 @@ function PlasmicDtInput__RenderFunc(props: {
               }
             >
               <div
+                data-plasmic-name={"text"}
+                data-plasmic-override={overrides.text}
                 className={classNames(
-                  defaultcss.all,
-                  defaultcss.__wab_text,
-                  sty.freeBox__efhDa,
+                  projectcss.all,
+                  projectcss.__wab_text,
+                  sty.text,
                   {
-                    [sty.freeBox__type_custom__efhDAtUuxl]: hasVariant(
+                    [sty.texttype_custom]: hasVariant(
                       variants,
                       "type",
                       "custom"
                     ),
-                    [sty.freeBox__type_now__efhDAmEudU]: hasVariant(
-                      variants,
-                      "type",
-                      "now"
-                    ),
+                    [sty.texttype_now]: hasVariant(variants, "type", "now"),
                   }
                 )}
               >
@@ -230,7 +241,7 @@ function PlasmicDtInput__RenderFunc(props: {
               data-plasmic-name={"customTime"}
               data-plasmic-override={overrides.customTime}
               className={classNames("__wab_instance", sty.customTime, {
-                [sty.customTime__type_now]: hasVariant(variants, "type", "now"),
+                [sty.customTimetype_now]: hasVariant(variants, "type", "now"),
               })}
             />
           </p.Stack>
@@ -241,9 +252,10 @@ function PlasmicDtInput__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "now", "custom", "customTime"],
+  root: ["root", "now", "custom", "text", "customTime"],
   now: ["now"],
-  custom: ["custom", "customTime"],
+  custom: ["custom", "text", "customTime"],
+  text: ["text"],
   customTime: ["customTime"],
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
@@ -253,6 +265,7 @@ type NodeDefaultElementType = {
   root: "div";
   now: "div";
   custom: "div";
+  text: "div";
   customTime: typeof TimeInput;
 };
 
@@ -267,17 +280,16 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicDtInput__VariantsArgs;
     args?: PlasmicDtInput__ArgsType;
     overrides?: NodeOverridesType<T>;
-    dataFetches?: PlasmicDtInput__Fetches;
   } & Omit<PlasmicDtInput__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
-    // Specify args directly as props
-    Omit<PlasmicDtInput__ArgsType, ReservedPropsType> &
-    // Specify overrides for each element directly as props
-    Omit<
+    /* Specify args directly as props*/ Omit<
+      PlasmicDtInput__ArgsType,
+      ReservedPropsType
+    > &
+    /* Specify overrides for each element directly as props*/ Omit<
       NodeOverridesType<T>,
       ReservedPropsType | VariantPropType | ArgPropType
     > &
-    // Specify props for the root element
-    Omit<
+    /* Specify props for the root element*/ Omit<
       Partial<React.ComponentProps<NodeDefaultElementType[T]>>,
       ReservedPropsType | VariantPropType | ArgPropType | DescendantsType<T>
     >;
@@ -287,20 +299,21 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
   const func = function <T extends PropsType>(
     props: T & StrictProps<T, PropsType>
   ) {
-    const { variants, args, overrides } = deriveRenderOpts(props, {
-      name: nodeName,
-      descendantNames: [...PlasmicDescendants[nodeName]],
-      internalArgPropNames: PlasmicDtInput__ArgProps,
-      internalVariantPropNames: PlasmicDtInput__VariantProps,
-    });
-
-    const { dataFetches } = props;
+    const { variants, args, overrides } = React.useMemo(
+      () =>
+        deriveRenderOpts(props, {
+          name: nodeName,
+          descendantNames: [...PlasmicDescendants[nodeName]],
+          internalArgPropNames: PlasmicDtInput__ArgProps,
+          internalVariantPropNames: PlasmicDtInput__VariantProps,
+        }),
+      [props, nodeName]
+    );
 
     return PlasmicDtInput__RenderFunc({
       variants,
       args,
       overrides,
-      dataFetches,
       forNode: nodeName,
     });
   };
@@ -319,6 +332,7 @@ export const PlasmicDtInput = Object.assign(
     // Helper components rendering sub-elements
     now: makeNodeComponent("now"),
     custom: makeNodeComponent("custom"),
+    text: makeNodeComponent("text"),
     customTime: makeNodeComponent("customTime"),
 
     // Metadata about props expected for PlasmicDtInput

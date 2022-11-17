@@ -16,6 +16,7 @@ import Head from "next/head";
 import Link, { LinkProps } from "next/link";
 
 import * as p from "@plasmicapp/react-web";
+import * as ph from "@plasmicapp/host";
 import * as pp from "@plasmicapp/react-web";
 import {
   hasVariant,
@@ -35,22 +36,20 @@ import {
 } from "@plasmicapp/react-web";
 
 import "@plasmicapp/react-web/lib/plasmic.css";
-import * as defaultcss from "../plasmic__default_style.module.css"; // plasmic-import: global/defaultcss
-import * as projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
-import * as sty from "./PlasmicSwitch.module.css"; // plasmic-import: j0fmjgi6Tf/css
+
+import projectcss from "./plasmic_easytime.module.css"; // plasmic-import: mBKHaRhjQbiZuznDyARcTS/projectcss
+import sty from "./PlasmicSwitch.module.css"; // plasmic-import: j0fmjgi6Tf/css
 
 export type PlasmicSwitch__VariantMembers = {
   noLabel: "noLabel";
   isDisabled: "isDisabled";
   isChecked: "isChecked";
 };
-
 export type PlasmicSwitch__VariantsArgs = {
   noLabel?: SingleBooleanChoiceArg<"noLabel">;
   isDisabled?: SingleBooleanChoiceArg<"isDisabled">;
   isChecked?: SingleBooleanChoiceArg<"isChecked">;
 };
-
 type VariantPropType = keyof PlasmicSwitch__VariantsArgs;
 export const PlasmicSwitch__VariantProps = new Array<VariantPropType>(
   "noLabel",
@@ -63,7 +62,6 @@ export type PlasmicSwitch__ArgsType = {
   name?: string;
   value?: string;
 };
-
 type ArgPropType = keyof PlasmicSwitch__ArgsType;
 export const PlasmicSwitch__ArgProps = new Array<ArgPropType>(
   "children",
@@ -85,16 +83,25 @@ function PlasmicSwitch__RenderFunc(props: {
   variants: PlasmicSwitch__VariantsArgs;
   args: PlasmicSwitch__ArgsType;
   overrides: PlasmicSwitch__OverridesType;
-  dataFetches?: PlasmicSwitch__Fetches;
+
   forNode?: string;
 }) {
-  const { variants, args, overrides, forNode, dataFetches } = props;
+  const { variants, overrides, forNode } = props;
+
+  const $ctx = ph.useDataEnv?.() || {};
+  const args = React.useMemo(() => Object.assign({}, props.args), [props.args]);
+
+  const $props = {
+    ...args,
+    ...variants,
+  };
+
+  const currentUser = p.useCurrentUser?.() || {};
 
   const [isRootFocusVisibleWithin, triggerRootFocusVisibleWithinProps] =
     useTrigger("useFocusVisibleWithin", {
       isTextInput: false,
     });
-
   const triggers = {
     focusVisibleWithin_root: isRootFocusVisibleWithin,
   };
@@ -105,29 +112,33 @@ function PlasmicSwitch__RenderFunc(props: {
       data-plasmic-override={overrides.root}
       data-plasmic-root={true}
       data-plasmic-for-node={forNode}
-      className={classNames(defaultcss.all, projectcss.root_reset, sty.root, {
-        [sty.root_____focusVisibleWithin]: triggers.focusVisibleWithin_root,
-        [sty.root__isChecked]: hasVariant(variants, "isChecked", "isChecked"),
-        [sty.root__isDisabled]: hasVariant(
-          variants,
-          "isDisabled",
-          "isDisabled"
-        ),
-        [sty.root__noLabel]: hasVariant(variants, "noLabel", "noLabel"),
-      })}
+      className={classNames(
+        projectcss.all,
+        projectcss.root_reset,
+        projectcss.plasmic_default_styles,
+        projectcss.plasmic_mixins,
+        projectcss.plasmic_tokens,
+        sty.root,
+        {
+          [sty.root___focusVisibleWithin]: triggers.focusVisibleWithin_root,
+          [sty.rootisChecked]: hasVariant(variants, "isChecked", "isChecked"),
+          [sty.rootisDisabled]: hasVariant(
+            variants,
+            "isDisabled",
+            "isDisabled"
+          ),
+          [sty.rootnoLabel]: hasVariant(variants, "noLabel", "noLabel"),
+        }
+      )}
       data-plasmic-trigger-props={[triggerRootFocusVisibleWithinProps]}
     >
       <div
         data-plasmic-name={"toggle"}
         data-plasmic-override={overrides.toggle}
-        className={classNames(defaultcss.all, sty.toggle, {
-          [sty.toggle_____focusVisibleWithin]: triggers.focusVisibleWithin_root,
-          [sty.toggle__isChecked]: hasVariant(
-            variants,
-            "isChecked",
-            "isChecked"
-          ),
-          [sty.toggle__isDisabled]: hasVariant(
+        className={classNames(projectcss.all, sty.toggle, {
+          [sty.toggle___focusVisibleWithin]: triggers.focusVisibleWithin_root,
+          [sty.toggleisChecked]: hasVariant(variants, "isChecked", "isChecked"),
+          [sty.toggleisDisabled]: hasVariant(
             variants,
             "isDisabled",
             "isDisabled"
@@ -137,10 +148,9 @@ function PlasmicSwitch__RenderFunc(props: {
         <div
           data-plasmic-name={"track"}
           data-plasmic-override={overrides.track}
-          className={classNames(defaultcss.all, sty.track, {
-            [sty.track_____focusVisibleWithin]:
-              triggers.focusVisibleWithin_root,
-            [sty.track__isChecked]: hasVariant(
+          className={classNames(projectcss.all, sty.track, {
+            [sty.track___focusVisibleWithin]: triggers.focusVisibleWithin_root,
+            [sty.trackisChecked]: hasVariant(
               variants,
               "isChecked",
               "isChecked"
@@ -151,10 +161,9 @@ function PlasmicSwitch__RenderFunc(props: {
         <div
           data-plasmic-name={"thumb"}
           data-plasmic-override={overrides.thumb}
-          className={classNames(defaultcss.all, sty.thumb, {
-            [sty.thumb_____focusVisibleWithin]:
-              triggers.focusVisibleWithin_root,
-            [sty.thumb__isChecked]: hasVariant(
+          className={classNames(projectcss.all, sty.thumb, {
+            [sty.thumb___focusVisibleWithin]: triggers.focusVisibleWithin_root,
+            [sty.thumbisChecked]: hasVariant(
               variants,
               "isChecked",
               "isChecked"
@@ -167,10 +176,10 @@ function PlasmicSwitch__RenderFunc(props: {
         <div
           data-plasmic-name={"labelContainer"}
           data-plasmic-override={overrides.labelContainer}
-          className={classNames(defaultcss.all, sty.labelContainer, {
-            [sty.labelContainer_____focusVisibleWithin]:
+          className={classNames(projectcss.all, sty.labelContainer, {
+            [sty.labelContainer___focusVisibleWithin]:
               triggers.focusVisibleWithin_root,
-            [sty.labelContainer__noLabel]: hasVariant(
+            [sty.labelContainernoLabel]: hasVariant(
               variants,
               "noLabel",
               "noLabel"
@@ -180,10 +189,10 @@ function PlasmicSwitch__RenderFunc(props: {
           {p.renderPlasmicSlot({
             defaultContents: "Enter some text",
             value: args.children,
-            className: classNames(sty.slotChildren, {
-              [sty.slotChildren_____focusVisibleWithin]:
+            className: classNames(sty.slotTargetChildren, {
+              [sty.slotTargetChildren___focusVisibleWithin]:
                 triggers.focusVisibleWithin_root,
-              [sty.slotChildren__noLabel]: hasVariant(
+              [sty.slotTargetChildrennoLabel]: hasVariant(
                 variants,
                 "noLabel",
                 "noLabel"
@@ -214,7 +223,6 @@ function useBehavior<P extends pp.SwitchProps>(props: P, ref: pp.SwitchRef) {
       labelSlot: "children",
       root: "root",
     },
-
     ref
   );
 }
@@ -248,17 +256,16 @@ type NodeComponentProps<T extends NodeNameType> =
     variants?: PlasmicSwitch__VariantsArgs;
     args?: PlasmicSwitch__ArgsType;
     overrides?: NodeOverridesType<T>;
-    dataFetches?: PlasmicSwitch__Fetches;
   } & Omit<PlasmicSwitch__VariantsArgs, ReservedPropsType> & // Specify variants directly as props
-    // Specify args directly as props
-    Omit<PlasmicSwitch__ArgsType, ReservedPropsType> &
-    // Specify overrides for each element directly as props
-    Omit<
+    /* Specify args directly as props*/ Omit<
+      PlasmicSwitch__ArgsType,
+      ReservedPropsType
+    > &
+    /* Specify overrides for each element directly as props*/ Omit<
       NodeOverridesType<T>,
       ReservedPropsType | VariantPropType | ArgPropType
     > &
-    // Specify props for the root element
-    Omit<
+    /* Specify props for the root element*/ Omit<
       Partial<React.ComponentProps<NodeDefaultElementType[T]>>,
       ReservedPropsType | VariantPropType | ArgPropType | DescendantsType<T>
     >;
@@ -268,20 +275,21 @@ function makeNodeComponent<NodeName extends NodeNameType>(nodeName: NodeName) {
   const func = function <T extends PropsType>(
     props: T & StrictProps<T, PropsType>
   ) {
-    const { variants, args, overrides } = deriveRenderOpts(props, {
-      name: nodeName,
-      descendantNames: [...PlasmicDescendants[nodeName]],
-      internalArgPropNames: PlasmicSwitch__ArgProps,
-      internalVariantPropNames: PlasmicSwitch__VariantProps,
-    });
-
-    const { dataFetches } = props;
+    const { variants, args, overrides } = React.useMemo(
+      () =>
+        deriveRenderOpts(props, {
+          name: nodeName,
+          descendantNames: [...PlasmicDescendants[nodeName]],
+          internalArgPropNames: PlasmicSwitch__ArgProps,
+          internalVariantPropNames: PlasmicSwitch__VariantProps,
+        }),
+      [props, nodeName]
+    );
 
     return PlasmicSwitch__RenderFunc({
       variants,
       args,
       overrides,
-      dataFetches,
       forNode: nodeName,
     });
   };

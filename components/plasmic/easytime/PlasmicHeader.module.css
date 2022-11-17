@@ -3,13 +3,13 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  background: #6246ea;
+  background: var(--token-zzL4-6AjI);
   height: 64px;
   width: 100%;
   align-content: unset;
   position: relative;
   min-width: 0;
-  padding: 8px;
+  padding: 4px;
 }
 .left {
   display: flex;
@@ -24,6 +24,12 @@
 }
 .headerButton__xQogy:global(.__wab_instance) {
   position: relative;
+}
+.text {
+  font-family: "Josefin Sans", sans-serif;
+  letter-spacing: -0.08em;
+  font-weight: 500;
+  font-size: 1.7rem;
 }
 .right {
   display: flex;

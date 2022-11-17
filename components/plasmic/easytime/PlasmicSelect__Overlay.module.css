@@ -12,7 +12,7 @@
   align-items: stretch;
   justify-content: flex-start;
 }
-.top__relativePlacement_bottom {
+.toprelativePlacement_bottom {
   height: 2px;
   flex-shrink: 0;
 }
@@ -32,7 +32,7 @@
   align-items: stretch;
   justify-content: flex-start;
 }
-.left__relativePlacement_right {
+.leftrelativePlacement_right {
   width: 2px;
   flex-shrink: 0;
 }
@@ -56,7 +56,7 @@
   align-items: stretch;
   justify-content: flex-start;
 }
-.right__relativePlacement_left {
+.rightrelativePlacement_left {
   width: 2px;
   flex-shrink: 0;
 }
@@ -67,7 +67,7 @@
   align-items: stretch;
   justify-content: flex-start;
 }
-.bottom__relativePlacement_top {
+.bottomrelativePlacement_top {
   height: 2px;
   flex-shrink: 0;
 }

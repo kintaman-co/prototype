@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #d1d1e9;
+  background: var(--token-UuK4I_eTV);
   align-content: unset;
   position: relative;
   border-radius: 4px;
@@ -19,36 +19,36 @@
   flex-wrap: nowrap;
   margin: 12px;
 }
-.slotStart {
+.slotTargetStart {
   font-weight: 700;
-  color: #2b2c34 /* plasmic-token: gFZV8R6YM */;
+  color: var(--token-gFZV8R6YM);
 }
-.freeBox__hzet7 {
+.text__hzet7 {
   position: relative;
   height: auto;
   margin-right: 4px;
   margin-left: 4px;
 }
-.slotCurBiz {
+.slotTargetCurBiz {
   font-size: 20px;
   font-weight: 700;
-  color: #2b2c34 /* plasmic-token: gFZV8R6YM */;
+  color: var(--token-gFZV8R6YM);
 }
-.freeBox__cxJMq {
+.text__cxJMq {
   position: relative;
   height: auto;
   margin-right: 4px;
   margin-left: 4px;
 }
 .freeBox__jkZnv {
+  flex-direction: row;
   display: flex;
   position: relative;
-  flex-direction: row;
 }
 .freeBox__jkZnv > :global(.__wab_flex-container) {
   flex-direction: row;
-  align-items: stretch;
   justify-content: flex-start;
+  align-items: stretch;
   margin-left: calc(0px - 12px);
   width: calc(100% + 12px);
 }
@@ -62,13 +62,13 @@
   > img {
   margin-left: 12px;
 }
-.freeBox__mzU5R {
+.text__mzU5R {
   position: relative;
 }
 .duration {
   position: relative;
   height: auto;
-  color: #2b2c34 /* plasmic-token: gFZV8R6YM */;
+  color: var(--token-gFZV8R6YM);
   font-weight: 700;
 }
 .time:global(.__wab_instance) {
@@ -77,28 +77,28 @@
 .recordItem:global(.__wab_instance) {
   position: relative;
 }
-.freeBox__kpTfq {
+.text__kpTfq {
   position: relative;
 }
 .report {
   position: relative;
-  background: #fffffe;
+  background: var(--token-NyEsQChCc);
   width: 240px;
   height: 120px;
   border-radius: 4px;
   margin: 4px;
 }
 .freeBox__lcBi {
+  flex-direction: column;
   display: flex;
   position: relative;
-  flex-direction: column;
   min-width: 200px;
   padding: 8px;
 }
 .freeBox__lcBi > :global(.__wab_flex-container) {
   flex-direction: column;
-  align-items: stretch;
   justify-content: flex-start;
+  align-items: stretch;
   margin-top: calc(0px - 8px);
   height: calc(100% + 8px);
 }
@@ -115,12 +115,13 @@
 .out:global(.__wab_instance) {
   position: relative;
 }
-.freeBox__oLOgd {
+.text__oLOgd {
   height: auto;
 }
 .cancel:global(.__wab_instance) {
   position: relative;
+  display: flex;
 }
-.freeBox___0Ux8V {
+.text___0Ux8V {
   height: auto;
 }

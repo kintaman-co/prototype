@@ -9,10 +9,10 @@
   min-width: 0;
   padding: 4px 9px;
 }
-.root__isHighlighted {
+.rootisHighlighted {
   background: #f2f2f7;
 }
-.root__isDisabled {
+.rootisDisabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
@@ -23,21 +23,59 @@
   align-items: stretch;
   justify-content: flex-start;
 }
-.slotChildren {
+.slotTargetChildren {
   white-space: pre;
 }
-.slotChildren > *,
-.slotChildren > .__wab_slot > *,
-.slotChildren > .__wab_slot > .__wab_slot > *,
-.slotChildren > .__wab_slot > .__wab_slot > .__wab_slot > *,
-.slotChildren > picture > img,
-.slotChildren > .__wab_slot > picture > img,
-.slotChildren > .__wab_slot > .__wab_slot > picture > img,
-.slotChildren > .__wab_slot > .__wab_slot > .__wab_slot > picture > img {
+.slotTargetChildren > :global(.__wab_text),
+.slotTargetChildren > :global(.__wab_slot-string-wrapper),
+.slotTargetChildren > :global(.__wab_slot) > :global(.__wab_text),
+.slotTargetChildren
+  > :global(.__wab_slot)
+  > :global(.__wab_slot-string-wrapper),
+.slotTargetChildren
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_text),
+.slotTargetChildren
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot-string-wrapper),
+.slotTargetChildren
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_text),
+.slotTargetChildren
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot-string-wrapper) {
   text-overflow: ellipsis;
+}
+.slotTargetChildren > *,
+.slotTargetChildren > :global(.__wab_slot) > *,
+.slotTargetChildren > :global(.__wab_slot) > :global(.__wab_slot) > *,
+.slotTargetChildren
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > *,
+.slotTargetChildren > picture > img,
+.slotTargetChildren > :global(.__wab_slot) > picture > img,
+.slotTargetChildren
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > picture
+  > img,
+.slotTargetChildren
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > :global(.__wab_slot)
+  > picture
+  > img {
   overflow: hidden;
 }
-.slotChildren__isSelected {
+.slotTargetChildrenisSelected {
   color: #007aff;
   font-weight: 500;
 }
