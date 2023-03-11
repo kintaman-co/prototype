@@ -1,22 +1,21 @@
 import React, { useState } from "react";
-import firebase from "firebase/app";
-import "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useList, useObject } from "react-firebase-hooks/database";
 import {
   PlasmicWorking,
   DefaultWorkingProps,
 } from "./plasmic/easytime/PlasmicWorking";
-import { HTMLElementRefOf } from "@plasmicapp/react-web";
 import { DTValues } from "./DtInput";
 import BizName from "./BizName";
 import { dateToMinstamp, formatDuration, minstampToDate } from "../utils/date";
+import { getAuth } from "@firebase/auth";
+import { getDatabase, push, ref, remove, update } from "@firebase/database";
 
 interface WorkingProps extends DefaultWorkingProps {}
 
 function Working(props: WorkingProps) {
-  const [user] = useAuthState(firebase.auth());
-  const userRef = user ? firebase.database().ref(`users/${user.uid}`) : null;
+  const [user] = useAuthState(getAuth());
+  const userRef = user ? ref(getDatabase(), `users/${user.uid}`) : null;
   const [snapshots, loading, error] = useObject(userRef);
   const start = minstampToDate(snapshots?.val()?.pending?.start);
   const curBizId = snapshots?.val()?.pending?.bizId;
@@ -68,10 +67,12 @@ function bizOut(
   if (endTS.dayAgo) {
     date.setDate(date.getDate() - 1);
   }
-  const uid = firebase.auth().currentUser?.uid;
-  const userRef = firebase.database().ref(`users/${uid}`);
-  const newRec = userRef.child("records").push().key;
-  userRef.update({
+  const uid = getAuth().currentUser?.uid;
+  const userRef = ref(getDatabase(), `users/${uid}`);
+  // const newRec = userRef.child("records").push().key;
+  // rewrite newRec to use firebase v9
+  const newRec = push(ref(getDatabase(), `users/${uid}/records`)).key;
+  update(userRef, {
     pending: null,
     [`records/${newRec}`]: {
       bizId,
@@ -82,8 +83,8 @@ function bizOut(
   });
 }
 function bizCancel() {
-  const uid = firebase.auth().currentUser?.uid;
-  const pendRef = firebase.database().ref(`users/${uid}/pending`);
-  pendRef.remove();
+  const uid = getAuth().currentUser?.uid;
+  const pendRef = ref(getDatabase(), `users/${uid}/pending`);
+  remove(pendRef);
 }
 export default Working;

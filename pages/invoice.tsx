@@ -1,5 +1,3 @@
-import firebase from "firebase/app";
-import "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useList, useObjectVal } from "react-firebase-hooks/database";
 import React, { useState } from "react";
@@ -14,22 +12,35 @@ import { dateToMinstamp } from "../utils/date";
 import TableRow from "../components/react-invoice/TableRow";
 import { SerializableInvoice } from "../utils/types";
 import { useRouter } from "next/router";
+import { getAuth } from "@firebase/auth";
+import { getDatabase, ref } from "@firebase/database";
 
 function Invoice() {
   const [biz, setBiz] = useState<string | null>(null);
   const [memo, setMemo] = useState("");
 
-  const [user] = useAuthState(firebase.auth());
-  const bizRef = firebase
-    .database()
-    .ref(`users/${user?.uid}/businesses/${biz}`);
+  const [user] = useAuthState(getAuth());
+  const bizRef = ref(getDatabase(), `users/${user?.uid}/businesses/${biz}`);
 
-  const [bizVal, loading, error] = useObjectVal(bizRef);
+  const [bizVal, loading, error] = useObjectVal<{
+    name: string;
+    feePerHr: string;
+    recipient: string;
+    vatRate: string;
+    topic: string;
+    isIndividual: boolean;
+    deleted: boolean;
+  }>(bizRef);
 
-  const userRef = firebase.database().ref(`users/${user?.uid}/info`);
-  const [userVal, userLoading, userError] = useObjectVal(userRef);
+  const userRef = ref(getDatabase(), `users/${user?.uid}/info`);
+  const [userVal, userLoading, userError] = useObjectVal<{
+    zipcode: string;
+    address: string;
+    name: string;
+    bank: string;
+  }>(userRef);
 
-  const recRef = firebase.database().ref(`users/${user?.uid}/records`);
+  const recRef = ref(getDatabase(), `users/${user?.uid}/records`);
   const [recSnaps, recLoading, recError] = useList(recRef);
 
   const today = new Date();
@@ -63,7 +74,7 @@ function Invoice() {
     ).toFixed(2)
   );
 
-  const total = bizVal ? duration * bizVal.feePerHr : undefined;
+  const total = bizVal ? duration * parseFloat(bizVal.feePerHr) : undefined;
 
   const invoice = (
     <Template
@@ -120,18 +131,18 @@ function Invoice() {
       },
       date: dateToMinstamp(today),
       sender: {
-        postNumber: userVal?.zipcode,
-        address: userVal?.address,
-        name: userVal?.name,
+        postNumber: userVal?.zipcode || "",
+        address: userVal?.address || "",
+        name: userVal?.name || "",
       },
       payTo: {
         due: dateToMinstamp(due),
-        bank: userVal?.bank,
+        bank: userVal?.bank || "",
       },
       items: [
         {
-          topic: bizVal?.topic,
-          price: parseInt(bizVal?.feePerHr, 10),
+          topic: bizVal?.topic || "",
+          price: parseInt(bizVal?.feePerHr || "0", 10),
           amount: duration,
         },
       ],

@@ -4,10 +4,10 @@ import "../firebase";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuthState } from "react-firebase-hooks/auth";
-import firebase from "firebase/app";
 import Head from "next/head";
+import { getAuth } from "@firebase/auth";
 function MyApp({ Component, pageProps }: AppProps) {
-  const [user, loading] = useAuthState(firebase.auth());
+  const [user, loading] = useAuthState(getAuth());
   const router = useRouter();
   useEffect(() => {
     if (!loading && !user && router.asPath !== "/signin") {

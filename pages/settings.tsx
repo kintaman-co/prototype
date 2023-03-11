@@ -1,20 +1,25 @@
-import firebase from "firebase/app";
-import "firebase/database";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
 import { useList, useObjectVal } from "react-firebase-hooks/database";
 import React from "react";
 import { ScreenVariantProvider } from "../components/plasmic/easytime/PlasmicGlobalVariant__Screen";
 import { PlasmicSettings } from "../components/plasmic/easytime/PlasmicSettings";
 import BizItem from "../components/BizItem";
 import { useRouter } from "next/router";
+import {
+  getAuth,
+  GithubAuthProvider,
+  GoogleAuthProvider,
+  signInWithRedirect,
+} from "firebase/auth";
+import { getDatabase, push, ref, update } from "firebase/database";
 
 /** link current account to google account */
 async function linkToGoogle() {
-  const provider = new firebase.auth.GoogleAuthProvider();
+  const provider = new GoogleAuthProvider();
   try {
-    await firebase.auth().currentUser!.linkWithPopup(provider);
+    await signInWithRedirect(getAuth(), provider);
     alert("連携しました");
-  } catch (e) {
+  } catch (e: any) {
     if (e.code === "auth/provider-already-linked") {
       alert("すでに連携されています。");
       return;
@@ -32,11 +37,11 @@ async function linkToGoogle() {
 }
 /** link current account to github account */
 async function linkToGithub() {
-  const provider = new firebase.auth.GithubAuthProvider();
+  const provider = new GithubAuthProvider();
   try {
-    await firebase.auth().currentUser!.linkWithPopup(provider);
+    await signInWithRedirect(getAuth(), provider);
     alert("連携しました");
-  } catch (e) {
+  } catch (e: any) {
     if (e.code === "auth/provider-already-linked") {
       alert("すでに連携されています。");
       return;
@@ -52,20 +57,23 @@ async function linkToGithub() {
     alert("エラーが発生しました: " + e.code);
   }
 }
-/** sign out from current account */
-function signOut() {
-  firebase.auth().signOut();
-}
 
 function Settings() {
   const router = useRouter();
 
-  const [user] = useAuthState(firebase.auth());
-  const bizRef = firebase.database().ref(`users/${user?.uid}/businesses`);
-  const userRef = firebase.database().ref(`users/${user?.uid}/info`);
+  const [user] = useAuthState(getAuth());
+  const bizRef = ref(getDatabase(), `users/${user?.uid}/businesses`);
+  const userRef = ref(getDatabase(), `users/${user?.uid}/info`);
 
   const [snapshots, loading, error] = useList(bizRef);
-  const [userSnapshot, userLoading, userError] = useObjectVal(userRef);
+  const [userSnapshot, userLoading, userError] = useObjectVal<{
+    name: string;
+    zipcode: string;
+    address: string;
+    bank: string;
+  }>(userRef);
+
+  const [signOut, _] = useSignOut(getAuth());
   return (
     <PlasmicSettings
       bizList={snapshots
@@ -77,7 +85,7 @@ function Settings() {
         ))}
       addBiz={{
         onClick() {
-          const key = bizRef?.push().key;
+          const key = push(bizRef!).key;
           if (key) {
             router.push(`/biz/${key}`);
           }
@@ -95,25 +103,25 @@ function Settings() {
       name={{
         value: userSnapshot?.name || "",
         onChange: (e) => {
-          userRef.update({ name: e.target.value });
+          update(userRef!, { name: e.target.value });
         },
       }}
       zipcode={{
         value: userSnapshot?.zipcode || "",
         onChange: (e) => {
-          userRef.update({ zipcode: e.target.value });
+          update(userRef!, { zipcode: e.target.value });
         },
       }}
       address={{
         value: userSnapshot?.address || "",
         onChange: (e) => {
-          userRef.update({ address: e.target.value });
+          update(userRef!, { address: e.target.value });
         },
       }}
       bank={{
         value: userSnapshot?.bank || "",
         onChange: (e) => {
-          userRef.update({ bank: e.target.value });
+          update(userRef!, { bank: e.target.value });
         },
       }}
     />

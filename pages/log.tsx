@@ -1,6 +1,3 @@
-import firebase from "firebase/app";
-import "firebase/auth";
-import "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { ScreenVariantProvider } from "../components/plasmic/easytime/PlasmicGlobalVariant__Screen";
 import { PlasmicLog } from "../components/plasmic/easytime/PlasmicLog";
@@ -20,12 +17,12 @@ import LogRecordHeaderItem, {
   Order,
   Topics,
 } from "../components/LogRecordHeaderItem";
+import { getAuth } from "@firebase/auth";
+import { getDatabase, ref } from "@firebase/database";
 
 function Log() {
-  const [user] = useAuthState(firebase.auth());
-  const recRef = user
-    ? firebase.database().ref(`users/${user.uid}/records`)
-    : null;
+  const [user] = useAuthState(getAuth());
+  const recRef = user ? ref(getDatabase(), `users/${user.uid}/records`) : null;
 
   const [snapshots, loading, error] = useList(recRef);
 

@@ -1,18 +1,17 @@
 import React, { useState } from "react";
-import firebase from "firebase/app";
-import "firebase/auth";
-import "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useObject } from "react-firebase-hooks/database";
+import { getAuth } from "firebase/auth";
+import { getDatabase, ref } from "firebase/database";
 
 type BizNameProps = {
   bizId: string;
 };
 
 function BizName({ bizId }: BizNameProps) {
-  const [user] = useAuthState(firebase.auth());
+  const [user] = useAuthState(getAuth());
   const bizRef = user
-    ? firebase.database().ref(`users/${user.uid}/businesses/${bizId}`)
+    ? ref(getDatabase(), `users/${user.uid}/businesses/${bizId}`)
     : null;
   const [snapshots, loading, error] = useObject(bizRef);
   let bizName: string | undefined = undefined;

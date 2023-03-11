@@ -1,6 +1,3 @@
-import firebase from "firebase/app";
-import "firebase/auth";
-import "firebase/database";
 import { PlasmicEditLog } from "../../components/plasmic/easytime/PlasmicEditLog";
 import { useEffect, useState, ReactNode } from "react";
 import { useRouter } from "next/router";
@@ -9,16 +6,18 @@ import { useObject } from "react-firebase-hooks/database";
 import { dateToMinstamp, padZero } from "../../utils/date";
 import BizName from "../../components/BizName";
 import BizSelect from "../../components/BizSelect";
+import { getAuth } from "@firebase/auth";
+import { getDatabase, push, ref, remove, update } from "@firebase/database";
 
 function EditLog() {
   const router = useRouter();
   const id = router.query.id as string;
   const isNew = id === "new";
 
-  const [user] = useAuthState(firebase.auth());
+  const [user] = useAuthState(getAuth());
   const recRef =
     user && !isNew
-      ? firebase.database().ref(`users/${user.uid}/records/${id}`)
+      ? ref(getDatabase(), `users/${user.uid}/records/${id}`)
       : null;
   const [snapshots, fbLoading, error] = useObject(recRef);
   const [actionLoading, setActionLoading] = useState(false);
@@ -53,7 +52,7 @@ function EditLog() {
     };
     setActionLoading(true);
     try {
-      await recRef?.update(updates);
+      await update(recRef!, updates);
     } catch (e) {
       console.error(e);
     }
@@ -69,7 +68,7 @@ function EditLog() {
     };
     setActionLoading(true);
     try {
-      await firebase.database().ref(`users/${user!.uid}/records`).push(updates);
+      await push(ref(getDatabase(), `users/${user!.uid}/records`), updates);
     } catch (e) {
       console.error(e);
     }
@@ -80,7 +79,7 @@ function EditLog() {
   const deleteLog = async () => {
     setActionLoading(true);
     try {
-      await recRef?.remove();
+      await remove(recRef!);
     } catch (e) {
       console.error(e);
     }

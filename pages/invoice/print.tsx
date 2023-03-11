@@ -23,7 +23,7 @@ function PrintInvoice() {
     if (invJson) {
       try {
         window.print();
-      } catch (e) {
+      } catch (e: any) {
         alert(`Error occured while printing: ${e?.message}`);
       }
     }

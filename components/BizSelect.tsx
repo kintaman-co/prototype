@@ -1,5 +1,3 @@
-import firebase from "firebase/app";
-import "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useList } from "react-firebase-hooks/database";
 import React from "react";
@@ -9,6 +7,8 @@ import {
 } from "./plasmic/easytime/PlasmicBizSelect";
 import { HTMLElementRefOf } from "@plasmicapp/react-web";
 import Select from "./Select";
+import { getAuth } from "@firebase/auth";
+import { getDatabase, ref as dbRef } from "firebase/database";
 type Props = {
   /**
    * bizId
@@ -28,9 +28,9 @@ function BizSelect_(
   { onChange, value, hasAll }: Props,
   ref: HTMLElementRefOf<"div">
 ) {
-  const [user] = useAuthState(firebase.auth());
+  const [user] = useAuthState(getAuth());
   const bizRef = user
-    ? firebase.database().ref(`users/${user.uid}/businesses`)
+    ? dbRef(getDatabase(), `users/${user.uid}/businesses`)
     : null;
 
   const [snapshots, loading, error] = useList(bizRef);

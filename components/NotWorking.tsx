@@ -8,17 +8,18 @@ import {
   PlasmicNotWorking,
   DefaultNotWorkingProps,
 } from "./plasmic/easytime/PlasmicNotWorking";
-import { HTMLElementRefOf } from "@plasmicapp/react-web";
 import Button from "./Button";
 import { DTValues } from "./DtInput";
 import { dateToMinstamp } from "../utils/date";
+import { getAuth } from "firebase/auth";
+import { getDatabase, ref, update } from "firebase/database";
 
 interface NotWorkingProps extends DefaultNotWorkingProps {}
 
 function NotWorking(props: NotWorkingProps) {
-  const [user] = useAuthState(firebase.auth());
+  const [user] = useAuthState(getAuth());
   const bizRef = user
-    ? firebase.database().ref(`users/${user.uid}/businesses`)
+    ? ref(getDatabase(), `users/${user.uid}/businesses`)
     : null;
   const [snapshots, loading, error] = useList(bizRef);
   const [time, setTime] = useState<DTValues>({
@@ -57,9 +58,9 @@ function bizIn(bizId: string, startTS: DTValues) {
   if (startTS.dayAgo) {
     date.setDate(date.getDate() - 1);
   }
-  const uid = firebase.auth().currentUser?.uid;
-  const userRef = firebase.database().ref(`users/${uid}`);
-  userRef.update({
+  const uid = getAuth().currentUser?.uid;
+  const userRef = ref(getDatabase(), `users/${uid}`);
+  update(userRef, {
     pending: {
       bizId: bizId,
       start: dateToMinstamp(date),

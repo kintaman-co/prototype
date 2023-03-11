@@ -1,27 +1,35 @@
-import firebase from "firebase/app";
-import "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useObjectVal } from "react-firebase-hooks/database";
 import React from "react";
 import { ScreenVariantProvider } from "../../components/plasmic/easytime/PlasmicGlobalVariant__Screen";
 import { PlasmicEditBiz } from "../../components/plasmic/easytime/PlasmicEditBiz";
 import { useRouter } from "next/router";
+import { getDatabase, ref, update } from "firebase/database";
+import { getAuth } from "@firebase/auth";
 
 function EditBiz() {
   const router = useRouter();
   const id = router.query.id;
-  const [user] = useAuthState(firebase.auth());
+  const [user] = useAuthState(getAuth());
   const bizRef = user
-    ? firebase.database().ref(`users/${user.uid}/businesses/${id}`)
+    ? ref(getDatabase(), `users/${user.uid}/businesses/${id}`)
     : null;
-  const [biz, loading, error] = useObjectVal(bizRef);
+  const [biz, loading, error] = useObjectVal<{
+    name: string;
+    feePerHr: string;
+    recipient: string;
+    vatRate: string;
+    topic: string;
+    isIndividual: boolean;
+    deleted: boolean;
+  }>(bizRef);
 
   return (
     <PlasmicEditBiz
       bizName={{
         value: biz?.name,
         onChange: (e) => {
-          bizRef!.update({ name: e.target.value });
+          update(bizRef!, { name: e.target.value });
         },
       }}
       feePerHr={{
@@ -31,13 +39,13 @@ function EditBiz() {
           if (parseInt(val, 10).toString() !== val) {
             return;
           }
-          bizRef!.update({ feePerHr: val });
+          update(bizRef!, { feePerHr: val });
         },
       }}
       recipient={{
         value: biz?.recipient,
         onChange: (e) => {
-          bizRef!.update({ recipient: e.target.value });
+          update(bizRef!, { recipient: e.target.value });
         },
       }}
       vatRate={{
@@ -47,31 +55,31 @@ function EditBiz() {
           if (parseInt(val, 10).toString() !== val) {
             return;
           }
-          bizRef!.update({ vatRate: val });
+          update(bizRef!, { vatRate: val });
         },
       }}
       topic={{
         value: biz?.topic,
         onChange: (e) => {
-          bizRef!.update({ topic: e.target.value });
+          update(bizRef!, { topic: e.target.value });
         },
       }}
       isIndividual={{
         isChecked: !!biz?.isIndividual,
         onChange: (val) => {
-          bizRef!.update({ isIndividual: val });
+          update(bizRef!, { isIndividual: val });
         },
       }}
       deleted={!!biz?.deleted}
       deleteBiz={{
         onClick: () =>
-          bizRef!.update({
+          update(bizRef!, {
             deleted: true,
           }),
       }}
       restoreDeletion={{
         onClick: () =>
-          bizRef!.update({
+          update(bizRef!, {
             deleted: false,
           }),
       }}

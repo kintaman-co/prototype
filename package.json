@@ -10,12 +10,12 @@
   },
   "dependencies": {
     "@plasmicapp/react-web": "^0.2.122",
-    "firebase": "^8.10.1",
+    "firebase": "^9.17.2",
     "next": "12.1.0",
     "qrcode.react": "^1.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-firebase-hooks": "^3.0.4"
+    "react-firebase-hooks": "^5.1.1"
   },
   "devDependencies": {
     "@plasmicapp/cli": "^0.1.187",
