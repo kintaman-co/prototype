@@ -16,7 +16,6 @@ import QRCode from "qrcode.react";
 
 function PrintInvoice() {
   const router = useRouter();
-  console.log(router);
 
   const invJson = router.query.invoice?.toString();
   useEffect(() => {

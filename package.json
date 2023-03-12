@@ -11,8 +11,8 @@
   "dependencies": {
     "@plasmicapp/react-web": "^0.2.122",
     "firebase": "^9.17.2",
-    "qrcode.react": "^3.1.0",
     "next": "13.2.4",
+    "qrcode.react": "^3.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-firebase-hooks": "^5.1.1"
@@ -21,6 +21,7 @@
     "@plasmicapp/cli": "^0.1.187",
     "@types/react": "17.0.19",
     "eslint": "7.32.0",
+    "eslint-config-next": "^13.2.4",
     "prettier": "^2.3.2",
     "typescript": "4.3.5"
   }
