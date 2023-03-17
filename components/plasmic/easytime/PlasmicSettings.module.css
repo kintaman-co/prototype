@@ -18,17 +18,17 @@
   flex-grow: 1;
 }
 .freeBox___3R5W5 {
-  flex-direction: column;
   display: flex;
   position: relative;
+  flex-direction: column;
   min-width: 300px;
   padding: 8px;
   margin: 0px;
 }
 .freeBox___3R5W5 > :global(.__wab_flex-container) {
   flex-direction: column;
-  justify-content: flex-start;
   align-items: stretch;
+  justify-content: flex-start;
   margin-top: calc(0px - 8px);
   height: calc(100% + 8px);
 }
@@ -47,14 +47,14 @@
   height: auto;
 }
 .freeBox__lBosZ {
-  flex-direction: column;
   display: flex;
   position: relative;
+  flex-direction: column;
 }
 .freeBox__lBosZ > :global(.__wab_flex-container) {
   flex-direction: column;
-  justify-content: flex-start;
   align-items: stretch;
+  justify-content: flex-start;
   margin-top: calc(0px - 9px);
   height: calc(100% + 9px);
 }
@@ -69,14 +69,14 @@
   margin-top: 9px;
 }
 .bizList {
-  flex-direction: column;
   display: flex;
   position: relative;
+  flex-direction: column;
 }
 .bizList > :global(.__wab_flex-container) {
   flex-direction: column;
-  justify-content: flex-start;
   align-items: stretch;
+  justify-content: flex-start;
   margin-top: calc(0px - 4px);
   height: calc(100% + 4px);
 }
@@ -109,15 +109,15 @@
   position: relative;
 }
 .freeBox__svdSp {
-  flex-direction: column;
   display: flex;
   position: relative;
+  flex-direction: column;
   padding: 0px;
 }
 .freeBox__svdSp > :global(.__wab_flex-container) {
   flex-direction: column;
-  justify-content: flex-start;
   align-items: stretch;
+  justify-content: flex-start;
   margin-top: calc(0px - 8px);
   height: calc(100% + 8px);
 }

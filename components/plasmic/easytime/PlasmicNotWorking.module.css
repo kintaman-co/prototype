@@ -17,16 +17,16 @@
   height: auto;
 }
 .bizList {
-  flex-direction: column;
   display: flex;
   position: relative;
+  flex-direction: column;
   min-width: 200px;
   padding: 8px;
 }
 .bizList > :global(.__wab_flex-container) {
   flex-direction: column;
-  justify-content: flex-start;
   align-items: stretch;
+  justify-content: flex-start;
   margin-top: calc(0px - 8px);
   height: calc(100% + 8px);
 }

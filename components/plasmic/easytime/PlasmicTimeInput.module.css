@@ -49,9 +49,9 @@
   border-style: none;
 }
 .dayAgoCheckbox {
-  flex-direction: row;
   display: flex;
   position: relative;
+  flex-direction: row;
   background: var(--token-oJ5ckTeVO);
   border-radius: 4px;
   padding: 4px;
@@ -59,8 +59,8 @@
 }
 .dayAgoCheckbox > :global(.__wab_flex-container) {
   flex-direction: row;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   align-content: unset;
   margin-left: calc(0px - 3px);
   width: calc(100% + 3px);

@@ -6,9 +6,9 @@
   height: auto;
 }
 .trigger {
-  flex-direction: row;
   position: relative;
   display: flex;
+  flex-direction: row;
   background: #fafafa;
   border-radius: 4px;
   padding: 3px 8px;

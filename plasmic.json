@@ -471,7 +471,7 @@
         {
           "id": "Sj6xKU6vWP",
           "name": "Fetcher",
-          "componentImportPath": "@plasmicapp/data-sources"
+          "componentImportPath": "@plasmicapp/react-web/lib/data-sources"
         }
       ],
       "projectApiToken": "Ex6L2DkdViuKvMCif24sfO8XZPOa8OZCXJZFea030Qp7nBAtl1hZyEza9T3gn9MfUjOOSt7vXZrTciwCymA",
@@ -493,6 +493,6 @@
   "nextjsConfig": {
     "pagesDir": "../pages"
   },
-  "cliVersion": "0.1.187",
-  "$schema": "https://unpkg.com/@plasmicapp/cli@0.1.187/dist/plasmic.schema.json"
+  "cliVersion": "0.1.221",
+  "$schema": "https://unpkg.com/@plasmicapp/cli@0.1.221/dist/plasmic.schema.json"
 }

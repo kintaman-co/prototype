@@ -41,14 +41,14 @@
   margin-left: 4px;
 }
 .freeBox__jkZnv {
-  flex-direction: row;
   display: flex;
   position: relative;
+  flex-direction: row;
 }
 .freeBox__jkZnv > :global(.__wab_flex-container) {
   flex-direction: row;
-  justify-content: flex-start;
   align-items: stretch;
+  justify-content: flex-start;
   margin-left: calc(0px - 12px);
   width: calc(100% + 12px);
 }
@@ -89,16 +89,16 @@
   margin: 4px;
 }
 .freeBox__lcBi {
-  flex-direction: column;
   display: flex;
   position: relative;
+  flex-direction: column;
   min-width: 200px;
   padding: 8px;
 }
 .freeBox__lcBi > :global(.__wab_flex-container) {
   flex-direction: column;
-  justify-content: flex-start;
   align-items: stretch;
+  justify-content: flex-start;
   margin-top: calc(0px - 8px);
   height: calc(100% + 8px);
 }

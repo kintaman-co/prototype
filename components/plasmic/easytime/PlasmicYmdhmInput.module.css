@@ -1,6 +1,6 @@
 .root {
-  flex-direction: row;
   display: inline-flex;
+  flex-direction: row;
   position: relative;
   width: auto;
   height: auto;

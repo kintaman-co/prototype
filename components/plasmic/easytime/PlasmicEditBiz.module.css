@@ -101,15 +101,15 @@
   min-width: 0;
 }
 .freeBox__q4MP {
-  flex-direction: column;
   display: flex;
   position: relative;
+  flex-direction: column;
   padding: 16px;
 }
 .freeBox__q4MP > :global(.__wab_flex-container) {
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   align-content: unset;
   margin-top: calc(0px - 4px);
   height: calc(100% + 4px);

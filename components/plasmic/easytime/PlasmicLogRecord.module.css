@@ -17,7 +17,6 @@
   justify-content: center;
   align-items: flex-start;
   align-content: unset;
-  flex-column-gap: 0px;
   position: relative;
 }
 .freeBox___0EFJ {
@@ -26,7 +25,6 @@
   justify-content: center;
   align-items: flex-start;
   align-content: unset;
-  flex-column-gap: 0px;
   position: relative;
 }
 .freeBox__xXXdt {
@@ -35,16 +33,14 @@
   justify-content: center;
   align-items: flex-start;
   align-content: unset;
-  flex-column-gap: 0px;
   position: relative;
 }
 .freeBox__d8Gjr {
-  display: block;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   align-content: unset;
-  flex-column-gap: 0px;
   position: relative;
 }
 .freeBox__vSsos {
@@ -53,7 +49,6 @@
   justify-content: center;
   align-items: flex-start;
   align-content: unset;
-  flex-column-gap: 0px;
   position: relative;
 }
 .text__vml5D {
@@ -65,7 +60,6 @@
   justify-content: center;
   align-items: flex-start;
   align-content: unset;
-  flex-column-gap: 0px;
   position: relative;
 }
 .edit:global(.__wab_instance) {
