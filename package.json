@@ -11,7 +11,7 @@
   "dependencies": {
     "@plasmicapp/react-web": "^0.2.122",
     "firebase": "^9.17.2",
-    "next": "13.2.4",
+    "next": "13.5.4",
     "qrcode.react": "^3.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
