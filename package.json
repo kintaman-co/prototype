@@ -18,7 +18,7 @@
     "react-firebase-hooks": "^5.1.1"
   },
   "devDependencies": {
-    "@plasmicapp/cli": "^0.1.187",
+    "@plasmicapp/cli": "^0.1.322",
     "@types/react": "17.0.19",
     "eslint": "7.32.0",
     "eslint-config-next": "^13.2.4",
